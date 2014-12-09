@@ -1,0 +1,18 @@
+/*******************************
+     User Global Variables
+*******************************/
+
+/*-------------------
+       Fonts
+--------------------*/
+
+@headerFont        : 'Ubuntu';
+@pageFont          : 'Ubuntu';
+@fontSmoothing     : antialiased;
+
+@importGoogleFonts : true;
+@googleFontName    : 'Ubuntu';
+@googleFontSizes   : '400,700,400italic,700italic';
+
+@googleProtocol    : '//';
+@googleFontRequest : '@{googleFontName}:@{googleFontSizes}';
