@@ -20,9 +20,9 @@ function getFlag() {
     var googleSpreadsheet = new GoogleSpreadsheet();
     googleSpreadsheet.url(flagURL);
     googleSpreadsheet.load(function(result) {
-        document.getElementById("test").innerHTML = JSON.parse(result).data[0];
+        flagJSON = JSON.parse(result);
     });
-    //document.getElementById("test").innerHTML = flagJSON[0];
+    document.getElementById("test").innerHTML = flagJSON.data[0];
 }
 
 function showFlags() {
