@@ -16,7 +16,6 @@ GoogleUrl = (function() {
     }
     this.jsonCellsUrl = "//spreadsheets.google.com/feeds/cells/" + this.key + "/od6/public/basic?alt=json-in-script";
     this.jsonListUrl = "//spreadsheets.google.com/feeds/list/" + this.key + "/od6/public/basic?alt=json-in-script";
-
     this.jsonUrl = this.jsonCellsUrl;
   }
   return GoogleUrl;
