@@ -9,11 +9,13 @@ function fillSectionTitles () {
 }
 
 function getSexuality() {
-    //localStorage.clear();
     var sexualitySpreadsheet = new GoogleSpreadsheet();
     sexualitySpreadsheet.url(sexualityURL);
     sexualitySpreadsheet.load(function(result) {
-        document.getElementById("test").innerHTML = JSON.stringify(result);
+        if (result === null) {
+            setTimeout(getSexuality, 3000);
+            return;
+        }
         for(var i = 0; i < result.data.length; i += colNum){
             document.getElementById('sexualities').innerHTML += '<p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p>' + result.data[i + 2] + '</p>';
         }
@@ -21,11 +23,13 @@ function getSexuality() {
 }
 
 function getGender() {
-    //localStorage.clear();
     var genderSpreadsheet = new GoogleSpreadsheet();
     genderSpreadsheet.url(genderURL);
     genderSpreadsheet.load(function(result) {
-        document.getElementById("test2").innerHTML = JSON.stringify(result);
+        if (result === null) {
+            setTimeout(getGender, 3000);
+            return;
+        };
         for(var i = 0; i < result.data.length; i += colNum){
             document.getElementById('genders').innerHTML += '<p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p>' + result.data[i + 2] + '</p>';
         }
@@ -33,7 +37,6 @@ function getGender() {
 }
 
 function showFlags() {
-    //localStorage.clear();
     fillSectionTitles();
     getSexuality();
     getGender();
