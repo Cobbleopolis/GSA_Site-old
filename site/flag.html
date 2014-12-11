@@ -5,7 +5,8 @@
     <title>Hooch GSA</title>
 
     <link rel="stylesheet" type="text/css" href="css/semantic/semantic.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/flag.css"/>
 
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="css/semantic/semantic.min.js"></script>
@@ -21,9 +22,14 @@
 
 </head>
 <body class="pushable" onload="showFlags()">
-    <div class="pusher">
+<div class="ui black big launch right attached fixed button" onclick="showNav()">
+    <i class="content icon"></i>
+    <span class="text">Menu</span>
+</div>
+
+<div class="pusher">
     <div class="ui left demo vertical inverted labeled icon sidebar menu">
-        <a class="item">
+        <a href="index.html" class="item">
             <i class="home icon"></i>
             Home
         </a>
@@ -52,7 +58,9 @@
             Settings
         </a>
     </div>
-    <p id="test"></p>
+    <article>
+        <div id="flags"></div>
+    </article>
 </div>
 </body>
 </html>

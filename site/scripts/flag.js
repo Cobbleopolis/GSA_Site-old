@@ -1,32 +1,19 @@
-var flagURL = "https://spreadsheets.google.com/pub?key=12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s&hl=en&output=html";
+var sexualityURL = 'https://spreadsheets.google.com/pub?key=12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s&hl=en&output=html';
+var colNum = 3;
 
-//{"url":"https://spreadsheets.google.com/feeds/cells/12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s/od6/public/basic",
-//    "key":"12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s",
-//    "jsonUrl":"http://spreadsheets.google.com/feeds/cells/12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s/od6/public/basic?alt=json-in-script",
-//    "googleUrl":{"sourceIdentifier":"https://spreadsheets.google.com/feeds/cells/12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s/od6/public/basic",
-//    "url":"https://spreadsheets.google.com/feeds/cells/12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s/od6/public/basic",
-//    "key":"12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s",
-//    "jsonCellsUrl":"http://spreadsheets.google.com/feeds/cells/12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s/od6/public/basic?alt=json-in-script",
-//    "jsonListUrl":"http://spreadsheets.google.com/feeds/list/12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s/od6/public/basic?alt=json-in-script",
-//    "jsonUrl":"http://spreadsheets.google.com/feeds/cells/12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s/od6/public/basic?alt=json-in-script"},
-//    "data":["Gay (Homosexual-Male)",
-//    "Generally refers to a man who is attracted to men. Sometimes refers to all people who are attracted to people of the same sex; sometimes \"homosexual\" is used for this also,
-//    although this label is seen by many today as a medical term that should be retired from common use.",
-//    "images/flags/gay.png"]}
-
-function getFlag() {
+function getSexuality() {
     localStorage.clear();
-    var flagJSON;
+    document.getElementById('flags').innerHTML += '<p class="flagSectionTitle">Sexualities</p>';
     var googleSpreadsheet = new GoogleSpreadsheet();
-    googleSpreadsheet.url(flagURL);
+    googleSpreadsheet.url(sexualityURL);
     googleSpreadsheet.load(function(result) {
-        flagJSON = JSON.parse(result);
-        document.getElementById("test").innerHTML = flagJSON.data[0];
+        for(var i = 0; i < result.data.length / colNum; i++){
+            document.getElementById('flags').innerHTML += '<p class="flagTitle">' + result.data[i * 3] + ':</p><img class="flagImg" src = "' + result.data[i * 3 + 1] + '"><p>' + result.data[i * 3 + 2] + '</p>';
+        }
     });
 }
 
 function showFlags() {
-    getFlag();
-    //alert("test");
+    getSexuality();
 
 }

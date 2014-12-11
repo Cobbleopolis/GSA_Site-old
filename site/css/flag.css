@@ -1,0 +1,18 @@
+article {
+    padding-left: 150px;
+}
+
+.flagSectionTitle {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.flagTitle {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.flagImg {
+    width: 200px;
+    height: 120px;
+}
