@@ -21,8 +21,8 @@ function getFlag() {
     googleSpreadsheet.url(flagURL);
     googleSpreadsheet.load(function(result) {
         flagJSON = JSON.parse(result);
+        document.getElementById("test").innerHTML = flagJSON.data[0];
     });
-    document.getElementById("test").innerHTML = flagJSON.data[0];
 }
 
 function showFlags() {
