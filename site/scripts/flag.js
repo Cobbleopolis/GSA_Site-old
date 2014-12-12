@@ -1,24 +1,21 @@
 var sexualityURL = 'https://spreadsheets.google.com/pub?key=12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s&hl=en&output=html';
 var genderURL = 'https://spreadsheets.google.com/pub?key=1M-3rloGazASnuSqzxwcxEcoTrAt6oucTOWP4uuSj-9U&hl=en&output=html';
-var colNum = 3;
+var otherURL = 'https://spreadsheets.google.com/pub?key=1_AvDOvAjxUUl2xAaomSNi0VfrTMamccL7MdJzvSr-bg&hl=en&output=html';
 
-function fillSectionTitles () {
-    localStorage.clear();
-    document.getElementById('sexualities').innerHTML += '<p class="flagSectionTitle">Sexualities</p>';
-    document.getElementById('genders').innerHTML += '<p class="flagSectionTitle">Genders</p>';
-}
 
 function getSexuality() {
     var sexualitySpreadsheet = new GoogleSpreadsheet();
     sexualitySpreadsheet.url(sexualityURL);
     sexualitySpreadsheet.load(function(result) {
+        var html = '';
         if (result === null) {
-            setTimeout(getSexuality, 3000);
+            setTimeout(getSexuality, 500);
             return;
         }
-        for(var i = 0; i < result.data.length; i += colNum){
-            document.getElementById('sexualities').innerHTML += '<p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p>' + result.data[i + 2] + '</p>';
+        for(var i = 0; i < result.data.length; i += 3){
+            html += '<p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p class="flagDesc">' + result.data[i + 2] + '</p>';
         }
+        document.getElementById('sexualitiesSection').innerHTML = html;
     });
 }
 
@@ -26,18 +23,37 @@ function getGender() {
     var genderSpreadsheet = new GoogleSpreadsheet();
     genderSpreadsheet.url(genderURL);
     genderSpreadsheet.load(function(result) {
+        var html = '';
         if (result === null) {
-            setTimeout(getGender, 3000);
+            setTimeout(getGender, 500);
             return;
         };
-        for(var i = 0; i < result.data.length; i += colNum){
-            document.getElementById('genders').innerHTML += '<p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p>' + result.data[i + 2] + '</p>';
+        for(var i = 0; i < result.data.length; i += 3){
+            html += '<p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p class="flagDesc">' + result.data[i + 2] + '</p>';
         }
+        document.getElementById('gendersSection').innerHTML = html;
+    });
+}
+
+function getOtherTerms() {
+    var html = '';
+    var genderSpreadsheet = new GoogleSpreadsheet();
+    genderSpreadsheet.url(otherURL);
+    genderSpreadsheet.load(function(result) {
+        if (result === null) {
+            setTimeout(getOtherTerms, 500);
+            return;
+        };
+        for(var i = 0; i < result.data.length; i += 2) {
+             html += '<p class="flagTitle">' + result.data[i] + ':</p><p class="flagDesc">' + result.data[i + 1] + '</p>';
+        }
+        document.getElementById('otherTermsSection').innerHTML = html;
     });
 }
 
 function showFlags() {
-    fillSectionTitles();
+    localStorage.clear();
     getSexuality();
     getGender();
+    getOtherTerms();
 }
