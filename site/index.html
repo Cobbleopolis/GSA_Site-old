@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="css/semantic/semantic.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <script type="text/javascript" src="scripts/nav.js"></script>
+    <script type="text/javascript" src="scripts/pageLoad.js"></script>
 
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="css/semantic/semantic.min.js"></script>
@@ -20,44 +22,12 @@
 
 </head>
 
-<body class="pushable">
+<body class="pushable" onload="loadPageIndex()">
 
-<div class="ui black big launch right attached fixed button" onclick="showNav()">
-    <i class="content icon"></i>
-    <span class="text">Menu</span>
-</div>
+<div id="navButton" class="ui black big launch right attached fixed button" onclick="showNav()"></div>
 
 <div class="pusher">
-    <div class="ui left demo vertical inverted labeled icon sidebar menu">
-        <a href="index.html" class="item">
-            <i class="home icon"></i>
-            Home
-        </a>
-        <a href="flag.html" class="item">
-            <i class="flag icon"></i>
-            Flags & Orientations
-        </a>
-        <a class="item">
-            <i class="calendar icon"></i>
-            Events
-        </a>
-        <a class="ui dropdown item" onclick="showFishbowl()">
-            <i class="chat icon"></i>
-            Fishbowl
-        </a>
-        <a class="item">
-            <i class="trophy icon"></i>
-            Achievements
-        </a>
-        <a class="item">
-            <i class="shop icon"></i>
-            Store
-        </a>
-        <a class="item">
-            <i class="settings icon"></i>
-            Settings
-        </a>
-    </div>
+    <div id="navBar" class="ui left demo vertical inverted labeled icon sidebar menu"></div>
 </div>
 <article>
     

@@ -13,7 +13,7 @@ function getSexuality() {
             return;
         }
         for(var i = 0; i < result.data.length; i += 3){
-            html += '<p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p class="flagDesc">' + result.data[i + 2] + '</p>';
+            html += '<div class="flag"><p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p class="flagDesc">' + result.data[i + 2] + '</p></div>';
         }
         document.getElementById('sexualitiesSection').innerHTML = html;
     });
@@ -29,7 +29,7 @@ function getGender() {
             return;
         };
         for(var i = 0; i < result.data.length; i += 3){
-            html += '<p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p class="flagDesc">' + result.data[i + 2] + '</p>';
+            html += '<div class="flag"><p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p class="flagDesc">' + result.data[i + 2] + '</p></div>';
         }
         document.getElementById('gendersSection').innerHTML = html;
     });
@@ -45,7 +45,7 @@ function getOtherTerms() {
             return;
         };
         for(var i = 0; i < result.data.length; i += 2) {
-             html += '<p class="flagTitle">' + result.data[i] + ':</p><p class="flagDesc">' + result.data[i + 1] + '</p>';
+             html += '<div class="flag"><p class="flagTitle">' + result.data[i] + ':<p class="flagDesc">' + result.data[i + 1] + '</p></div>';
         }
         document.getElementById('otherTermsSection').innerHTML = html;
     });

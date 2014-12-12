@@ -13,6 +13,7 @@
     <script type="text/javascript" src="scripts/nav.js"></script>
     <script type="text/javascript" src="scripts/flag.js"></script>
     <script type="text/javascript" src="scripts/google-spreadsheet.js"></script>
+    <script type="text/javascript" src="scripts/pageLoad.js"></script>
 
 
     <!-- Enabling HTML5 support for Internet Explorer -->
@@ -21,46 +22,13 @@
     <![endif]-->
 
 </head>
-<body class="pushable" onload="showFlags()">
-<div class="ui black big launch right attached fixed button" onclick="showNav()">
-    <i class="content icon"></i>
-    <span class="text">Menu</span>
-</div>
+<body class="pushable" onload="loadPageFlag()">
+
+<div id="navButton" class="ui black big launch right attached fixed button" onclick="showNav()"></div>
 
 <div class="pusher">
-    <div class="ui left demo vertical inverted labeled icon sidebar menu">
-        <a href="index.html" class="item">
-            <i class="home icon"></i>
-            Home
-        </a>
-        <a href="flag.html" class="item">
-            <i class="flag icon"></i>
-            Flags & Orientations
-        </a>
-        <a class="item">
-            <i class="calendar icon"></i>
-            Events
-        </a>
-        <a class="ui dropdown item" onclick="showFishbowl()">
-            <i class="chat icon"></i>
-            Fishbowl
-        </a>
-        <a class="item">
-            <i class="trophy icon"></i>
-            Achievements
-        </a>
-        <a class="item">
-            <i class="shop icon"></i>
-            Store
-        </a>
-        <a class="item">
-            <i class="settings icon"></i>
-            Settings
-        </a>
-    </div>
+    <div id="navBar" class="ui left demo vertical inverted labeled icon sidebar menu"></div>
     <article>
-        <p id="test"></p>
-        <p id="test2"></p>
         <div id="sexualities"><p class="flagSectionTitle">Sexualities</p><div id="sexualitiesSection"><p class="loading">Loading...</p></div></div>
         <div id="genders"><p class="flagSectionTitle">Genders</p><div id="gendersSection"><p class="loading">Loading...</p></div></div>
         <div id="otherTerms"><p class="flagSectionTitle">Other LGBT+ Terms</p><div id="otherTermsSection"><p class="loading">Loading...</p></div></div>
