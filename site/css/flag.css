@@ -2,11 +2,31 @@ article {
     padding-left: 150px;
 }
 
+#orientations {
+    font-weight: bold;
+    font-size: 30px;
+    /*padding-top: 50px;*/
+    padding-bottom: 0px;
+}
+
+.loading{
+    font-weight: normal;
+    font-size: 16px;
+    /*padding-top: 50px;*/
+    padding-bottom: 0px;
+}
+
 .flagSectionTitle {
     font-weight: bold;
     font-size: 30px;
     /*padding-top: 50px;*/
     padding-bottom: 0px;
+}
+
+.flag {
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: #AAAAAA;
 }
 
 .flagTitle {
@@ -24,6 +44,10 @@ article {
 
 .flagDesc{
     margin-left: 40px;
+    font-weight: normal;
+    font-size: 16px;
+    /*padding-top: 50px;*/
+    padding-bottom: 0px;
 }
 
 .loading {
