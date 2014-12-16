@@ -9,6 +9,10 @@ article {
     padding-bottom: 0px;
 }
 
+/*#sexualities{*/
+/*    margin-left: 80px;*/
+/*}*/
+
 .loading{
     font-weight: normal;
     font-size: 16px;
@@ -24,32 +28,27 @@ article {
 }
 
 .flag {
-    border: 2px solid black;
-    border-radius: 5px;
-    background-color: #AAAAAA;
+    padding-top: 20px;
+    width: 99.5%;
 }
 
 .flagTitle {
     font-weight: bold;
     font-size: 20px;
-    margin-left: 40px;
+    
 }
 
 .flagImg {
     width: 200px;
     height: 120px;
     margin-left: 40px;
+    margin: 20px;
 }
 
 
 .flagDesc{
-    margin-left: 40px;
+    margin: 20px !important;
+    margin-bottom: 20px;
     font-weight: normal;
     font-size: 16px;
-    /*padding-top: 50px;*/
-    padding-bottom: 0px;
-}
-
-.loading {
-    margin-left: 40px;
 }

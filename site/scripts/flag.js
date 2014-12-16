@@ -14,7 +14,7 @@ function getSexuality() {
             return;
         }
         for(var i = 0; i < result.data.length; i += 3){
-            html += '<div class="ui divider"></div><div class="flag"><p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p class="flagDesc">' + result.data[i + 2] + '</p></div>';
+            html += '<div class="flag"><div class="ui top attached tabular menu"><div class="active item"><p class="flagTitle">' + result.data[i] + ':</p></div><div class="ui bottom attached segment"><img class="flagImg" src = "' + result.data[i + 1] + '"><div class="ui fitted divider"></div><p class="flagDesc">' + result.data[i + 2] + '</p></div></div></div>';
         }
         document.getElementById('sexualitiesSection').innerHTML = html;
     });
@@ -30,7 +30,7 @@ function getRomantic() {
             return;
         }
         for(var i = 0; i < result.data.length; i += 3){
-            html += '<div class="ui divider"></div><div class="flag"><p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p class="flagDesc">' + result.data[i + 2] + '</p></div>';
+            html += '<div class="flag"><div class="ui top attached tabular menu"><div class="active item"><p class="flagTitle">' + result.data[i] + ':</p></div><div class="ui bottom attached segment"><img class="flagImg" src = "' + result.data[i + 1] + '"><div class="ui fitted divider"></div><p class="flagDesc">' + result.data[i + 2] + '</p></div></div></div>';
         }
         document.getElementById('romanticSection').innerHTML = html;
     });
@@ -46,7 +46,7 @@ function getGender() {
             return;
         };
         for(var i = 0; i < result.data.length; i += 3){
-            html += '<div class="ui divider"></div><div class="flag"><p class="flagTitle">' + result.data[i] + ':</p><img class="flagImg" src = "' + result.data[i + 1] + '"><p class="flagDesc">' + result.data[i + 2] + '</p></div>';
+            html += '<div class="flag"><div class="ui top attached tabular menu"><div class="active item"><p class="flagTitle">' + result.data[i] + ':</p></div><div class="ui bottom attached segment"><img class="flagImg" src = "' + result.data[i + 1] + '"><div class="ui fitted divider"></div><p class="flagDesc">' + result.data[i + 2] + '</p></div></div></div>';
         }
         document.getElementById('gendersSection').innerHTML = html;
     });
@@ -62,7 +62,7 @@ function getOtherTerms() {
             return;
         };
         for(var i = 0; i < result.data.length; i += 2) {
-             html += '<div class="ui divider"></div><div class="flag"><p class="flagTitle">' + result.data[i] + ':<p class="flagDesc">' + result.data[i + 1] + '</p></div>';
+             html += '<div class="flag"><div class="ui top attached tabular menu"><div class="active item"><p class="flagTitle">' + result.data[i] + ':</p></div><div class="ui bottom attached segment"><p class="flagDesc">' + result.data[i + 1] + '</p></div></div></div>';
         }
         document.getElementById('otherTermsSection').innerHTML = html;
     });
