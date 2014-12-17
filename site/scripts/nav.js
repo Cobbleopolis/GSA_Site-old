@@ -23,9 +23,7 @@ function readTextFile(file){
 // }
 
 function navMake(){
-    // var navBarHTML = readTextFile("resourcePages/navBar.html");
     document.getElementById("navBar").innerHTML = readTextFile("resorcePages/navBar.html");
-    // var navButtonHTML = readTextFile("resourcePages/navButton.html");
     document.getElementById("navButton").innerHTML = readTextFile("resorcePages/navButton.html");
     
 }

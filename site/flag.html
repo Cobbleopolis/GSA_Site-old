@@ -23,25 +23,47 @@
 
 </head>
 <body class="pushable" onload="loadPageFlag()">
-
+<div id="navBar" class="ui left demo vertical inverted labeled icon sidebar menu"></div>
 <div id="navButton" class="ui black big launch right attached fixed button" onclick="showNav()"></div>
 
 <div class="pusher">
-    <div id="navBar" class="ui left demo vertical inverted labeled icon sidebar menu"></div>
     <article>
-        <div id="orientations">
-            <p id="orientationsTitle">Orientations</p>
-            <div class="ui blue segment">
-                <div class="ui vertical segment">
-                    <div id="sexualities"><p class="flagSectionTitle">Sexual Orientations</p><div class="ui red segment" id="sexualitiesSection"><p class="loading">Loading...</p></div></div>
-                </div>
-                <div class="ui vertical segment">
-                    <div id="romantic"><p class="flagSectionTitle">Romantic Orientations</p><div id="romanticSection"><p class="loading">Loading...</p></div></div>
+            <div class="ui top attached tabular menu" id="sexualities">
+                <div class="active item">
+                    <p class="flagSectionTitle">Sexual Orientations</p>
                 </div>
             </div>
+            <div class="ui bottom attached segment" id="sexualitiesSection">
+                <p class="loading">Loading...</p>
+            </div>
+
+            <div class="ui top attached tabular menu" id="romantic">
+                <div class="active item">
+                    <p class="flagSectionTitle">Romantic Orientations</p>
+                </div>
+            </div>
+            <div class="ui bottom  attached segment" id="romanticSection">
+                <p class="loading">Loading...</p>
+            </div>
+
+            <div class="ui top attached tabular menu" id="genders">
+                <div class="active item">
+                    <p class="flagSectionTitle">Gender Identitiess</p>
+                </div>
+            </div>
+            <div class="ui bottom  attached segment" id="gendersSection">
+                <p class="loading">Loading...</p>
+            </div>
+
+            <div class="ui top attached tabular menu" id="otherTerms">
+                <div class="active item">
+                    <p class="flagSectionTitle">Other LGBT+ Terms</p>
+                </div>
+            </div>
+            <div class="ui bottom  attached segment" id="otherTermsSection">
+                <p class="loading">Loading...</p>
+            </div>
         </div>
-        <div id="genders"><p class="flagSectionTitle">Gender Identitiess</p><div id="gendersSection"><p class="loading">Loading...</p></div></div>
-        <div id="otherTerms"><p class="flagSectionTitle">Other LGBT+ Terms</p><div id="otherTermsSection"><p class="loading">Loading...</p></div></div>
     </article>
 </div>
 </body>
