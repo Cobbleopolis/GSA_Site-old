@@ -30,6 +30,23 @@ function getSexuality() {
     });
 }
 
+function getSexuality2(){
+    var html = "";
+    $.getJSON("//spreadsheets.google.com/feeds/list/12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s/od6/public/values?alt=json", function(data) {
+        //first row "title" column
+        for(var i = 0; i < data.feed.entry.length; i++){
+            alert("loop");
+            html += '<div class="flagEntry">' + 
+                '<div class="ui top attached header">' + 
+                    '<p class="flagTitle">' + data.feed.entry[i]['gsx$sexuality']['$t'] + ':</p>' + 
+                '</div>';
+        }
+    });
+    alert("test");
+    console.log(html);
+    document.getElementById('sexualitiesSection').innerHTML = html;
+}
+
 function getRomantic() {
     var romanticSpreadsheet = new GoogleSpreadsheet();
     romanticSpreadsheet.url(romanticURL);
@@ -107,8 +124,8 @@ function getOtherTerms() {
 
 function showFlags() {
     localStorage.clear();
-    getSexuality();
-    getRomantic();
-    getGender();
-    getOtherTerms();
+    getSexuality2();
+    // getRomantic();
+    // getGender();
+    // getOtherTerms();
 }
