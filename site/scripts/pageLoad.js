@@ -5,9 +5,4 @@ function loadPageIndex(){
 function loadPageFlag(){
     navMake();
     showFlags();
-    //$('.ui.sticky')
-    //    .sticky({
-    //        context: '#content'
-    //    })
-    //;
 }
