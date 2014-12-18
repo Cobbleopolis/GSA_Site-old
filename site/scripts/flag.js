@@ -34,7 +34,7 @@ function loadSection(data, section){
                 '<div class="ui top attached header">' + 
                     '<p class="flagTitle">' + data.feed.entry[i]['gsx$identification']['$t'] + ':</p>' + 
                 '</div>';
-                if(data.feed.entry[i]['gsx$imagelink']['$t']){
+                if(data.feed.entry[i]['gsx$imagelink']){
                     html += '<div class="ui attached segment">' + 
                         '<img class="flagImg" src = "' + data.feed.entry[i]['gsx$imagelink']['$t'] + '">' + 
                     '</div>';
