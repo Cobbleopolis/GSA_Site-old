@@ -25,19 +25,24 @@ function getOtherTerms() {
 function loadSection(data, section){
         var html = "";
         for(var i = 0; i < data.feed.entry.length; i++){
-            html += '<div class="flagEntry">' + 
-                '<div class="ui top attached header">' + 
-                    '<p class="flagTitle">' + data.feed.entry[i]['gsx$identification']['$t'] + ':</p>' + 
+            html += '<div class="flagEntry">' +
+                '<div class="ui top attached header">' +
+                    '<p class="flagTitle">' + data.feed.entry[i]['gsx$identification']['$t'] + '</p>' +
                 '</div>';
                 if(data.feed.entry[i]['gsx$imagelink']){
-                    html += '<div class="ui attached segment">' + 
-                        '<img class="flagImg" src = "' + data.feed.entry[i]['gsx$imagelink']['$t'] + '">' + 
+                    html += '<div class="ui attached segment">' +
+                        '<img class="flagImg" src = "' + data.feed.entry[i]['gsx$imagelink']['$t'] + '">' +
                     '</div>';
                 }
-                html += '<div class="ui attached segment">' + 
-                    '<p class="flagDesc">' + data.feed.entry[i]['gsx$description']['$t'] + '</p>' + 
-                '</div>' +
-            '</div>';
+                html += '<div class="ui attached segment">' +
+                    '<p class="flagDesc">' + data.feed.entry[i]['gsx$description']['$t'] + '</p>' +
+                '</div>';
+                if(data.feed.entry[i]['gsx$warning'] && data.feed.entry[i]['gsx$warning']['$t']){
+                    html += '<div class="ui bottom attached warning message">' +
+                        '<i class="warning sign icon"></i>' + data.feed.entry[i]['gsx$warning']['$t'] +
+                    '</div>';
+                }
+            html += '</div>';
         }
         document.getElementById(section).innerHTML = html;
 }
