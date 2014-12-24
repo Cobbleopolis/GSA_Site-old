@@ -1,8 +1,3 @@
-var sexualityURL = 'https://spreadsheets.google.com/pub?key=12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s&hl=en&output=html';
-var romanticURL = 'https://spreadsheets.google.com/pub?key=1SlE3zpanxS1vZ2fAOsCJ4jkSddFYhUe6zJzM_7iCLmA&hl=en&output=html';
-var genderURL = 'https://spreadsheets.google.com/pub?key=1M-3rloGazASnuSqzxwcxEcoTrAt6oucTOWP4uuSj-9U&hl=en&output=html';
-var otherURL = 'https://spreadsheets.google.com/pub?key=1_AvDOvAjxUUl2xAaomSNi0VfrTMamccL7MdJzvSr-bg&hl=en&output=html';
-
 function getSexuality(){
     $.getJSON("//spreadsheets.google.com/feeds/list/12fWXwKd4Ta7scHhuU4o3RSUWNGZinF8pmOjIso3Ee8s/od6/public/values?alt=json", function(data) {
         loadSection(data, 'sexualitiesSection');
@@ -44,7 +39,6 @@ function loadSection(data, section){
                 '</div>' +
             '</div>';
         }
-        // console.log(html);
         document.getElementById(section).innerHTML = html;
 }
 
