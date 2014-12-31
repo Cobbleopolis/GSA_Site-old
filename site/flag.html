@@ -28,42 +28,17 @@
 
 <div class="pusher">
     <article>
-            <div class="ui top attached tabular menu" id="sexualities">
-                <div class="active item">
-                    <p class="flagSectionTitle">Sexual Orientations</p>
-                </div>
-            </div>
-            <div class="ui bottom attached segment" id="sexualitiesSection">
-                <p class="loading">Loading...</p>
-            </div>
+        <div class="ui pointing secondary demo menu">
+            <a class="active red item" data-tab="sexualities">Sexual Orientations</a>
+            <a class="orange item" data-tab="romantic">Romantic Orientations</a>
+            <a class="blue item" data-tab="gender">Gender Identitiess</a>
+            <a class="purple item" data-tab="other">Other LGBT+ Terms</a>
+        </div>
 
-            <div class="ui top attached tabular menu" id="romantic">
-                <div class="active item">
-                    <p class="flagSectionTitle">Romantic Orientations</p>
-                </div>
-            </div>
-            <div class="ui bottom  attached segment" id="romanticSection">
-                <p class="loading">Loading...</p>
-            </div>
-
-            <div class="ui top attached tabular menu" id="genders">
-                <div class="active item">
-                    <p class="flagSectionTitle">Gender Identitiess</p>
-                </div>
-            </div>
-            <div class="ui bottom  attached segment" id="gendersSection">
-                <p class="loading">Loading...</p>
-            </div>
-
-            <div class="ui top attached tabular menu" id="otherTerms">
-                <div class="active item">
-                    <p class="flagSectionTitle">Other LGBT+ Terms</p>
-                </div>
-            </div>
-            <div class="ui bottom  attached segment" id="otherTermsSection">
-                <p class="loading">Loading...</p>
-            </div>
-        <!--</div>-->
+        <div class="ui active tab segment" id="sexualitiesSection" data-tab="sexualities"><p class="loading">Loading...</p></div>
+        <div class="ui tab segment" id="romanticSection" data-tab="romantic"><p class="loading">Loading...</p></div>
+        <div class="ui tab segment" id="gendersSection" data-tab="gender"><p class="loading">Loading...</p></div>
+        <div class="ui tab segment" id="otherTermsSection" data-tab="other"><p class="loading">Loading...</p></div>
     </article>
 </div>
 </body>
