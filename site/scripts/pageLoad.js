@@ -2,6 +2,10 @@ function loadPageIndex(){
     navMake();
 }
 
+function loadPageEvents(){
+    navMake();
+}
+
 function loadPageFlag(){
     navMake();
     showFlags();
