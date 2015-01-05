@@ -1,3 +1,7 @@
+article {
+    padding-left: 150px;
+}
+
 .fixed.launch.button {
     position: fixed;
     top: 63px;
