@@ -1,5 +1,6 @@
 function loadPageIndex(){
     navMake();
+    makeSlideshow();
 }
 
 function loadPageEvents(){

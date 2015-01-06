@@ -6,6 +6,32 @@ article{
     font-size: 60px;
 }
 
+#header{
+    width: 100%;
+}
+
+#header li{
+    display: inline-block;
+    list-style-type: none;
+    width: 49%;
+    padding: 0 2.5%;
+    vertical-align: middle;
+}
+
+.segment_title{
+    font-size: 25px;
+    font-weight: bold;
+}
+
 #content {
     font-size: 20px;
+}
+
+#slideshow {
+    position: relative;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+#slideshow > div {
+    position: absolute;
 }
