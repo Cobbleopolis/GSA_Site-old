@@ -4,6 +4,7 @@ article{
 
 .title {
     font-size: 60px;
+    font-weight: bold;
 }
 
 #header{
@@ -13,7 +14,7 @@ article{
 #header li{
     display: inline-block;
     list-style-type: none;
-    width: 49%;
+    width: 49.5%;
     padding: 0 2.5%;
     vertical-align: middle;
 }
