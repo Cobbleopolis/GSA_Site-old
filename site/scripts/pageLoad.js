@@ -1,7 +1,7 @@
 
 function loadPageIndex(){
     navMake();
-    makeSlideshow();
+    makeHomePage();
 }
 
 function loadPageEvents(){

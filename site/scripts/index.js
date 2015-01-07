@@ -1,7 +1,6 @@
-function makeSlideshow() {
+function makeHomePage() {
     fillContent();
     fillSlideshow();
-    activateSlideshow();
 }
 
 function fillContent() {
@@ -13,6 +12,12 @@ function fillContent() {
             } else if (data.feed.entry[i]['gsx$section']['$t'].toLowerCase() === 'about') {
                 document.getElementById('about_content').innerHTML = '';
                 document.getElementById('about_content').innerHTML = '<p class="content_paragraph">' + data.feed.entry[i]['gsx$content']['$t'] + '</p>';
+            } else if (data.feed.entry[i]['gsx$section']['$t'].toLowerCase() === 'meeting'){
+                document.getElementById('meeting_content').innerHTML = '';
+                document.getElementById('meeting_content').innerHTML = '<p class="content_paragraph">' + data.feed.entry[i]['gsx$content']['$t'] + '</p>';
+            } else if (data.feed.entry[i]['gsx$section']['$t'].toLowerCase() === 'fishbowl') {
+                document.getElementById('fishbowl_content').innerHTML = '';
+                document.getElementById('fishbowl_content').innerHTML = '<p class="content_paragraph">' + data.feed.entry[i]['gsx$content']['$t'] + '</p>';
             }
         }
         $('#slideshow').height($('#summery_entry').outerHeight());
@@ -45,5 +50,6 @@ function fillSlideshow() {
             html += '<img src="' + data.feed.entry[i]['gsx$content']['$t'] + '" width = "' + $slideshow.width() + '" height = "' + $slideshow.height() + '"></div>';
         }
         document.getElementById('slideshow').innerHTML = html;
+        activateSlideshow();
     });
 }
