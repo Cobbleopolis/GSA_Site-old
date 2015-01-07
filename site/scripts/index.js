@@ -1,8 +1,6 @@
 function makeSlideshow(){
-    var $slideshow = $('#slideshow');
-    var $summery = $('#summery_entry');
-    console.log($summery.height());
-    $slideshow.height($summery.outerHeight());
+    $('#slideshow').height($('#summery_entry').outerHeight());
+
     fillSlideshow();
     activateSlideshow();
 
