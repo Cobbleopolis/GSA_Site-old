@@ -24,6 +24,10 @@ article{
     font-weight: bold;
 }
 
+.content_paragraph {
+    text-indent: 50px;
+}
+
 #content {
     font-size: 20px;
 }
