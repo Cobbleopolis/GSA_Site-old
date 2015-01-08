@@ -16,6 +16,10 @@ function loadPageFlag(){
     });
 }
 
+function loadPageChat(){
+    navMake();
+}
+
 function loadPageTest(){
     navMake();
     $(document).ready(function(){

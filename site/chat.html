@@ -6,13 +6,14 @@
 
     <link rel="stylesheet" type="text/css" href="css/semantic/semantic.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="css/events.css"/>
+    <link rel="stylesheet" type="text/css" href="css/chat.css"/>
     <script type="text/javascript" src="scripts/nav.js"></script>
     <script type="text/javascript" src="scripts/pageLoad.js"></script>
-    <script type="text/javascript" src="scripts/events.js"></script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="css/semantic/semantic.min.js"></script>
+    <script type="text/javascript" src="scripts/nav.js"></script>
+
 
     <!-- Enabling HTML5 support for Internet Explorer -->
     <!--[if lt IE 9]>
@@ -21,18 +22,18 @@
 
 </head>
 
-<body class="pushable" onload="loadPageEvents()">
+<body class="pushable" onload="loadPageChat()">
 <div id="navBar" class="ui left demo vertical inverted labeled icon sidebar menu"></div>
 <div id="navButton" class="ui black big launch right attached fixed button" onclick="showNav()"></div>
 
 <div class="pusher">
-    <iframe id="cal"
-            src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23f7f7f7&amp;src=hooch.gsa%40gmail.com&amp;color=%232952A3&amp;src=en.usa%23holiday%40group.v.calendar.google.com&amp;color=%23B1440E&amp;ctz=America%2FNew_York"
-            style=" border-width:0 " frameborder="0" scrolling="no"></iframe>
-    <script>
-        document.getElementById("cal").height = window.innerHeight * 0.9;
-        document.getElementById("cal").width = window.innerWidth * 0.9;
-    </script>
+    <article>
+        <iframe id="chat" src="https://kiwiirc.com/client/irc.esper.net/#hooch_gsa"></iframe>
+        <script>
+            document.getElementById("chat").height = window.innerHeight * 0.95;
+            document.getElementById("chat").width = window.innerWidth * 0.9;
+        </script>
+    </article>
 </div>
 </body>
 </html>
