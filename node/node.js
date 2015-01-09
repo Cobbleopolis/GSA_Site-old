@@ -9,9 +9,9 @@ my_http.createServer(function(request,response){
     if(my_path === "/html/"){
         full_path += "index.html";
     }
-    sys.puts("Path request: " + my_path);
-    sys.puts("Full request: " + full_path);
-    sys.puts("---------------")
+    //sys.puts("Path request: " + my_path);
+    //sys.puts("Full request: " + full_path);
+    //sys.puts("---------------");
 ;    path.exists(full_path,function(exists){
         if(!exists){
             response.writeHeader(404, {"Content-Type": "text/plain"});
@@ -36,8 +36,4 @@ my_http.createServer(function(request,response){
         }
     });
 }).listen(8080);
-sys.puts("Server Running on 8080");
-
-function endsWith(str, suffix) {
-    return str.indexOf(suffix, str.length - suffix.length) !== -1;
-}
+sys.puts("Server Running on 80");
