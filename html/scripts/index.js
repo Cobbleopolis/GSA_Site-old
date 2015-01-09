@@ -1,6 +1,7 @@
 function makeHomePage() {
     fillContent();
     fillSlideshow();
+    activateSlideshow();
 }
 
 function fillContent() {
@@ -43,13 +44,12 @@ function fillSlideshow() {
         var html = '';
         for (var i = 0; i < data.feed.entry.length; i++) {
             if (i === 0) {
-                html += '<div style="display: block;">';
+                html += '<div style="display: block">';
             } else {
-                html += '<div style="display: none;">'
+                html += '<div style="display: none">';
             }
             html += '<img src="' + data.feed.entry[i]['gsx$content']['$t'] + '" width = "' + $slideshow.width() + '" height = "' + $slideshow.height() + '"></div>';
         }
         document.getElementById('slideshow').innerHTML = html;
-        activateSlideshow();
     });
 }

@@ -4,17 +4,15 @@ var sys = require("sys"),
     url = require("url"),
     filesys = require("fs");
 my_http.createServer(function(request,response){
-    var my_path = url.parse(request.url).pathname + "html/";
-    var full_path = path.join(process.cwd(),my_path); //var full_path = path.join(process.cwd(),my_path) + "html\\";
+    var my_path = "/html" + url.parse(request.url).pathname;
+    var full_path = path.join(process.cwd(),my_path);
     if(my_path === "/html/"){
         full_path += "index.html";
     }
-    var use_path = parsePath(my_path);
     sys.puts("Path request: " + my_path);
     sys.puts("Full request: " + full_path);
-    sys.puts("Use request: " + use_path);
     sys.puts("---------------")
-;    path.exists(full_path,function(exists){ //path.exists(full_path,function(exists){
+;    path.exists(full_path,function(exists){
         if(!exists){
             response.writeHeader(404, {"Content-Type": "text/plain"});
             response.write("404 Not Found\n");
@@ -38,8 +36,8 @@ my_http.createServer(function(request,response){
         }
     });
 }).listen(8080);
-sys.puts("Server Running on 8080");			
+sys.puts("Server Running on 8080");
 
-function parsePath(str){
-    return str;
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }
