@@ -2,7 +2,8 @@ var sys = require("sys"),
     my_http = require("http"),
     path = require("path"),
     url = require("url"),
-    filesys = require("fs");
+    filesys = require("fs"),
+    mongo = require("./mongo.js");
 my_http.createServer(function(request,response){
     var my_path = "/html" + url.parse(request.url).pathname;
     var full_path = path.join(process.cwd(),my_path);
@@ -12,7 +13,7 @@ my_http.createServer(function(request,response){
     //sys.puts("Path request: " + my_path);
     //sys.puts("Full request: " + full_path);
     //sys.puts("---------------");
-;    path.exists(full_path,function(exists){
+    path.exists(full_path,function(exists){
         if(!exists){
             response.writeHeader(404, {"Content-Type": "text/plain"});
             response.write("404 Not Found\n");
@@ -35,5 +36,6 @@ my_http.createServer(function(request,response){
             });
         }
     });
-}).listen(8080);
+}).listen(80);
 sys.puts("Server Running on 80");
+mongo.test();
