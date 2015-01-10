@@ -29,6 +29,7 @@ my_http.createServer(function(request,response){
                 }
                 else{
                     response.writeHeader(200);
+
                     response.write(file, "binary");
                     response.end();
                 }
@@ -39,3 +40,4 @@ my_http.createServer(function(request,response){
 }).listen(80);
 sys.puts("Server Running on 80");
 mongo.test();
+mongo.pageHandle();

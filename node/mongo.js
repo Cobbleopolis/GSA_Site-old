@@ -4,17 +4,20 @@
     var collections = ["names", "test"]
     var db = require("mongojs").connect(databaseUrl, collections);
 
-    module.exports.pageHandle = function (page_request) {
-        if(strEndsWith(page_request, "index.html")){
-
-        }
+    module.exports.pageHandle = function () {
+        var homePage = db.collection("homePage");
+        homePage.find().toArray(function(err, docs){
+            console.log("retrieved records:");
+            console.log(docs);
+        });
+        //console.log(db.homePage.summary);
     };
 
     module.exports.test = function () {
         db.names.find({ }, function (err, names) {
             if (err || !names) console.log("No names found");
             else names.forEach(function (names) {
-                console.log(names);
+                console.log(names.name);
             });
         });
     };
