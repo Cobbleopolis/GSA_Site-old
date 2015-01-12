@@ -29,8 +29,8 @@ my_http.createServer(function(request,response){
                 }
                 else{
                     response.writeHeader(200);
-                    mongo.pageHandle(full_path, file);
-                    response.write(file, "binary");
+                    //file = mongo.pageHandle(full_path, file);
+                    response.write(mongo.pageHandle(full_path, file), "binary");
                     response.end();
                 }
 

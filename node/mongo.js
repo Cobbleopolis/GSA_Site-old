@@ -6,12 +6,14 @@
     var db = require("mongojs").connect(databaseUrl, collections);
 
     module.exports.pageHandle = function (request, page) {
-        sys.puts(request);
-        sys.puts(strEndsWith(request, "index.html"));
-        sys.puts("--------------------");
+        var out_page = page;
+        //sys.puts(request);
+        //sys.puts(strEndsWith(request, "index.html"));
+        //sys.puts("--------------------");
         if (strEndsWith(request, "index.html")) {
-            indexHandle(request, page);
+            out_page = indexHandle(request, page);
         }
+        return out_page;
     };
 
     function indexHandle(request, page){
@@ -24,9 +26,11 @@
                     $('#summary_content').html(doc.content);
                     sys.puts("After: " + $('#summary_content').html());
                 }
-            })
+            });
+
         });
-        //console.log(db.homePage.summary);
+        sys.puts($.html());
+        return $.html();
     }
 
     //module.exports.indexHandle = indexHandle(page);
