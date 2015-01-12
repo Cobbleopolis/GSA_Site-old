@@ -13,7 +13,7 @@ my_http.createServer(function(request,response){
     //sys.puts("Path request: " + my_path);
     //sys.puts("Full request: " + full_path);
     //sys.puts("---------------");
-    path.exists(full_path,function(exists){
+    filesys.exists(full_path,function(exists){
         if(!exists){
             response.writeHeader(404, {"Content-Type": "text/plain"});
             response.write("404 Not Found\n");
@@ -29,7 +29,7 @@ my_http.createServer(function(request,response){
                 }
                 else{
                     response.writeHeader(200);
-
+                    mongo.pageHandle(full_path, file);
                     response.write(file, "binary");
                     response.end();
                 }
@@ -39,5 +39,3 @@ my_http.createServer(function(request,response){
     });
 }).listen(80);
 sys.puts("Server Running on 80");
-mongo.test();
-mongo.pageHandle();
