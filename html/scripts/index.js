@@ -11,14 +11,14 @@ function fillContent() {
                 //document.getElementById('summary_content').innerHTML = '';
                 //document.getElementById('summary_content').innerHTML = '<p class="content_paragraph">' + data.feed.entry[i]['gsx$content']['$t'] + '</p>';
             } else if (data.feed.entry[i]['gsx$section']['$t'].toLowerCase() === 'about') {
-                document.getElementById('about_content').innerHTML = '';
-                document.getElementById('about_content').innerHTML = '<p class="content_paragraph">' + data.feed.entry[i]['gsx$content']['$t'] + '</p>';
+                //document.getElementById('about_content').innerHTML = '';
+                //document.getElementById('about_content').innerHTML = '<p class="content_paragraph">' + data.feed.entry[i]['gsx$content']['$t'] + '</p>';
             } else if (data.feed.entry[i]['gsx$section']['$t'].toLowerCase() === 'meeting'){
-                document.getElementById('meeting_content').innerHTML = '';
-                document.getElementById('meeting_content').innerHTML = '<p class="content_paragraph">' + data.feed.entry[i]['gsx$content']['$t'] + '</p>';
+                //document.getElementById('meeting_content').innerHTML = '';
+                //document.getElementById('meeting_content').innerHTML = '<p class="content_paragraph">' + data.feed.entry[i]['gsx$content']['$t'] + '</p>';
             } else if (data.feed.entry[i]['gsx$section']['$t'].toLowerCase() === 'fishbowl') {
-                document.getElementById('fishbowl_content').innerHTML = '';
-                document.getElementById('fishbowl_content').innerHTML = '<p class="content_paragraph">' + data.feed.entry[i]['gsx$content']['$t'] + '</p>';
+                //document.getElementById('fishbowl_content').innerHTML = '';
+                //document.getElementById('fishbowl_content').innerHTML = '<p class="content_paragraph">' + data.feed.entry[i]['gsx$content']['$t'] + '</p>';
             }
         }
         $('#slideshow').height($('#summery_entry').outerHeight());

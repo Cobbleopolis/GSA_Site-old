@@ -1,6 +1,6 @@
 
 function loadPageIndex(){
-    navMake();
+    //navMake();
     makeHomePage();
 }
 

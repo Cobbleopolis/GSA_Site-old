@@ -5,19 +5,47 @@
     var collections = ["names", "homePage"];
     var db = require("mongojs").connect(databaseUrl, collections);
 
+    var navBar = "";
+    fs.readFile(__dirname + "/html/resorcePages/navBar.html", function(err, file) {
+       navBar = file;
+    });
+    var navButton = "";
+    fs.readFile(__dirname + "/html/resorcePages/navButton.html", function(err, file) {
+        navButton = file;
+    });
+
+
+
+
     module.exports.indexHandle = function(url, res) {
+        //console.log(__dirname);
         fs.readFile(url, function (err, file) {
             var $ = cheerio.load(file);
+            $("#navBar").html(navBar);
+            $("#navButton").html(navButton);
             var homePage = db.collection("homePage");
             homePage.find(function (err, docs) {
                 for (var i = 0; i < docs.length; i++) {
-                    if (docs[i].section === "summary") {
-                        $('#summary_content').html(docs[i].content);
+                    switch(docs[i].section){
+                        case "summary":
+                            $('#summary_content').html(docs[i].content);
+                            break;
+                        case "about":
+                            $('#about_content').html(docs[i].content);
+                            break;
+                        case "meetings":
+                            $('#meeting_content').html(docs[i].content);
+                            break;
+                        case "fishbowl":
+                            $('#fishbowl_content').html(docs[i].content);
                     }
                 }
                 res.send($.html());
             });
         });
     };
+
+
+
 }());
 
