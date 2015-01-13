@@ -6,25 +6,21 @@ var mongo = require("./mongo.js");
 app.use(express.static(__dirname + '/html'));
 
 app.get('/', function(req, res){
-    mongo.indexHandle(res);
-    res.sendFile(__dirname + '/html/index.html');
+    mongo.indexHandle(__dirname + "/index.html", res);
+    res.sendFile(__dirname + '/index.html');
 });
 
 
 app.get('/flag', function(req, res){
-    res.sendFile(__dirname + '/html/flag.html');
+    res.sendFile(__dirname + '/flag.html');
 });
 
 app.get('/events', function(req, res){
-    res.sendFile(__dirname + '/html/events.html');
+    res.sendFile(__dirname + '/events.html');
 });
 
 app.get('/chat', function(req, res){
-    res.sendFile(__dirname + '/html/chat.html');
-});
-
-app.get('/about', function (req, res) {
-    res.send("Hello World about");
+    res.sendFile(__dirname + '/chat.html');
 });
 
 var server = app.listen(80, function () {
