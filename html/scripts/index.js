@@ -1,7 +1,8 @@
 function makeHomePage() {
-    fillContent();
-    fillSlideshow();
+    //fillContent();
+    //fillSlideshow();
     activateSlideshow();
+    $('#slideshow').height($('#summery_entry').outerHeight());
 }
 
 function fillContent() {
@@ -50,6 +51,6 @@ function fillSlideshow() {
             }
             html += '<img src="' + data.feed.entry[i]['gsx$content']['$t'] + '" width = "' + $slideshow.width() + '" height = "' + $slideshow.height() + '"></div>';
         }
-        document.getElementById('slideshow').innerHTML = html;
+        //document.getElementById('slideshow').innerHTML = html;
     });
 }
