@@ -6,7 +6,7 @@ var mongo = require("./mongo.js");
 app.use(express.static(__dirname + '/html'));
 
 app.get('/', function(req, res){
-    mongo.indexHandle(__dirname + "/index.html", res);
+    mongo.pageHandle(__dirname + "/index.html", res);
     res.sendFile(__dirname + '/index.html');
 });
 

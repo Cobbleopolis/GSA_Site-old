@@ -6,7 +6,8 @@
     var db = require("mongojs").connect(databaseUrl, collections);
 
     module.exports.pageHandle = function (url, res) {
-        fs.readFile(url, "binary", function(err, file) {
+        console.log(url);
+        fs.readFile(url, function(err, file) {
             if (strEndsWith(url, "index.html")) {
                 indexHandle(file, res);
             }
