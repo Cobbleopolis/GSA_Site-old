@@ -6,10 +6,10 @@ var mongo = require("./mongo.js");
 app.use(express.static(__dirname + '/html'));
 
 app.get('/', function(req, res){
+    console.log("Hello World");
     mongo.pageHandle(__dirname + "/index.html", res);
     res.sendFile(__dirname + '/index.html');
 });
-
 
 app.get('/flag', function(req, res){
     res.sendFile(__dirname + '/flag.html');
