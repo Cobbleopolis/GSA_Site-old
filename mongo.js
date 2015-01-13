@@ -18,10 +18,6 @@
                 res.send($.html());
             });
         });
-    }
-
-    function strEndsWith(str, suffix) {
-        return str.match(suffix + "$") == suffix;
-    }
+    };
 }());
 
