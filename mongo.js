@@ -18,12 +18,11 @@
             $('#navButton').html(navButton);
 
             var homePage = db.collection('homePage');
-            fs.readdir('html/images/slideshow', function (err, files) {
+            fs.readdir(__dirname + 'html/images/slideshow', function (err, files) {
                 var html = '';
                 if (err)
                     throw err;
                 for (var i = 0; i < files.length; i++) {
-                    //console.log("File:" + files[i]);
                     if (i === 0) {
                         html += '<div style="display: block">';
                     } else {
