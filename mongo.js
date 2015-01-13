@@ -26,7 +26,7 @@
                         } else {
                             html += '<div style="display: none">';
                         }
-                        html += '<img class="slideshow_img" src="images/flags/' + files[i] + '"></div>';
+                        html += '<img class="slideshow_img" src="images/slideshow/' + files[i] + '"></div>';
                     }
                 $('#slideshow').html(html);
             });
@@ -63,15 +63,68 @@
             var romantic = db.collection('romantic');
             var genders = db.collection('genders');
             var other_terms = db.collection('other_terms');
-            sexualities.find(function (err, flag) {
+            sexualities.find(function (err, flags) {
                 if (!err)
-                    for (var i = 0; i < flag.length; i++) {
-                        //TODO Insert the flags
-                    }
+                    $("#sexualitiesSection").html(flagToHTML(flags));
+            });
+            romantic.find(function (err, flags) {
+                if (!err)
+                    $("#romanticSection").html(flagToHTML(flags));
+            });
+            genders.find(function (err, flags) {
+                if (!err)
+                    $("#gendersSection").html(flagToHTML(flags));
+            });
+            other_terms.find(function (err, flags) {
+                if (!err)
+                    $("#otherTermsSection").html(flagToHTML(flags));
                 res.send($.html());
             });
+
         });
     };
 
+    module.exports.eventsHandle = function (url, res) {
+        fs.readFile(url, function (err, file) {
+            var $ = cheerio.load(file);
+            $('#navBar').html(navBar);
+            $('#navButton').html(navButton);
+            res.send($.html());
+        });
+    };
+
+    module.exports.chatHandle = function (url, res) {
+        fs.readFile(url, function (err, file) {
+            var $ = cheerio.load(file);
+            $('#navBar').html(navBar);
+            $('#navButton').html(navButton);
+            res.send($.html());
+        });
+    };
+
+    function flagToHTML(array){
+        var html = '';
+        for (var i = 0; i < array.length; i++) {
+            html += '<div class="flagEntry">' +
+            '<div class="ui top attached header">' +
+            '<p class="flagTitle">' + array[i].identification + '</p>' +
+            '</div>';
+            if(array[i].image_link){
+                html += '<div class="ui attached segment">' +
+                '<img class="flagImg" src = "' + array[i].image_link + '">' +
+                '</div>';
+            }
+            html += '<div class="ui attached segment">' +
+            '<p class="flagDesc">' + array[i].description + '</p>' +
+            '</div>';
+            if(array[i].warning){
+                html += '<div class="ui bottom attached warning message">' +
+                '<i class="warning sign icon"></i>' + array[i].warning +
+                '</div>';
+            }
+            html += '</div>';
+        }
+        return html;
+    }
 }());
 

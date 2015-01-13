@@ -49,8 +49,8 @@ function loadSection(data, section){
 
 function showFlags() {
     localStorage.clear();
-    getSexuality();
-    getRomantic();
-    getGender();
-    getOtherTerms();
+    //getSexuality();
+    //getRomantic();
+    //getGender();
+    //getOtherTerms();
 }

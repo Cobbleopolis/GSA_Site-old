@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var path = require("path");
 var mongo = require("./mongo.js");
 
 app.get('/', function(req, res){
@@ -8,20 +7,20 @@ app.get('/', function(req, res){
 });
 
 app.get('/flags', function(req, res){
-    res.sendFile(__dirname + '/html/flag.html');
+    mongo.flagHandle(__dirname + "/html/flag.html", res);
 });
 
 app.get('/events', function(req, res){
-    res.sendFile(__dirname + '/html/events.html');
+    mongo.eventsHandle(__dirname + "/html/events.html", res);
 });
 
 app.get('/chat', function(req, res){
-    res.sendFile(__dirname + '/html/chat.html');
+    mongo.chatHandle(__dirname + "/html/chat.html", res);
 });
 
 app.use(express.static(__dirname + '/html'));
 
-var server = app.listen(80, function () {
+var server = app.listen(81, function () {
 
     var host = server.address().address;
     var port = server.address().port;
