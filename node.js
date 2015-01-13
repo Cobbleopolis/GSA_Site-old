@@ -8,16 +8,16 @@ app.get('/', function(req, res){
     //res.sendFile(__dirname + '/html/index.html');
 });
 
-app.get('/flag', function(req, res){
-    res.sendFile(__dirname + '/flag.html');
+app.get('/flags', function(req, res){
+    res.sendFile(__dirname + '/html/flag.html');
 });
 
 app.get('/events', function(req, res){
-    res.sendFile(__dirname + '/events.html');
+    res.sendFile(__dirname + '/html/events.html');
 });
 
 app.get('/chat', function(req, res){
-    res.sendFile(__dirname + '/chat.html');
+    res.sendFile(__dirname + '/html/chat.html');
 });
 
 app.use(express.static(__dirname + '/html'));

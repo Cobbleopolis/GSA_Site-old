@@ -6,7 +6,6 @@
     var db = require("mongojs").connect(databaseUrl, collections);
 
     module.exports.pageHandle = function (url, res) {
-        console.log(url);
         fs.readFile(url, function(err, file) {
             if (strEndsWith(url, "index.html")) {
                 indexHandle(file, res);
@@ -28,7 +27,6 @@
                 }
             };
             res.send($.html());
-            console.log($.html());
         });
     }
 
