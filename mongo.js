@@ -18,7 +18,7 @@
             $('#navButton').html(navButton);
 
             var homePage = db.collection('homePage');
-            fs.readdir(__dirname + '/html/images/slideshow', function (err, files) {
+            fs.readdir(__dirname + '/html/images/slideshow/', function (err, files) {
                 var html = '';
                 if (err)
                     throw err;
