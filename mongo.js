@@ -5,14 +5,8 @@
     var collections = ["names", "homePage"];
     var db = require("mongojs").connect(databaseUrl, collections);
 
-    var navBar = "";
-    fs.readFile(__dirname + "/html/resorcePages/navBar.html", function(err, file) {
-       navBar = file;
-    });
-    var navButton = "";
-    fs.readFile(__dirname + "/html/resorcePages/navButton.html", function(err, file) {
-        navButton = file;
-    });
+    var navBar = fs.readFileSync(__dirname + "/html/resorcePages/navBar.html");
+    var navButton = fs.readFileSync(__dirname + "/html/resorcePages/navButton.html");
 
 
 

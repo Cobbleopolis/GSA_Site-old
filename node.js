@@ -5,7 +5,6 @@ var mongo = require("./mongo.js");
 
 app.get('/', function(req, res){
     mongo.indexHandle(__dirname + "/html/index.html", res);
-    //res.sendFile(__dirname + '/html/index.html');
 });
 
 app.get('/flags', function(req, res){
