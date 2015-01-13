@@ -12,8 +12,6 @@
     <script type="text/javascript" src="css/semantic/semantic.min.js"></script>
     <script type="text/javascript" src="scripts/nav.js"></script>
     <script type="text/javascript" src="scripts/flag.js"></script>
-    <!--<script type="text/javascript" src="scripts/google-spreadsheet.js"></script>-->
-    <script type="text/javascript" src="scripts/pageLoad.js"></script>
 
 
     <!-- Enabling HTML5 support for Internet Explorer -->
@@ -22,7 +20,7 @@
     <![endif]-->
 
 </head>
-<body class="pushable" onload="loadPageFlag()">
+<body class="pushable" onload="makeTabs()">
 <div id="navBar" class="ui left demo vertical inverted labeled icon sidebar menu"></div>
 <div id="navButton" class="ui black big launch right attached fixed button" onclick="showNav()"></div>
 
@@ -35,38 +33,10 @@
             <a class="blue item" id="other" data-tab="other">Other LGBT+ Terms</a>
         </div>
 
-        <div class="ui red active tab segment" id="sexualitiesSection" data-tab="sexualities">
-            <div class="ui loading segment">
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-            </div>
-        </div>
-        <div class="ui orange tab segment" id="romanticSection" data-tab="romantic">
-            <div class="ui loading segment">
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-            </div>
-        </div>
-        <div class="ui green tab segment" id="gendersSection" data-tab="gender">
-            <div class="ui loading segment">
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-            </div>
-        </div>
-        <div class="ui blue tab segment" id="otherTermsSection" data-tab="other">
-            <div class="ui loading segment">
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-            </div>
-        </div>
+        <div class="ui red active tab segment" id="sexualitiesSection" data-tab="sexualities"></div>
+        <div class="ui orange tab segment" id="romanticSection" data-tab="romantic"></div>
+        <div class="ui green tab segment" id="gendersSection" data-tab="gender"></div>
+        <div class="ui blue tab segment" id="otherTermsSection" data-tab="other"></div>
         <br>
         <br>
     </article>
