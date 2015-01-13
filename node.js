@@ -4,9 +4,8 @@ var path = require("path");
 var mongo = require("./mongo.js");
 
 app.get('/', function(req, res){
-    console.log("Hello World");
-    mongo.pageHandle(__dirname + "/index.html", res);
-    res.sendFile(__dirname + '/index.html');
+    mongo.pageHandle(__dirname + "/html/index.html", res);
+    //res.sendFile(__dirname + '/html/index.html');
 });
 
 app.get('/flag', function(req, res){
