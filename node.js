@@ -3,8 +3,6 @@ var app = express();
 var path = require("path");
 var mongo = require("./mongo.js");
 
-app.use(express.static(__dirname + '/html'));
-
 app.get('/', function(req, res){
     console.log("Hello World");
     mongo.pageHandle(__dirname + "/index.html", res);
@@ -22,6 +20,8 @@ app.get('/events', function(req, res){
 app.get('/chat', function(req, res){
     res.sendFile(__dirname + '/chat.html');
 });
+
+app.use(express.static(__dirname + '/html'));
 
 var server = app.listen(80, function () {
 
