@@ -14,6 +14,6 @@ function activateSlideshow() {
             .fadeIn(1000)
             .end()
             .appendTo('#slideshow');
-    }, 3000);
+    }, 5000);
 
 }
