@@ -39,7 +39,6 @@
                     switch (docs[i].section) {
                         case 'summary':
                             $('#summary_content').html(docs[i].content);
-                            //$('#slideshow').height($('#summery_entry').outerHeight());
                             break;
                         case 'about':
                             $('#about_content').html(docs[i].content);
