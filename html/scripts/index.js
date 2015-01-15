@@ -12,6 +12,6 @@ function activateSlideshow() {
                 $('#slideshow_entry div:first-child').fadeOut(1000)
                     .next().fadeIn(1000)
                     .end().appendTo('#slideshow_entry');},
-            3000);
+            4000);
     });
 }
