@@ -18,6 +18,10 @@ app.get('/chat', function(req, res){
     mongo.chatHandle(__dirname + "/html/chat.html", res);
 });
 
+app.get('/fishbowl', function(req, res){
+    mongo.chatHandle(__dirname + "/html/fishbowl.html", res);
+});
+
 app.use(express.static(__dirname + '/html'));
 
 var server = app.listen(81, function () {

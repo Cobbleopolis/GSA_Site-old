@@ -109,6 +109,17 @@
         });
     };
 
+    module.exports.fishbowlHandle = function (url, res) {
+        fs.readFile(url, function (err, file) {
+            if (err)
+                throw err;
+            var $ = cheerio.load(file);
+            $('#navBar').html(navBar);
+            $('#navButton').html(navButton);
+            res.send($.html());
+        });
+    };
+
     function flagToHTML(array) {
         var html = '';
         for (var i = 0; i < array.length; i++) {
