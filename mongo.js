@@ -23,14 +23,9 @@
                 if (err)
                     throw err;
                 for (var i = 0; i < files.length; i++) {
-                    if (i === 0) {
-                        html += '<div style="display: block">';
-                    } else {
-                        html += '<div style="display: none">';
-                    }
-                    html += '<img class="slideshow_img" src="images/slideshow/' + files[i] + '"></div>';
+                    html += '<div align="center" class="slideshow_div"><img class="slideshow_img" src="images/slideshow/' + files[i] + '"></div>';
                 }
-                $('#slideshow').html(html);
+                $('#slideshow_entry').html(html);
             });
             homePage.find(function (err, docs) {
                 if (err)
