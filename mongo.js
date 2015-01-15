@@ -60,7 +60,7 @@
 
             var sexualities = db.collection('sexualities');
             var romantic = db.collection('romantic');
-            var genders = db.collection('genders');
+            var genders = db.collection('gender');
             var other_terms = db.collection('other_terms');
             sexualities.find(function (err, flags) {
                 if (err)
