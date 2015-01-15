@@ -35,13 +35,7 @@ article{
 
 #slideshow_entry{
     background-color: #000000;
-    /*position: relative;*/
     padding: 20px;
     box-shadow: 0 0 20px rgba(0,0,0,0.4);
     overflow: hidden;
-    /*background-color: rgba(0,0,0,.5);*/
-}
-
-#slideshow_img {
-    /*position: absolute;*/
 }
