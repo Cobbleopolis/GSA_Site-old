@@ -13,6 +13,22 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="css/semantic/semantic.min.js"></script>
     <script type="text/javascript" src="scripts/nav.js"></script>
+    <script src="ckeditor/ckeditor.js"></script>
+    <script src="ckeditor/adapters/jquery.js"></script>
+    <script>
+
+        CKEDITOR.disableAutoInline = true;
+
+        $( document ).ready( function() {
+            $( '#editor' ).ckeditor(); // Use CKEDITOR.replace() if element is <textarea>.
+            $( '#editable' ).ckeditor(); // Use CKEDITOR.inline().
+        } );
+
+        function setValue() {
+            $('div#test').html($('#editor').val());
+        }
+
+    </script>
 
 
     <!-- Enabling HTML5 support for Internet Explorer -->
@@ -27,7 +43,14 @@
 <div id="navButton" class="ui black big launch right attached fixed button" onclick="showNav()"></div>
 
 <div class="pusher">
-
+    <article>
+        <textarea cols="80" id="editor" name="editor" rows="10" style="visibility: hidden; display: none;"></textarea>
+        <span style="float: right">
+			<!--<input type="text" id="val" value="I'm using jQuery val()!" size="30">-->
+			<input onclick="setValue();" type="button" value="Set value">
+		</span>
+        <div id="test"></div>
+    </article>
 </div>
 </body>
 </html>
