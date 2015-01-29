@@ -1,7 +1,27 @@
+#editButton {
+    float: right;
+    margin-top: 15px;
+}
+
 #previewButton {
     float: right;
+    margin-top: 15px;
+}
+
+#saveButton {
+    float: right;
+    margin-top: 15px;
+}
+
+#div {
+    margin-top: 65px;
 }
 
 #preview {
-    margin-top: 35px;
+    margin-top: 65px;
+}
+
+article{
+    padding-top: 15px;
+    padding-right: 7.8125%;
 }

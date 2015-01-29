@@ -17,18 +17,22 @@
     <script src="ckeditor/adapters/jquery.js"></script>
     <script>
 
+        var page = "";
+        var section= "";
+
         CKEDITOR.disableAutoInline = true;
 
         $( document ).ready( function() {
-            $( '#editor' ).ckeditor(); // Use CKEDITOR.replace() if element is <textarea>.
-            $( '#editable' ).ckeditor(); // Use CKEDITOR.inline().
+            $('#editor').ckeditor(); // Use CKEDITOR.replace() if element is <textarea>.
+            $('#editable').ckeditor(); // Use CKEDITOR.inline().
+            $('select.ui.dropdown').dropdown();
         } );
 
         function setValue() {
             $('#preview').html($('#editor').val());
         }
 
-        $("#submitPost").click(function(){
+        $("#submit").click(function(){
             $.post("admin", function(data){
                 console.log(data);
             });
@@ -50,11 +54,24 @@
 
 <div class="pusher">
     <article>
-        <form method="post" action="/admin">
+        <form method="post" action="/select" class="ui form">
+            <div class="field">
+                <h3>Select page and section to edit</h3>
+                <select class="ui dropdown">
+                    <option value="">Page</option>
+                    <option value="0">Home Page</option>
+                    <!--<option value="1">Flags and Orientations</option>-->
+                </select>
+                <input class="ui red submit button" id="editButton" type="submit" value="Edit">
+            </div>
+        </form>
+        <div id="div" class="ui divider"></div>
+        <form method="post" action="/admin" class="ui form">
             <textarea cols="80" id="editor" name="editor" rows="10" style="visibility: hidden; display: none;"></textarea>
-            <input id="previewButton" onclick="setValue();" type="button" value="Preview">
+            <div onclick="setValue();" id="previewButton" class="ui green button">Preview</div>
+            <!--<input id="previewButton" onclick="setValue();" type="button" value="Preview">-->
             <div id="preview" class="ui segment"></div>
-            <input type="submit">
+            <input class="ui blue submit button" id="saveButton" type="submit" value="Save">
         </form>
     </article>
 </div>
