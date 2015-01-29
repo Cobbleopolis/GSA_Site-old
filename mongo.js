@@ -120,6 +120,21 @@
         });
     };
 
+    module.exports.adminHandle = function (url, res) {
+        fs.readFile(url, function (err, file) {
+            if (err)
+                throw err;
+            var $ = cheerio.load(file);
+            $('#navBar').html(navBar);
+            $('#navButton').html(navButton);
+            res.send($.html());
+        });
+    };
+
+    module.exports.adminSubmit = function(req, res){
+        module.exports.adminHandle(__dirname + "/html/admin.html", res);
+    }
+
     function flagToHTML(array) {
         var html = '';
         for (var i = 0; i < array.length; i++) {
