@@ -8,37 +8,13 @@
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <link rel="stylesheet" type="text/css" href="css/admin.css"/>
     <script type="text/javascript" src="scripts/nav.js"></script>
-    <!--<script type="text/javascript" src="scripts/pageLoad.js"></script>-->
+    <script type="text/javascript" src="scripts/admin.js"></script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="css/semantic/semantic.min.js"></script>
-    <script type="text/javascript" src="scripts/nav.js"></script>
+    <!--<script type="text/javascript" src="scripts/nav.js"></script>-->
     <script src="ckeditor/ckeditor.js"></script>
     <script src="ckeditor/adapters/jquery.js"></script>
-    <script>
-
-        var page = "";
-        var section= "";
-
-        CKEDITOR.disableAutoInline = true;
-
-        $( document ).ready( function() {
-            $('#editor').ckeditor(); // Use CKEDITOR.replace() if element is <textarea>.
-            $('#editable').ckeditor(); // Use CKEDITOR.inline().
-            $('select.ui.dropdown').dropdown();
-        } );
-
-        function setValue() {
-            $('#preview').html($('#editor').val());
-        }
-
-        $("#submit").click(function(){
-            $.post("admin", function(data){
-                console.log(data);
-            });
-        });
-
-    </script>
 
 
     <!-- Enabling HTML5 support for Internet Explorer -->
@@ -48,7 +24,7 @@
 
 </head>
 
-<body class="pushable">
+<body class="pushable" onload="loadAdminPage()">
 <div id="navBar" class="ui left demo vertical inverted labeled icon sidebar menu"></div>
 <div id="navButton" class="ui black big launch right attached fixed button" onclick="showNav()"></div>
 
@@ -57,10 +33,36 @@
         <form method="post" action="/select" class="ui form">
             <div class="field">
                 <h3>Select page and section to edit</h3>
-                <select class="ui dropdown">
+                <select onchange="handlePageDropdownChange(this)" class="ui dropdown">
                     <option value="">Page</option>
-                    <option value="0">Home Page</option>
-                    <!--<option value="1">Flags and Orientations</option>-->
+                    <option value="home">Home Page</option>
+                    <option value="flags">Flags and Orientations</option>
+                </select>
+                <select id="sectionHomeDropdown" class="ui dropdown"> <!--onchange="handleSectionDropdownChange(this)"-->
+                    <option value="">Section</option>
+                    <option value="summary">Summary</option>
+                    <option value="about">About</option>
+                    <option value="meetings">Meetings</option>
+                    <option value="fishbowl">Fishbowl</option>
+                </select>
+                <select id="sectionFlagsDropdown" onchange="handleFlagSectionDropdownChange(this)" class="ui dropdown"> <!--onchange="handleSectionDropdownChange(this)"-->
+                    <option value="">Section</option>
+                    <option value="sexuality">Sexual Orientations</option>
+                    <option value="romantic">Romantic Orientations</option>
+                    <option value="gender">Gender Identities</option>
+                    <option value="other">Other LGBT+ Terms</option>
+                </select>
+                <select id="sectionSexualityDropdown" class="ui dropdown"> <!--onchange="handleSectionDropdownChange(this)"-->
+                    <option value="">Group1</option>
+                </select>
+                <select id="sectionRomanticDropdown" class="ui dropdown"> <!--onchange="handleSectionDropdownChange(this)"-->
+                    <option value="">Group2</option>
+                </select>
+                <select id="sectionGenderDropdown" class="ui dropdown"> <!--onchange="handleSectionDropdownChange(this)"-->
+                    <option value="">Group3</option>
+                </select>
+                <select id="sectionOtherDropdown" class="ui dropdown"> <!--onchange="handleSectionDropdownChange(this)"-->
+                    <option value="">Group4</option>
                 </select>
                 <input class="ui red submit button" id="editButton" type="submit" value="Edit">
             </div>
