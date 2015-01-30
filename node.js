@@ -3,9 +3,6 @@ var bodyParser = require('body-parser');
 var app = express();
 var mongo = require("./mongo.js");
 
-var jsonParser = bodyParser.json();
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
 app.get('/', function(req, res){
     mongo.indexHandle(__dirname + "/html/index.html", res);
 });
@@ -37,6 +34,11 @@ app.post('/admin',function(req,res){
     console.log(req.body);
     mongo.adminSubmit(req, res);
 });
+
+//app.post('/admin',function(req,res){
+//    console.log(req.body);
+//    mongo.adminSubmit(req, res);
+//});
 
 app.use(express.static(__dirname + '/html'));
 

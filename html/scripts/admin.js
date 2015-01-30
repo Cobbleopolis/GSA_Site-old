@@ -13,11 +13,6 @@ function loadAdminPage(){
     $("#sectionRomanticDropdown").parent().hide();
     $("#sectionGenderDropdown").parent().hide();
     $("#sectionOtherDropdown").parent().hide();
-    $("#submit").click(function(){
-        $.post("admin", function(data){
-            console.log(data);
-        });
-    });
 }
 
 function setValue() {
@@ -50,6 +45,10 @@ function handlePageDropdownChange(sel){
 //$("#sectionHomeDropdown").css("height", "0");
 //$("#sectionHomeDropdown").parent().css("height", "0");
 //$("#sectionFlagsDropdown").css("visibility", "visible");
+
+function handleHomeSectionDropdownChange(sel){
+    var val = sel.value;
+}
 
 function handleFlagSectionDropdownChange(sel){
     var val = sel.value;
