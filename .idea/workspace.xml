@@ -4,6 +4,7 @@
     <list default="true" id="607ed1ae-9e3d-4e52-86b5-e54890a6ef65" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/admin.html" afterPath="$PROJECT_DIR$/html/admin.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/scripts/admin.js" afterPath="$PROJECT_DIR$/html/scripts/admin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mongo.js" afterPath="$PROJECT_DIR$/mongo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node.js" afterPath="$PROJECT_DIR$/node.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -34,18 +35,28 @@
       <file leaf-file-name="node.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="318" max-vertical-offset="1026">
-              <caret line="33" column="24" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1116">
+              <caret line="38" column="26" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mongo.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mongo.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5723542" vertical-offset="2435" max-vertical-offset="3708">
+              <caret line="150" column="28" selection-start-line="150" selection-start-column="28" selection-end-line="150" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/admin.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49541286" vertical-offset="486" max-vertical-offset="1602">
-              <caret line="39" column="67" selection-start-line="39" selection-start-column="67" selection-end-line="39" selection-end-column="67" />
+            <state vertical-scroll-proportion="1.8518518" vertical-offset="1076" max-vertical-offset="1566">
+              <caret line="57" column="47" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="47" />
               <folding>
                 <element signature="n#style#0;n#textarea#0;n#form#1;n#article#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -56,8 +67,8 @@
       <file leaf-file-name="admin.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/scripts/admin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="478" max-vertical-offset="1584">
-              <caret line="48" column="40" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="1890">
+              <caret line="17" column="73" selection-start-line="17" selection-start-column="73" selection-end-line="17" selection-end-column="73" />
               <folding />
             </state>
           </provider>
@@ -73,8 +84,9 @@
       <list>
         <option value="$PROJECT_DIR$/html/css/admin.css" />
         <option value="$PROJECT_DIR$/node.js" />
-        <option value="$PROJECT_DIR$/html/scripts/admin.js" />
         <option value="$PROJECT_DIR$/html/admin.html" />
+        <option value="$PROJECT_DIR$/html/scripts/admin.js" />
+        <option value="$PROJECT_DIR$/mongo.js" />
       </list>
     </option>
   </component>
@@ -127,20 +139,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="GSA_Site" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GSA_Site" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GSA_Site" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -433,7 +431,8 @@
       <workItem from="1422626244177" duration="688000" />
       <workItem from="1422630885606" duration="138000" />
       <workItem from="1422635589001" duration="5155000" />
-      <workItem from="1422647943358" duration="1639000" />
+      <workItem from="1422647943358" duration="1678000" />
+      <workItem from="1422896305741" duration="4797000" />
     </task>
     <task id="LOCAL-00001" summary="Major work on Admin Page">
       <created>1422644406715</created>
@@ -441,11 +440,17 @@
       <option name="project" value="LOCAL" />
       <updated>1422644406715</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Major work on Admin Page">
+      <created>1422651459924</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1422651459924</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7870000" />
+    <option name="totallyTimeSpent" value="12706000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1490" height="880" extended-state="6" />
@@ -535,6 +540,32 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/node.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="318" max-vertical-offset="1026">
+          <caret line="33" column="24" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1602">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#textarea#0;n#form#1;n#article#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/scripts/admin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="478" max-vertical-offset="1584">
+          <caret line="48" column="40" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html/admin.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="584" max-vertical-offset="1548">
@@ -611,29 +642,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="318" max-vertical-offset="1026">
-          <caret line="33" column="24" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/scripts/admin.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="478" max-vertical-offset="1584">
-          <caret line="48" column="40" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1890">
+          <caret line="17" column="73" selection-start-line="17" selection-start-column="73" selection-end-line="17" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html/admin.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49541286" vertical-offset="486" max-vertical-offset="1602">
-          <caret line="39" column="67" selection-start-line="39" selection-start-column="67" selection-end-line="39" selection-end-column="67" />
+        <state vertical-scroll-proportion="1.8518518" vertical-offset="1076" max-vertical-offset="1566">
+          <caret line="57" column="47" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="47" />
           <folding>
             <element signature="n#style#0;n#textarea#0;n#form#1;n#article#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1116">
+          <caret line="38" column="26" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mongo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5723542" vertical-offset="2435" max-vertical-offset="3708">
+          <caret line="150" column="28" selection-start-line="150" selection-start-column="28" selection-end-line="150" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>

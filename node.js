@@ -24,7 +24,7 @@ app.get('/fishbowl', function(req, res){
 });
 
 app.get('/admin', function(req, res){
-    mongo.chatHandle(__dirname + "/html/admin.html", res);
+    mongo.adminHandle(__dirname + "/html/admin.html", res);
 });
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -32,7 +32,12 @@ app.use(bodyParser.json());
 
 app.post('/admin',function(req,res){
     console.log(req.body);
-    mongo.adminSubmit(req, res);
+    mongo.adminChangeSubmit(req, res);
+});
+
+app.post('/admin/edit',function(req,res){
+    console.log(req.body);
+    mongo.adminEditSubmit(req, res);
 });
 
 //app.post('/admin',function(req,res){

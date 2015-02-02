@@ -127,13 +127,42 @@
             var $ = cheerio.load(file);
             $('#navBar').html(navBar);
             $('#navButton').html(navButton);
-            res.send($.html());
+
+            var sexualities = db.collection('sexualities');
+            var romantic = db.collection('romantic');
+            var genders = db.collection('gender');
+            var other_terms = db.collection('other_terms');
+            sexualities.find(function (err, flags) {
+                if (err)
+                    throw err;
+                $("#sectionSexualityDropdown").html(flagToSelect(flags));
+                romantic.find(function (err, flags) {
+                    if (err)
+                        throw err;
+                    $("#sectionRomanticDropdown").html(flagToSelect(flags));
+                    genders.find(function (err, flags) {
+                        if (err)
+                            throw err;
+                        $("#sectionGenderDropdown").html(flagToSelect(flags));
+                        other_terms.find(function (err, flags) {
+                            if (err)
+                                throw err;
+                            $("#sectionOtherDropdown").html(flagToSelect(flags));
+                            res.send($.html());
+                        });
+                    });
+                });
+            });
         });
     };
 
-    module.exports.adminSubmit = function(req, res){
+    module.exports.adminChangeSubmit = function (req, res) {
         module.exports.adminHandle(__dirname + "/html/admin.html", res);
-    }
+    };
+
+    module.exports.adminEditSubmit = function (req, res) {
+        module.exports.adminHandle(__dirname + "/html/admin.html", res);
+    };
 
     function flagToHTML(array) {
         var html = '';
@@ -156,6 +185,14 @@
                 '</div>';
             }
             html += '</div>';
+        }
+        return html;
+    }
+
+    function flagToSelect(array) {
+        var html = '';
+        for (var i = 0; i < array.length; i++) {
+            html += '<option value="' + array[i].identification + '">' + array[i].identification + '</option>';
         }
         return html;
     }
