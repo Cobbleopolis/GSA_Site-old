@@ -30,7 +30,10 @@
 
 <div class="pusher">
     <article>
-        <form method="post" action="/admin">
+        <div id="result" class="ui inverted segment">
+
+        </div>
+        <form method="post" action="/admin/edit">
             <h3>Select page and section to edit</h3>
             <select onchange="handlePageDropdownChange(this)" id="pageDropdown">
                 <option selected="selected" value="">Page</option>
@@ -47,23 +50,15 @@
             <select id="sectionFlagsDropdown" onchange="handleFlagSectionDropdownChange(this)">
                 <!--onchange="handleSectionDropdownChange(this)"-->
                 <option selected="selected" value="">Section</option>
-                <option value="sexuality">Sexual Orientations</option>
+                <option value="sexualities">Sexual Orientations</option>
                 <option value="romantic">Romantic Orientations</option>
                 <option value="gender">Gender Identities</option>
-                <option value="other">Other LGBT+ Terms</option>
+                <option value="other_terms">Other LGBT+ Terms</option>
             </select>
-            <select id="sectionSexualityDropdown" onchange="handleGroupDropdownChange(this)">
-                <option selected="selected" value="">Group1</option>
-            </select>
-            <select id="sectionRomanticDropdown" onchange="handleGroupDropdownChange(this)">
-                <option selected="selected" value="">Group2</option>
-            </select>
-            <select id="sectionGenderDropdown" onchange="handleGroupDropdownChange(this)">
-                <option selected="selected" value="">Group3</option>
-            </select>
-            <select id="sectionOtherDropdown" onchange="handleGroupDropdownChange(this)">
-                <option selected="selected" value="">Group4</option>
-            </select>
+            <select id="sectionSexualityDropdown" onchange="handleGroupDropdownChange(this)"></select>
+            <select id="sectionRomanticDropdown" onchange="handleGroupDropdownChange(this)"></select>
+            <select id="sectionGenderDropdown" onchange="handleGroupDropdownChange(this)"></select>
+            <select id="sectionOtherDropdown" onchange="handleGroupDropdownChange(this)"></select>
             <div class="ui red submit button" onclick = "submitEdit()" id="editButton">Edit</div>
         </form>
         <div id="div" class="ui divider"></div>
@@ -74,7 +69,7 @@
             <div onclick="setValue();" id="previewButton" class="ui green button">Preview</div>
             <!--<input id="previewButton" onclick="setValue();" type="button" value="Preview">-->
             <div id="preview" class="ui segment"></div>
-            <input class="ui blue submit button" id="saveButton" type="submit" value="Save">
+            <div class="ui blue submit button" onclick = "submitChange()" id="saveButton">Save</div>
         </form>
     </article>
 </div>

@@ -12,10 +12,38 @@ function loadAdminPage() {
     $("#sectionRomanticDropdown").hide();
     $("#sectionGenderDropdown").hide();
     $("#sectionOtherDropdown").hide();
+    $("#result").hide();
 }
 
 function submitEdit() {
-    $.post("/admin/edit", { page: page, section: section, group: group});
+    $("#result").removeClass("red").addClass("green");
+    $("#result").html("");
+    $("#result").hide();
+    if (page !== '' && section !== '' && group !== ''){
+        if(page === 'flags' && group === 'none'){
+            $("#result").addClass("red");
+            $("#result").html("Please select a page, section and a group (if available).");
+            $("#result").show();
+        } else {
+            $.post("/admin/edit", {page: page, section: section, group: group})
+                .done(function (data) {
+                    $('#editor').val(data);
+                });
+        }
+    } else {
+        $("#result").addClass("red");
+        $("#result").html("Please select a page, section and a group (if available).");
+        $("#result").show();
+    }
+}
+
+function submitChange() {
+    $.post("/admin", {page: page, section: section, group: group, editor: $('#editor').val()})
+        .done(function (data) {
+            $("#result").removeClass("red").addClass("green");
+            $("#result").html("Changes Saved.");
+            $("#result").show();
+        });
 }
 
 function setValue() {
@@ -27,6 +55,7 @@ function handlePageDropdownChange(sel) {
     page = val;
     if (val === "home") {
         section = $("#sectionHomeDropdown").val();
+        group = "none";
         $("#sectionHomeDropdown").show();
         $("#sectionFlagsDropdown").hide();
         $("#sectionSexualityDropdown").hide();
@@ -35,58 +64,55 @@ function handlePageDropdownChange(sel) {
         $("#sectionOtherDropdown").hide();
     } else if (val === "flags") {
         section = $("#sectionFlagsDropdown").val();
+        //hideShowFlagGroup(val);
         $("#sectionHomeDropdown").hide();
         $("#sectionFlagsDropdown").show();
-        if (section === "sexuality") {
+        if (section === "sexualities") {
             $("#sectionSexualityDropdown").show();
+            group = $("#sectionSexualityDropdown").val();
         } else if (section === "romantic") {
             $("#sectionRomanticDropdown").show();
-        } else if (section === "gender"){
+            group = $("#sectionRomanticDropdown").val();
+        } else if (section === "gender") {
             $("#sectionGenderDropdown").show();
-        } else if (section === "other"){
+            group = $("#sectionGenderDropdown").val();
+        } else if (section === "other_terms") {
             $("#sectionOtherDropdown").show();
+            group = $("#sectionOtherDropdown").val();
         }
     }
 }
 
-//$("#sectionFlagsDropdown").parent().css("visibility", "hidden");
-//$("#sectionFlagsDropdown").css("height", "0");
-//$("#sectionFlagsDropdown").parent().css("height", "0");
-//$("#sectionHomeDropdown").parent().css("visibility", "visible");
-
-//$("#sectionHomeDropdown").parent().css("visibility", "hidden");
-//$("#sectionHomeDropdown").css("height", "0");
-//$("#sectionHomeDropdown").parent().css("height", "0");
-//$("#sectionFlagsDropdown").css("visibility", "visible");
-
 function handleHomeSectionDropdownChange(sel) {
     var val = sel.value;
     section = val;
+    group = "none";
 }
 
 function handleFlagSectionDropdownChange(sel) {
     var val = sel.value;
     section = val;
-    if (val === "sexuality") {
-        section = "sexuality";
+    console.log(val);
+    hideShowFlagGroup(val);
+}
+
+function hideShowFlagGroup(val){
+    if (val === "sexualities") {
         $("#sectionSexualityDropdown").show();
         $("#sectionRomanticDropdown").hide();
         $("#sectionGenderDropdown").hide();
         $("#sectionOtherDropdown").hide();
     } else if (val === "romantic") {
-        section = "romantic";
         $("#sectionSexualityDropdown").hide();
         $("#sectionRomanticDropdown").show();
         $("#sectionGenderDropdown").hide();
         $("#sectionOtherDropdown").hide();
     } else if (val === "gender") {
-        section = "gender";
         $("#sectionSexualityDropdown").hide();
         $("#sectionRomanticDropdown").hide();
         $("#sectionGenderDropdown").show();
         $("#sectionOtherDropdown").hide();
-    } else if (val === "other") {
-        section = "other";
+    } else if (val === "other_terms") {
         $("#sectionSexualityDropdown").hide();
         $("#sectionRomanticDropdown").hide();
         $("#sectionGenderDropdown").hide();

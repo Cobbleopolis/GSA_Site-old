@@ -66,24 +66,26 @@
                 if (err)
                     throw err;
                 $("#sexualitiesSection").html(flagToHTML(flags));
-            });
-            romantic.find(function (err, flags) {
-                if (err)
-                    throw err;
-                $("#romanticSection").html(flagToHTML(flags));
-            });
-            genders.find(function (err, flags) {
-                if (err)
-                    throw err;
-                $("#gendersSection").html(flagToHTML(flags));
-            });
-            other_terms.find(function (err, flags) {
-                if (err)
-                    throw err;
-                $("#otherTermsSection").html(flagToHTML(flags));
-                res.send($.html());
-            });
 
+                romantic.find(function (err, flags) {
+                    if (err)
+                        throw err;
+                    $("#romanticSection").html(flagToHTML(flags));
+
+                    genders.find(function (err, flags) {
+                        if (err)
+                            throw err;
+                        $("#gendersSection").html(flagToHTML(flags));
+
+                        other_terms.find(function (err, flags) {
+                            if (err)
+                                throw err;
+                            $("#otherTermsSection").html(flagToHTML(flags));
+                            res.send($.html());
+                        });
+                    });
+                });
+            });
         });
     };
 
@@ -157,11 +159,31 @@
     };
 
     module.exports.adminChangeSubmit = function (req, res) {
-        module.exports.adminHandle(__dirname + "/html/admin.html", res);
+        var data = req.body;
+
+        var database = db.collection(getDBName(data));
+
+        if (data.page === "flags") {
+            database.update({identification: data.group}, {$set: {description: data.editor}}, res.send(data.editor));
+        } else if (data.page === "home") {
+            database.update({section: data.section}, {$set: {content: data.editor}}, res.send(data.editor));
+        }
     };
 
     module.exports.adminEditSubmit = function (req, res) {
-        module.exports.adminHandle(__dirname + "/html/admin.html", res);
+        var data = req.body;
+
+        var database = db.collection(getDBName(data));
+
+        if (data.page === "flags") {
+            database.findOne({identification: data.group}, function (err, document) {
+                res.send(document.description);
+            });
+        } else if (data.page === "home") {
+            database.findOne({section: data.section}, function (err, document) {
+                res.send(document.content);
+            });
+        }
     };
 
     function flagToHTML(array) {
@@ -190,11 +212,19 @@
     }
 
     function flagToSelect(array) {
-        var html = '';
+        var html = '<option selected="selected" value="">Entry</option>';
         for (var i = 0; i < array.length; i++) {
             html += '<option value="' + array[i].identification + '">' + array[i].identification + '</option>';
         }
         return html;
+    }
+
+    function getDBName(data) {
+        if (data.page === "home") {
+            return "homePage";
+        } else if (data.page === "flags") {
+            return data.section;
+        }
     }
 }());
 

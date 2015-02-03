@@ -31,19 +31,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 app.post('/admin',function(req,res){
-    console.log(req.body);
     mongo.adminChangeSubmit(req, res);
 });
 
 app.post('/admin/edit',function(req,res){
-    console.log(req.body);
     mongo.adminEditSubmit(req, res);
 });
-
-//app.post('/admin',function(req,res){
-//    console.log(req.body);
-//    mongo.adminSubmit(req, res);
-//});
 
 app.use(express.static(__dirname + '/html'));
 
