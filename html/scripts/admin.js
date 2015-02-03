@@ -2,11 +2,14 @@ var page = "";
 var section = "";
 var group = "";
 
+// place into "Gay" warning
+// Sometimes "homosexual" is used to refer to the lesbian orentation as well, although this label is seen by many today as a medical term that should be retired from common use.
+
 function loadAdminPage() {
     //$("select").dropdown();
 
     $("#content").ckeditor(); // Use CKEDITOR.replace() if element is <textarea>.
-    $("#warning").ckeditor(); // Use CKEDITOR.inline().
+    //$("#warning").ckeditor(); // Use CKEDITOR.inline().
     $("select.ui.dropdown").dropdown();
     $("#sectionHomeDropdown").hide();
     $("#sectionFlagsDropdown").hide();
@@ -15,9 +18,12 @@ function loadAdminPage() {
     $("#sectionGenderDropdown").hide();
     $("#sectionOtherDropdown").hide();
     $("#result").hide();
+    $(".pageToggle").hide();
+    $("#contentLabel").show();
 }
 
 function submitEdit() {
+    $("#editSection").parent().removeClass("disabled").addClass("loading");
     $("#result").removeClass("red").addClass("green");
     $("#result").html("");
     $("#result").hide();
@@ -29,7 +35,16 @@ function submitEdit() {
         } else {
             $.post("/admin/edit", {page: page, section: section, group: group})
                 .done(function (data) {
-                    $('#content').val(data);
+                    $("#editSection").parent().removeClass("loading");
+                    if(page === "flags"){
+                        $(".pageToggle").show();
+                        $("#entryName").val(data.identification);
+                        $("#content").val(data.description);
+                        $("#flagImage").val(data.image_link);
+                        $("#warning").val(data.warning);
+                    } else if (page === "home"){
+                        $("#content").val(data.content);
+                    }
                 });
         }
     } else {
@@ -40,7 +55,7 @@ function submitEdit() {
 }
 
 function submitChange() {
-    $.post("/admin", {page: page, section: section, group: group, editor: $('#content').val()})
+    $.post("/admin", {page: page, section: section, group: group, entryName: $("#entryName").val(), flagImage: $("#flagImage").val(), editor: $('#content').val(), warning: $("warning").val()})
         .done(function (data) {
             $("#result").removeClass("red").addClass("green");
             $("#result").html("Changes Saved.");

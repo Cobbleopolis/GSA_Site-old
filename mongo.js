@@ -170,11 +170,11 @@
     module.exports.adminChangeSubmit = function (req, res) {
         var data = req.body;
 
-        console.log(req);
+        //console.log(req.body);
         var database = db.collection(getDBName(data));
 
         if (data.page === "flags") {
-            database.update({identification: data.group}, {$set: {description: data.editor}}, res.send(data.editor));
+            database.update({identification: data.group}, {$set: { identification: data.entryName, image_link: data.flagImage, description: data.editor, warning: data.warning}}, res.send(data.editor));
         } else if (data.page === "home") {
             database.update({section: data.section}, {$set: {content: data.editor}}, res.send(data.editor));
         }
@@ -187,11 +187,11 @@
 
         if (data.page === "flags") {
             database.findOne({identification: data.group}, function (err, document) {
-                res.send(document.description);
+                res.send(document);
             });
         } else if (data.page === "home") {
             database.findOne({section: data.section}, function (err, document) {
-                res.send(document.content);
+                res.send(document);
             });
         }
     };

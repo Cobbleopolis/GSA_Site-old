@@ -61,20 +61,27 @@
             <div class="ui red submit button" onclick = "submitEdit()" id="editButton">Edit</div>
         </form>
         <div id="div" class="ui divider"></div>
-        <form method="post" action="/admin">
-            <p class="label">Section Name:</p>
-            <input type="text" id="entryName">
-            <p class="label">Flag Image</p>
-            <select id="flagImage"></select>
-            <p class="label">Content:</p>
+        <div class="ui disabled segment">
+        <form method="post" id="editSection" action="/admin">
+
+            <p class="pageToggle label">Section Name:</p>
+            <input class="pageToggle" type="text" id="entryName">
+
+            <p class="pageToggle label">Flag Image</p>
+            <select class="pageToggle" id="flagImage"></select>
+
+            <p id="contentLabel" class="label">Content:</p>
             <textarea cols="80" id="content" rows="10" style="visibility: hidden; display: none;"></textarea>
-            <p class="label">Warning:</p>
-            <textarea cols="80" id="warning" rows="10" style="visibility: hidden; display: none;"></textarea>
+
+            <p class="pageToggle label">Warning:</p>
+            <textarea class="pageToggle" id="warning" cols="80"></textarea>
+
             <div onclick="setValue();" id="previewButton" class="ui green button">Preview</div>
             <!--<input id="previewButton" onclick="setValue();" type="button" value="Preview">-->
             <div id="preview" class="ui segment"></div>
             <div class="ui blue submit button" onclick = "submitChange()" id="saveButton">Save</div>
         </form>
+        </div>
     </article>
 </div>
 </body>

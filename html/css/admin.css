@@ -37,10 +37,15 @@ select {
 
 input[type=text] {
     background-color: #FFFFFF;
-    padding: 5px;
+    /*padding: 5px;*/
     border: 1px solid #A9A9A9;
     border-radius: 2px;
     margin: 15px;
+    font-size: 20px;
+}
+
+textarea {
+    font-size: 20px;
 }
 
 .label {
@@ -48,4 +53,5 @@ input[type=text] {
     font-weight: bold;
     font-size: 25px;
     text-indent: 0;
+    font-size: 20px;
 }
