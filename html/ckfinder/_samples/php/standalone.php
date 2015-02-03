@@ -15,7 +15,7 @@
 	<title>CKFinder - Sample - Standalone</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex, nofollow" />
-	<link href="../sample.css" rel="stylesheet" type="text/css" />
+	<link href="/ckfinder/_samples/sample.css" rel="stylesheet" type="text/css" />
 	<style type="text/css">
 
 		/* By defining CKFinderFrame, you are able to customize the CKFinder frame style */

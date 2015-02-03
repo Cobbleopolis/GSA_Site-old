@@ -27,6 +27,10 @@ app.get('/admin', function(req, res){
     mongo.adminHandle(__dirname + "/html/admin.html", res);
 });
 
+app.get('/_samples', function(req, res){
+    mongo.chatHandle(__dirname + "/html/ckfinder/_samples/standalone.html", res);
+});
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 

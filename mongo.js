@@ -62,22 +62,22 @@
             var romantic = db.collection('romantic');
             var genders = db.collection('gender');
             var other_terms = db.collection('other_terms');
-            sexualities.find(function (err, flags) {
+            sexualities.find({}, { sort: 'identification'}, function (err, flags) {
                 if (err)
                     throw err;
                 $("#sexualitiesSection").html(flagToHTML(flags));
 
-                romantic.find(function (err, flags) {
+                romantic.find({}, { sort: 'identification'}, function (err, flags) {
                     if (err)
                         throw err;
                     $("#romanticSection").html(flagToHTML(flags));
 
-                    genders.find(function (err, flags) {
+                    genders.find({}, { sort: 'identification'}, function (err, flags) {
                         if (err)
                             throw err;
                         $("#gendersSection").html(flagToHTML(flags));
 
-                        other_terms.find(function (err, flags) {
+                        other_terms.find({}, { sort: 'identification'}, function (err, flags) {
                             if (err)
                                 throw err;
                             $("#otherTermsSection").html(flagToHTML(flags));
@@ -134,19 +134,19 @@
             var romantic = db.collection('romantic');
             var genders = db.collection('gender');
             var other_terms = db.collection('other_terms');
-            sexualities.find(function (err, flags) {
+            sexualities.find({}, { sort: 'identification'}, function (err, flags) {
                 if (err)
                     throw err;
                 $("#sectionSexualityDropdown").html(flagToSelect(flags));
-                romantic.find(function (err, flags) {
+                romantic.find({}, { sort: 'identification'}, function (err, flags) {
                     if (err)
                         throw err;
                     $("#sectionRomanticDropdown").html(flagToSelect(flags));
-                    genders.find(function (err, flags) {
+                    genders.find({}, { sort: 'identification'}, function (err, flags) {
                         if (err)
                             throw err;
                         $("#sectionGenderDropdown").html(flagToSelect(flags));
-                        other_terms.find(function (err, flags) {
+                        other_terms.find({}, { sort: 'identification'}, function (err, flags) {
                             if (err)
                                 throw err;
                             $("#sectionOtherDropdown").html(flagToSelect(flags));
@@ -161,6 +161,7 @@
     module.exports.adminChangeSubmit = function (req, res) {
         var data = req.body;
 
+        console.log(req);
         var database = db.collection(getDBName(data));
 
         if (data.page === "flags") {
