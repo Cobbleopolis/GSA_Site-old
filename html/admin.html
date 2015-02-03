@@ -14,7 +14,6 @@
     <script type="text/javascript" src="css/semantic/semantic.min.js"></script>
     <!--<script type="text/javascript" src="scripts/nav.js"></script>-->
     <!--<script src="ckfinder/ckfinder.js"></script>-->
-    <script src="scripts/dropzone.js"></script>
     <script src="ckeditor/ckeditor.js"></script>
     <script src="ckeditor/adapters/jquery.js"></script>
 
@@ -34,7 +33,7 @@
     <article>
         <div id="result" class="ui inverted segment"></div>
         <form method="post" action="/admin/edit">
-            <h3>Select page and section to edit</h3>
+            <p class="label">Select page and section to edit</p>
             <select onchange="handlePageDropdownChange(this)" id="pageDropdown">
                 <option selected="selected" value="">Page</option>
                 <option value="home">Home Page</option>
@@ -63,9 +62,14 @@
         </form>
         <div id="div" class="ui divider"></div>
         <form method="post" action="/admin">
-            <textarea cols="80" id="editor" name="editor" rows="10"
-                      style="visibility: hidden; display: none;"></textarea>
-
+            <p class="label">Section Name:</p>
+            <input type="text" id="entryName">
+            <p class="label">Flag Image</p>
+            <select id="flagImage"></select>
+            <p class="label">Content:</p>
+            <textarea cols="80" id="content" rows="10" style="visibility: hidden; display: none;"></textarea>
+            <p class="label">Warning:</p>
+            <textarea cols="80" id="warning" rows="10" style="visibility: hidden; display: none;"></textarea>
             <div onclick="setValue();" id="previewButton" class="ui green button">Preview</div>
             <!--<input id="previewButton" onclick="setValue();" type="button" value="Preview">-->
             <div id="preview" class="ui segment"></div>

@@ -14,7 +14,7 @@
 }
 
 #div {
-    margin-top: 65px;
+    /*margin-top: 65px;*/
 }
 
 #preview {
@@ -30,8 +30,22 @@ article{
     margin-top: 15px;
 }
 
-/*.sec {*/
-    /*width: 0 !important;*/
-    /*height: 0 !important;*/
-    /*visibility: hidden;*/
-/*}*/
+select {
+    margin: 25px 10px;
+    font-size: 20px;
+}
+
+input[type=text] {
+    background-color: #FFFFFF;
+    padding: 5px;
+    border: 1px solid #A9A9A9;
+    border-radius: 2px;
+    margin: 15px;
+}
+
+.label {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 25px;
+    text-indent: 0;
+}

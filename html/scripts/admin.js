@@ -3,9 +3,11 @@ var section = "";
 var group = "";
 
 function loadAdminPage() {
-    $('#editor').ckeditor(); // Use CKEDITOR.replace() if element is <textarea>.
-    $('#editable').ckeditor(); // Use CKEDITOR.inline().
-    $('select.ui.dropdown').dropdown();
+    //$("select").dropdown();
+
+    $("#content").ckeditor(); // Use CKEDITOR.replace() if element is <textarea>.
+    $("#warning").ckeditor(); // Use CKEDITOR.inline().
+    $("select.ui.dropdown").dropdown();
     $("#sectionHomeDropdown").hide();
     $("#sectionFlagsDropdown").hide();
     $("#sectionSexualityDropdown").hide();
@@ -27,7 +29,7 @@ function submitEdit() {
         } else {
             $.post("/admin/edit", {page: page, section: section, group: group})
                 .done(function (data) {
-                    $('#editor').val(data);
+                    $('#content').val(data);
                 });
         }
     } else {
@@ -38,7 +40,7 @@ function submitEdit() {
 }
 
 function submitChange() {
-    $.post("/admin", {page: page, section: section, group: group, editor: $('#editor').val()})
+    $.post("/admin", {page: page, section: section, group: group, editor: $('#content').val()})
         .done(function (data) {
             $("#result").removeClass("red").addClass("green");
             $("#result").html("Changes Saved.");
@@ -47,7 +49,7 @@ function submitChange() {
 }
 
 function setValue() {
-    $('#preview').html($('#editor').val());
+    $('#preview').html($('#content').val());
 }
 
 function handlePageDropdownChange(sel) {

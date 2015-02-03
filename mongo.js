@@ -150,7 +150,16 @@
                             if (err)
                                 throw err;
                             $("#sectionOtherDropdown").html(flagToSelect(flags));
-                            res.send($.html());
+                            fs.readdir(__dirname + '/html/images/flags/', function (err, files) {
+                                var html = '<option selected="selected" value="">Flag Image</option>';
+                                if (err)
+                                    throw err;
+                                for (var i = 0; i < files.length; i++) {
+                                    html += '<option value= "images/flags/' + files[i] + '">' + files[i] + '</option>';
+                                }
+                                $('#flagImage').html(html);
+                                res.send($.html());
+                            });
                         });
                     });
                 });
