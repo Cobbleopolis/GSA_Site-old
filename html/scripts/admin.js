@@ -2,14 +2,8 @@ var page = "";
 var section = "";
 var group = "";
 
-// place into "Gay" warning
-// Sometimes "homosexual" is used to refer to the lesbian orentation as well, although this label is seen by many today as a medical term that should be retired from common use.
-
 function loadAdminPage() {
-    //$("select").dropdown();
-
     $("#content").ckeditor(); // Use CKEDITOR.replace() if element is <textarea>.
-    //$("#warning").ckeditor(); // Use CKEDITOR.inline().
     $("select.ui.dropdown").dropdown();
     $("#sectionHomeDropdown").hide();
     $("#sectionFlagsDropdown").hide();
@@ -20,6 +14,7 @@ function loadAdminPage() {
     $("#result").hide();
     $(".pageToggle").hide();
     $("#contentLabel").show();
+    $("#preview").hide();
 }
 
 function submitEdit() {
@@ -61,11 +56,13 @@ function submitChange() {
             $("#result").removeClass("red").addClass("green");
             $("#result").html("Changes Saved.");
             $("#result").show();
+            $('body').scrollTop(0);
         });
 }
 
 function setValue() {
-    $('#preview').html($('#content').val());
+    $("#preview").html($("#content").val());
+    $("#preview").show();
 }
 
 function handlePageDropdownChange(sel) {
@@ -110,7 +107,6 @@ function handleHomeSectionDropdownChange(sel) {
 function handleFlagSectionDropdownChange(sel) {
     var val = sel.value;
     section = val;
-    console.log(val);
     hideShowFlagGroup(val);
 }
 
@@ -141,4 +137,8 @@ function hideShowFlagGroup(val){
 function handleGroupDropdownChange(sel) {
     var val = sel.value;
     group = val;
+}
+
+function updateFlagImg(sel){
+    $("#previewImg").attr("src", sel.value);
 }

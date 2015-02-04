@@ -13,14 +13,6 @@
     margin-top: 15px;
 }
 
-#div {
-    /*margin-top: 65px;*/
-}
-
-#preview {
-    margin-top: 65px;
-}
-
 article{
     padding-top: 15px;
     padding-right: 7.8125%;
@@ -56,9 +48,13 @@ textarea {
     font-size: 20px;
 }
 
+#flagImg {
+    float: left;
+}
+
 #previewImg {
     width: 200px;
     height: 120px;
-    margin: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    margin: 10px 100% 10px 10px;
 }
