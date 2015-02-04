@@ -23,24 +23,25 @@ app.get('/fishbowl', function(req, res){
     mongo.chatHandle(__dirname + "/html/fishbowl.html", res);
 });
 
-app.get('/admin', function(req, res){
+app.get('/adminEdit', function(req, res){
     mongo.adminHandle(__dirname + "/html/admin.html", res);
 });
 
-app.get('/_samples', function(req, res){
-    mongo.chatHandle(__dirname + "/html/ckfinder/_samples/standalone.html", res);
-});
-
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.post('/admin',function(req,res){
+app.post('/adminEdit/change',function(req,res){
     mongo.adminChangeSubmit(req, res);
 });
 
-app.post('/admin/edit',function(req,res){
+app.post('/adminEdit/edit/',function(req,res){
     mongo.adminEditSubmit(req, res);
 });
+
+app.post('/admin/edit/remove',function(req,res){
+    mongo.adminRemoveSubmit(req, res);
+});
+
 
 app.use(express.static(__dirname + '/html'));
 

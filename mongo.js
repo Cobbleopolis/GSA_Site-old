@@ -62,22 +62,22 @@
             var romantic = db.collection('romantic');
             var genders = db.collection('gender');
             var other_terms = db.collection('other_terms');
-            sexualities.find({}, { sort: 'identification'}, function (err, flags) {
+            sexualities.find({}, {sort: 'identification'}, function (err, flags) {
                 if (err)
                     throw err;
                 $("#sexualitiesSection").html(flagToHTML(flags));
 
-                romantic.find({}, { sort: 'identification'}, function (err, flags) {
+                romantic.find({}, {sort: 'identification'}, function (err, flags) {
                     if (err)
                         throw err;
                     $("#romanticSection").html(flagToHTML(flags));
 
-                    genders.find({}, { sort: 'identification'}, function (err, flags) {
+                    genders.find({}, {sort: 'identification'}, function (err, flags) {
                         if (err)
                             throw err;
                         $("#gendersSection").html(flagToHTML(flags));
 
-                        other_terms.find({}, { sort: 'identification'}, function (err, flags) {
+                        other_terms.find({}, {sort: 'identification'}, function (err, flags) {
                             if (err)
                                 throw err;
                             $("#otherTermsSection").html(flagToHTML(flags));
@@ -134,24 +134,24 @@
             var romantic = db.collection('romantic');
             var genders = db.collection('gender');
             var other_terms = db.collection('other_terms');
-            sexualities.find({}, { sort: 'identification'}, function (err, flags) {
+            sexualities.find({}, {sort: 'identification'}, function (err, flags) {
                 if (err)
                     throw err;
                 $("#sectionSexualityDropdown").html(flagToSelect(flags));
-                romantic.find({}, { sort: 'identification'}, function (err, flags) {
+                romantic.find({}, {sort: 'identification'}, function (err, flags) {
                     if (err)
                         throw err;
                     $("#sectionRomanticDropdown").html(flagToSelect(flags));
-                    genders.find({}, { sort: 'identification'}, function (err, flags) {
+                    genders.find({}, {sort: 'identification'}, function (err, flags) {
                         if (err)
                             throw err;
                         $("#sectionGenderDropdown").html(flagToSelect(flags));
-                        other_terms.find({}, { sort: 'identification'}, function (err, flags) {
+                        other_terms.find({}, {sort: 'identification'}, function (err, flags) {
                             if (err)
                                 throw err;
                             $("#sectionOtherDropdown").html(flagToSelect(flags));
                             fs.readdir(__dirname + '/html/images/flags/', function (err, files) {
-                                var html = '<option selected="selected" value="">Flag Image</option>';
+                                var html = '<option selected="selected" value="">None</option>';
                                 if (err)
                                     throw err;
                                 for (var i = 0; i < files.length; i++) {
@@ -174,10 +174,102 @@
         var database = db.collection(getDBName(data));
 
         if (data.page === "flags") {
-            database.update({identification: data.group}, {$set: { identification: data.entryName, image_link: data.flagImage, description: data.editor, warning: data.warning}}, res.send(data.editor));
+            if (data.group === "ADD_ENTRY") {
+                database.save({
+                    identification: data.entryName,
+                    image_link: data.flagImage,
+                    description: data.editor,
+                    warning: data.warning
+                }, function () {
+                    var sexualities = db.collection('sexualities');
+                    var romantic = db.collection('romantic');
+                    var genders = db.collection('gender');
+                    var other_terms = db.collection('other_terms');
+
+                    var html = [ "", "", "", ""];
+
+                    if (data.page === "flags")
+                        database.remove({identification: data.group}, function (err, result) {
+                            if (err)
+                                throw err;
+                            sexualities.find({}, {sort: 'identification'}, function (err, flags) {
+                                if (err)
+                                    throw err;
+                                html[0] += flagToSelect(flags);
+                                romantic.find({}, {sort: 'identification'}, function (err, flags) {
+                                    if (err)
+                                        throw err;
+                                    html[1] += flagToSelect(flags);
+                                    genders.find({}, {sort: 'identification'}, function (err, flags) {
+                                        if (err)
+                                            throw err;
+                                        html[2] += flagToSelect(flags);
+                                        other_terms.find({}, {sort: 'identification'}, function (err, flags) {
+                                            if (err)
+                                                throw err;
+                                            html[3] += flagToSelect(flags);
+
+                                            res.send(html);
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                });
+            } else {
+                database.update({identification: data.group}, {
+                    $set: {
+                        identification: data.entryName,
+                        image_link: data.flagImage,
+                        description: data.editor,
+                        warning: data.warning
+                    }
+                }, res.send(data.editor));
+            }
         } else if (data.page === "home") {
             database.update({section: data.section}, {$set: {content: data.editor}}, res.send(data.editor));
         }
+    };
+
+    module.exports.adminRemoveSubmit = function (req, res) {
+        var data = req.body;
+
+        var database = db.collection(getDBName(data));
+
+        var sexualities = db.collection('sexualities');
+        var romantic = db.collection('romantic');
+        var genders = db.collection('gender');
+        var other_terms = db.collection('other_terms');
+
+        var html = [ "", "", "", ""];
+
+        if (data.page === "flags")
+            database.remove({identification: data.group}, function (err, result) {
+                if (err)
+                    throw err;
+                sexualities.find({}, {sort: 'identification'}, function (err, flags) {
+                    if (err)
+                        throw err;
+                    html[0] += flagToSelect(flags);
+                    romantic.find({}, {sort: 'identification'}, function (err, flags) {
+                        if (err)
+                            throw err;
+                        html[1] += flagToSelect(flags);
+                        genders.find({}, {sort: 'identification'}, function (err, flags) {
+                            if (err)
+                                throw err;
+                            html[2] += flagToSelect(flags);
+                            other_terms.find({}, {sort: 'identification'}, function (err, flags) {
+                                if (err)
+                                    throw err;
+                                html[3] += flagToSelect(flags);
+
+                                res.send(html);
+                            });
+                        });
+                    });
+                });
+            });
     };
 
     module.exports.adminEditSubmit = function (req, res) {
@@ -222,10 +314,11 @@
     }
 
     function flagToSelect(array) {
-        var html = '<option selected="selected" value="">Entry</option><option value="">None</option>';
+        var html = '<option selected="selected" value="">Entry</option>';
         for (var i = 0; i < array.length; i++) {
             html += '<option value="' + array[i].identification + '">' + array[i].identification + '</option>';
         }
+        html += '<option value="ADD_ENTRY">--Add Entry--</option>';
         return html;
     }
 
