@@ -5,7 +5,8 @@
 
 #previewButton {
     float: right;
-    margin-top: 15px;
+    margin: 15px;
+
 }
 
 #saveButton {
@@ -57,4 +58,8 @@ textarea {
     height: 120px;
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
     margin: 10px 100% 10px 10px;
+}
+
+#preview{
+    float: left;
 }

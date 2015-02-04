@@ -4,11 +4,6 @@
     /*float: none;*/
 }
 
-#select{
-    float: left;
-    display: inline-block;
-}
-
 #orientations {
     font-weight: bold;
     font-size: 30px;
