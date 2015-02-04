@@ -222,7 +222,7 @@
     }
 
     function flagToSelect(array) {
-        var html = '<option selected="selected" value="">Entry</option>';
+        var html = '<option selected="selected" value="">Entry</option><option value="">None</option>';
         for (var i = 0; i < array.length; i++) {
             html += '<option value="' + array[i].identification + '">' + array[i].identification + '</option>';
         }

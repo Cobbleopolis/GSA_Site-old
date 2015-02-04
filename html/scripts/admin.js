@@ -197,5 +197,10 @@ function formatFlagPreview() {
     }
 
     function updateFlagImg(sel) {
+        if(sel.value === ""){
+            $("#previewImg").hide();
+        } else {
+            $("#previewImg").show();
+        }
         $("#previewImg").attr("src", sel.value);
     }
