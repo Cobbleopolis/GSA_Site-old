@@ -41,6 +41,7 @@ function submitEdit() {
                         $("#entryName").val(data.identification);
                         $("#content").val(data.description);
                         $("#flagImage").val(data.image_link);
+                        $("#previewImg").attr("src", data.image_link);
                         $("#warning").val(data.warning);
                     } else if (page === "home"){
                         $("#content").val(data.content);

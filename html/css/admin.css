@@ -55,3 +55,10 @@ textarea {
     text-indent: 0;
     font-size: 20px;
 }
+
+#previewImg {
+    width: 200px;
+    height: 120px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
