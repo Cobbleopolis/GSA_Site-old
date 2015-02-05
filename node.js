@@ -23,8 +23,12 @@ app.get('/fishbowl', function(req, res){
     mongo.chatHandle(__dirname + "/html/fishbowl.html", res);
 });
 
+app.get('/adminLogin', function(req, res){
+    mongo.chatHandle(__dirname + "/html/adminLogin.html", res);
+});
+
 app.get('/adminEdit', function(req, res){
-    mongo.adminHandle(__dirname + "/html/admin.html", res);
+    mongo.adminHandle(__dirname + "/html/adminEdit.html", res);
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,10 +42,9 @@ app.post('/adminEdit/edit/',function(req,res){
     mongo.adminEditSubmit(req, res);
 });
 
-app.post('/admin/edit/remove',function(req,res){
+app.post('/adminEdit/remove',function(req,res){
     mongo.adminRemoveSubmit(req, res);
 });
-
 
 app.use(express.static(__dirname + '/html'));
 
