@@ -23,27 +23,31 @@ app.get('/fishbowl', function(req, res){
     mongo.chatHandle(__dirname + "/html/fishbowl.html", res);
 });
 
-app.get('/adminLogin', function(req, res){
-    mongo.chatHandle(__dirname + "/html/adminLogin.html", res);
+app.get('/admin/login', function(req, res){
+    mongo.chatHandle(__dirname + "/html/admin/adminLogin.html", res);
 });
 
-app.get('/adminEdit', function(req, res){
-    mongo.adminHandle(__dirname + "/html/adminEdit.html", res);
+app.get('/admin/edit', function(req, res){
+    mongo.adminHandle(__dirname + "/html/admin/adminEdit.html", res);
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.post('/adminEdit/change',function(req,res){
+app.post('/admin/edit/change',function(req,res){
     mongo.adminChangeSubmit(req, res);
 });
 
-app.post('/adminEdit/edit/',function(req,res){
+app.post('/admin/edit/edit/',function(req,res){
     mongo.adminEditSubmit(req, res);
 });
 
-app.post('/adminEdit/remove',function(req,res){
+app.post('/admin/edit/remove',function(req,res){
     mongo.adminRemoveSubmit(req, res);
+});
+
+app.post('/admin/login',function(req,res){
+    mongo.adminLoginSubmit(req, res);
 });
 
 app.use(express.static(__dirname + '/html'));
@@ -54,5 +58,4 @@ var server = app.listen(81, function () {
     var port = server.address().port;
 
     console.log('App listening at http://%s:%s', host, port);
-
 });

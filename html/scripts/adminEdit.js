@@ -29,7 +29,7 @@ function submitEdit() {
             $("#result").show();
         } else {
             $("#editSection").parent().removeClass("disabled").addClass("loading");
-            $.post("/adminEdit/edit", {page: page, section: section, group: group})
+            $.post("/admin/edit/edit", {page: page, section: section, group: group})
                 .done(function (data) {
                     $("#editSection").parent().removeClass("loading");
                     $("#preview").hide();
@@ -76,7 +76,7 @@ function submitRemove() {
                     $("#result").html("Please select a page, section and a group (if available).");
                     $("#result").show();
                 } else {
-                    $.post("/adminEdit/remove", {page: page, section: section, group: group})
+                    $.post("/admin/edit/remove", {page: page, section: section, group: group})
                         .done(function (data) {
                             group = "";
                             $("#sectionSexualityDropdown").html(data[0]);
@@ -102,7 +102,7 @@ function submitRemove() {
 }
 
 function submitChange() {
-    $.post("/adminEdit/change", {
+    $.post("/admin/edit/change", {
         page: page,
         section: section,
         group: group,

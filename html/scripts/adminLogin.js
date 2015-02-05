@@ -7,9 +7,12 @@ function loadAdminPage() {
                 "Login": function () {
                     var username = $("#username");
                     var password = $("#password");
+
                     //Do your code here
-                    console.log(username.val());
-                    console.log(password.val());
+                    $.post("/admin/login", {user: $("#username").val(), pass: $("#password").val()})
+                        .done(function(data){
+
+                        });
                     $(this).dialog("close");
                 }
             }

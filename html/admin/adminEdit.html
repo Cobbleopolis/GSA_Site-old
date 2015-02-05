@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Hooch GSA | Admin</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/semantic/semantic.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/adminEdit.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/flag.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/index.css"/>
+
+    <script type="text/javascript" src="../scripts/nav.js"></script>
+    <script type="text/javascript" src="../scripts/adminEdit.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../css/semantic/semantic.min.js"></script>
+    <script src="../ckeditor/ckeditor.js"></script>
+    <script src="../ckeditor/adapters/jquery.js"></script>
+
+
+    <!-- Enabling HTML5 support for Internet Explorer -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="pushable" onload="loadAdminPage()">
+<div id="navBar" class="ui left demo vertical inverted labeled icon sidebar menu"></div>
+<div id="navButton" class="ui black big launch right attached fixed button" onclick="showNav()"></div>
+
+<div class="pusher">
+    <article>
+        <div id="result" class="ui inverted segment"></div>
+        <form method="post" action="/admin/edit">
+            <p class="label">Select page and section to edit</p>
+            <select onchange="handlePageDropdownChange(this)" id="pageDropdown">
+                <option selected="selected" value="">Page</option>
+                <option value="home">Home Page</option>
+                <option value="flags">Flags and Orientations</option>
+            </select>
+            <select onchange="handleHomeSectionDropdownChange(this)" id="sectionHomeDropdown">
+                <!--onchange="handleSectionDropdownChange(this)"-->
+                <option selected="selected" value="">Section</option>
+                <option value="summary">Summary</option>
+                <option value="about">About</option>
+                <option value="meetings">Meetings</option>
+                <option value="fishbowl">Fishbowl</option>
+            </select>
+            <select id="sectionFlagsDropdown" onchange="handleFlagSectionDropdownChange(this)">
+                <!--onchange="handleSectionDropdownChange(this)"-->
+                <option selected="selected" value="">Section</option>
+                <option value="sexualities">Sexual Orientations</option>
+                <option value="romantic">Romantic Orientations</option>
+                <option value="gender">Gender Identities</option>
+                <option value="other_terms">Other LGBT+ Terms</option>
+            </select>
+            <select id="sectionSexualityDropdown" onchange="handleGroupDropdownChange(this)"></select>
+            <select id="sectionRomanticDropdown" onchange="handleGroupDropdownChange(this)"></select>
+            <select id="sectionGenderDropdown" onchange="handleGroupDropdownChange(this)"></select>
+            <select id="sectionOtherDropdown" onchange="handleGroupDropdownChange(this)"></select>
+
+            <div class="ui buttons" id="submitButtons">
+                <div class="ui red submit button" onclick="submitRemove()" id="removeButton">Remove</div>
+                <div class="or"></div>
+                <div class="ui blue submit button" onclick="submitEdit()" id="editButton">Edit</div>
+            </div>
+        </form>
+        <div id="div" class="ui divider"></div>
+        <div class="ui disabled segment">
+            <form method="post" id="editSection" action="/admin">
+
+                <p class="pageToggle label">Section Name:</p>
+                <input class="pageToggle" type="text" id="entryName">
+
+                <p class="pageToggle label">Flag Image</p>
+                <select class="pageToggle" onchange="updateFlagImg(this)" id="flagImage"></select>
+                <img id="previewImg" class="pageToggle">
+
+                <p id="contentLabel" class="label">Content:</p>
+                <textarea cols="80" id="content" rows="10" style="visibility: hidden; display: none;"></textarea>
+
+                <p class="pageToggle label">Warning:</p>
+                <textarea class="pageToggle" id="warning" cols="80"></textarea>
+
+                <div onclick="setValue();" id="previewButton" class="ui blue button">Preview</div>
+                <!--<div id="previewDiv" class="ui pageToggle divider"></div>-->
+            </form>
+            <div id="preview"></div>
+            <div class="ui green submit button" onclick="submitChange()" id="saveButton">Save</div>
+        </div>
+    </article>
+</div>
+</body>
+</html>
