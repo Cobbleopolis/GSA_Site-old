@@ -7,7 +7,7 @@
 
     var navBar = fs.readFileSync(__dirname + '/html/resorcePages/navBar.html');
     var navButton = fs.readFileSync(__dirname + '/html/resorcePages/navButton.html');
-    var adminLoginFail = fs.readFileSync(__dirname + '/html/resorcePages/adminLoginFail.html');
+    //var adminLoginFail = fs.readFileSync(__dirname + '/html/admin/adminLoginFail.html');
 
 
     module.exports.indexHandle = function (url, res) {
@@ -127,20 +127,27 @@
         fs.readFile(url, function (err, file) {
             if (err)
                 throw err;
-            //console.log("Dash");
+            console.log(req.cookies);
             var $ = cheerio.load(file);
             $('#navBar').html(navBar);
             $('#navButton').html(navButton);
-            if(req.cookies.hoochgsa.adminLogin){
-                res.send($.html());
+            if (req.cookies.hoochgsa) {
+                if (req.cookies.hoochgsa.adminLogin) {
+                    res.send($.html());
+                } else {
+                    res.writeHead(302, {
+                        'Location': 'admin/login/fail'
+                        //add other headers here...
+                    });
+                    res.end();
+                }
             } else {
-                res.send(adminLoginFail);
+                res.writeHead(302, {
+                    'Location': 'admin/login/fail'
+                    //add other headers here...
+                });
+                res.end();
             }
-            //for(var i = 0; i < req.cookies.length; i++){
-            //    //if(req.cookies[i].name){
-            //        console.log("Cookie" + req.cookies[i]);
-            //    //}
-            //}
         });
     };
 
@@ -329,27 +336,38 @@
     module.exports.adminLoginSubmit = function (req, res) {
         var data = req.body;
         var adminUser = db.collection('adminUser');
-        adminUser.find(function(err, users) {
-            if(err)
+        adminUser.find(function (err, users) {
+            if (err)
                 throw err;
             var loginFound = false;
-            for(var i = 0; i < users.length ; i++){
-                console.log("User: " + users[i].user);
-                console.log("Pass: " + users[i].pass);
-                if(users[i].user === data.user && users[i].pass === data.pass){
+            for (var i = 0; i < users.length; i++) {
+                //console.log("User: " + users[i].user);
+                //console.log("Pass: " + users[i].pass);
+                if (users[i].user === data.user && users[i].pass === data.pass) {
                     loginFound = true;
                 }
             }
-            if(loginFound){
-                console.log("Login Found");
-                res.cookie("hoochgsa", { adminLogin: true });
+            if (loginFound) {
+                //console.log("Login Found");
+                res.cookie("hoochgsa", {adminLogin: true}, {maxAge: 10000}); //7200000
                 res.send(true);
             } else {
                 console.log("Login Failed");
-                console.log("User: " + data.user);
-                console.log("Pass: " + data.pass);
+                //console.log("User: " + data.user);
+                //console.log("Pass: " + data.pass);
                 res.send(false);
             }
+        });
+    };
+
+    module.exports.adminLoginFailHandle = function (url, res) {
+        fs.readFile(url, function (err, file) {
+            if (err)
+                throw err;
+            var $ = cheerio.load(file);
+            $('#navBar').html(navBar);
+            $('#navButton').html(navButton);
+            res.send($.html());
         });
     };
 

@@ -32,6 +32,10 @@ app.get('/admin/login', function(req, res){
     mongo.adminLoginHandle(__dirname + "/html/admin/adminLogin.html", res);
 });
 
+app.get('/admin/login/fail', function(req, res){
+    mongo.adminLoginFailHandle(__dirname + "/html/admin/adminLoginFail.html", res);
+});
+
 app.get('/admin/dash', function(req, res){
     mongo.adminDashHandle(__dirname + "/html/admin/adminDash.html", req, res);
 });
