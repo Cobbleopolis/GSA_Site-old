@@ -63,7 +63,11 @@
             <select id="sectionGenderDropdown" onchange="handleGroupDropdownChange(this)"></select>
             <select id="sectionOtherDropdown" onchange="handleGroupDropdownChange(this)"></select>
 
-            <div class="ui red submit button" onclick="submitEdit()" id="editButton">Edit</div>
+            <div class="ui buttons" id="submitButtons">
+                <div class="ui red submit button" onclick="submitRemove()" id="removeButton">Remove</div>
+                <div class="or"></div>
+                <div class="ui blue submit button" onclick="submitEdit()" id="editButton">Edit</div>
+            </div>
         </form>
         <div id="div" class="ui divider"></div>
         <div class="ui disabled segment">
@@ -82,11 +86,11 @@
                 <p class="pageToggle label">Warning:</p>
                 <textarea class="pageToggle" id="warning" cols="80"></textarea>
 
-                <div onclick="setValue();" id="previewButton" class="ui green button">Preview</div>
+                <div onclick="setValue();" id="previewButton" class="ui blue button">Preview</div>
                 <!--<div id="previewDiv" class="ui pageToggle divider"></div>-->
             </form>
             <div id="preview"></div>
-            <div class="ui blue submit button" onclick="submitChange()" id="saveButton">Save</div>
+            <div class="ui green submit button" onclick="submitChange()" id="saveButton">Save</div>
         </div>
     </article>
 </div>

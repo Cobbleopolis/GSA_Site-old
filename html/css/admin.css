@@ -1,4 +1,4 @@
-#editButton {
+#submitButtons {
     float: right;
     margin-top: 15px;
 }
@@ -10,7 +10,7 @@
 
 #saveButton {
     float: right;
-    margin: 15px;
+    margin: 10px 10px 10px 100%;
 }
 
 article{
