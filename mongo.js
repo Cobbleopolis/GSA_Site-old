@@ -2,11 +2,12 @@
     var fs = require('fs');
     var cheerio = require('cheerio');
     var databaseUrl = 'gsa-site:gayisok1@99.62.101.62:25566/gsa-site'; // 'username:password@example.com/mydb'
-    var collections = ['homePage', 'sexualities', 'romantic', 'genders', 'other_terms'];
+    var collections = ['homePage', 'sexualities', 'romantic', 'genders', 'other_terms', 'adminUser'];
     var db = require('mongojs').connect(databaseUrl, collections);
 
     var navBar = fs.readFileSync(__dirname + '/html/resorcePages/navBar.html');
     var navButton = fs.readFileSync(__dirname + '/html/resorcePages/navButton.html');
+    var adminLoginFail = fs.readFileSync(__dirname + '/html/resorcePages/adminLoginFail.html');
 
 
     module.exports.indexHandle = function (url, res) {
@@ -122,7 +123,33 @@
         });
     };
 
-    module.exports.adminHandle = function (url, res) {
+    module.exports.adminDashHandle = function (url, req, res) {
+        fs.readFile(url, function (err, file) {
+            if (err)
+                throw err;
+            //console.log("Dash");
+            var $ = cheerio.load(file);
+            $('#navBar').html(navBar);
+            $('#navButton').html(navButton);
+            if(req.cookies.hoochgsa.adminLogin){
+                res.send($.html());
+            } else {
+                res.send(adminLoginFail);
+            }
+            //for(var i = 0; i < req.cookies.length; i++){
+            //    //if(req.cookies[i].name){
+            //        console.log("Cookie" + req.cookies[i]);
+            //    //}
+            //}
+        });
+    };
+
+    module.exports.adminDashSubmit = function (req, res) {
+        var data = req.body;
+        //console.log("Cookies: ", req.cookies);
+    };
+
+    module.exports.adminEditHandle = function (url, res) {
         fs.readFile(url, function (err, file) {
             if (err)
                 throw err;
@@ -186,7 +213,7 @@
                     var genders = db.collection('gender');
                     var other_terms = db.collection('other_terms');
 
-                    var html = [ "", "", "", ""];
+                    var html = ["", "", "", ""];
 
                     if (data.page === "flags")
                         database.remove({identification: data.group}, function (err, result) {
@@ -241,7 +268,7 @@
         var genders = db.collection('gender');
         var other_terms = db.collection('other_terms');
 
-        var html = [ "", "", "", ""];
+        var html = ["", "", "", ""];
 
         if (data.page === "flags")
             database.remove({identification: data.group}, function (err, result) {
@@ -286,6 +313,44 @@
                 res.send(document);
             });
         }
+    };
+
+    module.exports.adminLoginHandle = function (url, res) {
+        fs.readFile(url, function (err, file) {
+            if (err)
+                throw err;
+            var $ = cheerio.load(file);
+            $('#navBar').html(navBar);
+            $('#navButton').html(navButton);
+            res.send($.html());
+        });
+    };
+
+    module.exports.adminLoginSubmit = function (req, res) {
+        var data = req.body;
+        var adminUser = db.collection('adminUser');
+        adminUser.find(function(err, users) {
+            if(err)
+                throw err;
+            var loginFound = false;
+            for(var i = 0; i < users.length ; i++){
+                console.log("User: " + users[i].user);
+                console.log("Pass: " + users[i].pass);
+                if(users[i].user === data.user && users[i].pass === data.pass){
+                    loginFound = true;
+                }
+            }
+            if(loginFound){
+                console.log("Login Found");
+                res.cookie("hoochgsa", { adminLogin: true });
+                res.send(true);
+            } else {
+                console.log("Login Failed");
+                console.log("User: " + data.user);
+                console.log("Pass: " + data.pass);
+                res.send(false);
+            }
+        });
     };
 
     function flagToHTML(array) {

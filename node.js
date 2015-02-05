@@ -1,7 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser')
 var app = express();
 var mongo = require("./mongo.js");
+
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get('/', function(req, res){
     mongo.indexHandle(__dirname + "/html/index.html", res);
@@ -24,15 +29,20 @@ app.get('/fishbowl', function(req, res){
 });
 
 app.get('/admin/login', function(req, res){
-    mongo.chatHandle(__dirname + "/html/admin/adminLogin.html", res);
+    mongo.adminLoginHandle(__dirname + "/html/admin/adminLogin.html", res);
+});
+
+app.get('/admin/dash', function(req, res){
+    mongo.adminDashHandle(__dirname + "/html/admin/adminDash.html", req, res);
 });
 
 app.get('/admin/edit', function(req, res){
-    mongo.adminHandle(__dirname + "/html/admin/adminEdit.html", res);
+    mongo.adminEditHandle(__dirname + "/html/admin/adminEdit.html", res);
 });
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.post('/admin/dash',function(req,res){
+    mongo.adminDashSubmit(req, res);
+});
 
 app.post('/admin/edit/change',function(req,res){
     mongo.adminChangeSubmit(req, res);
