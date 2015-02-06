@@ -136,13 +136,13 @@
                     res.send($.html());
                 } else {
                     res.writeHead(302, {
-                        'Location': 'login/fail'
+                        'Location': 'login'
                     });
                     res.end();
                 }
             } else {
                 res.writeHead(302, {
-                    'Location': 'login/fail'
+                    'Location': 'login'
                 });
                 res.end();
             }
