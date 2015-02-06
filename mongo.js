@@ -363,6 +363,37 @@
         }
     };
 
+    module.exports.adminFishbowlHandle = function (url, req, res) {
+        fs.readFile(url, function (err, file) {
+            if (err)
+                throw err;
+            //console.log(req.cookies);
+            var $ = cheerio.load(file);
+            $('#navBar').html(navBar);
+            $('#navButton').html(navButton);
+            if (req.cookies.hoochgsa) {
+                if (req.cookies.hoochgsa.adminLogin) {
+                    res.send($.html());
+                } else {
+                    res.writeHead(302, {
+                        'Location': 'login'
+                    });
+                    res.end();
+                }
+            } else {
+                res.writeHead(302, {
+                    'Location': 'login'
+                });
+                res.end();
+            }
+        });
+    };
+
+    module.exports.adminFishbowlSubmit = function (req, res) {
+        var data = req.body;
+        //console.log("Cookies: ", req.cookies);
+    };
+
     module.exports.adminLoginHandle = function (url, res) {
         fs.readFile(url, function (err, file) {
             if (err)
@@ -391,7 +422,7 @@
             if (loginFound) {
                 //console.log("Login Found");
                 var d = new Date();
-                d.setTime(d.getTime() + 1 * 60 * 1000); // in milliseconds
+                d.setTime(d.getTime() + 30 * 60 * 1000); // in milliseconds
                 res.cookie("hoochgsa", {adminLogin: true}, {expires: d}); //7200000
                 res.send(true);
             } else {
