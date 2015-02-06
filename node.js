@@ -41,7 +41,7 @@ app.get('/admin/dash', function(req, res){
 });
 
 app.get('/admin/edit', function(req, res){
-    mongo.adminEditHandle(__dirname + "/html/admin/adminEdit.html", res);
+    mongo.adminEditHandle(__dirname + "/html/admin/adminEdit.html", req, res);
 });
 
 app.post('/admin/dash',function(req,res){

@@ -136,15 +136,13 @@
                     res.send($.html());
                 } else {
                     res.writeHead(302, {
-                        'Location': 'admin/login/fail'
-                        //add other headers here...
+                        'Location': 'login/fail'
                     });
                     res.end();
                 }
             } else {
                 res.writeHead(302, {
-                    'Location': 'admin/login/fail'
-                    //add other headers here...
+                    'Location': 'login/fail'
                 });
                 res.end();
             }
@@ -156,7 +154,35 @@
         //console.log("Cookies: ", req.cookies);
     };
 
-    module.exports.adminEditHandle = function (url, res) {
+    module.exports.adminFishbowlHandle = function (url, req, res) {
+        fs.readFile(url, function (err, file) {
+            if (err)
+                throw err;
+            console.log(req.cookies);
+            var $ = cheerio.load(file);
+            $('#navBar').html(navBar);
+            $('#navButton').html(navButton);
+            if (req.cookies.hoochgsa) {
+                if (req.cookies.hoochgsa.adminLogin) {
+                    res.send($.html());
+                } else {
+                    res.writeHead(302, {
+                        'Location': 'login/fail'
+                        //add other headers here...
+                    });
+                    res.end();
+                }
+            } else {
+                res.writeHead(302, {
+                    'Location': 'login/fail'
+                    //add other headers here...
+                });
+                res.end();
+            }
+        });
+    };
+
+    module.exports.adminEditHandle = function (url, req, res) {
         fs.readFile(url, function (err, file) {
             if (err)
                 throw err;
@@ -164,40 +190,55 @@
             $('#navBar').html(navBar);
             $('#navButton').html(navButton);
 
-            var sexualities = db.collection('sexualities');
-            var romantic = db.collection('romantic');
-            var genders = db.collection('gender');
-            var other_terms = db.collection('other_terms');
-            sexualities.find({}, {sort: 'identification'}, function (err, flags) {
-                if (err)
-                    throw err;
-                $("#sectionSexualityDropdown").html(flagToSelect(flags));
-                romantic.find({}, {sort: 'identification'}, function (err, flags) {
-                    if (err)
-                        throw err;
-                    $("#sectionRomanticDropdown").html(flagToSelect(flags));
-                    genders.find({}, {sort: 'identification'}, function (err, flags) {
+            if (req.cookies.hoochgsa) {
+                if (req.cookies.hoochgsa.adminLogin) {
+
+                    var sexualities = db.collection('sexualities');
+                    var romantic = db.collection('romantic');
+                    var genders = db.collection('gender');
+                    var other_terms = db.collection('other_terms');
+                    sexualities.find({}, {sort: 'identification'}, function (err, flags) {
                         if (err)
                             throw err;
-                        $("#sectionGenderDropdown").html(flagToSelect(flags));
-                        other_terms.find({}, {sort: 'identification'}, function (err, flags) {
+                        $("#sectionSexualityDropdown").html(flagToSelect(flags));
+                        romantic.find({}, {sort: 'identification'}, function (err, flags) {
                             if (err)
                                 throw err;
-                            $("#sectionOtherDropdown").html(flagToSelect(flags));
-                            fs.readdir(__dirname + '/html/images/flags/', function (err, files) {
-                                var html = '<option selected="selected" value="">None</option>';
+                            $("#sectionRomanticDropdown").html(flagToSelect(flags));
+                            genders.find({}, {sort: 'identification'}, function (err, flags) {
                                 if (err)
                                     throw err;
-                                for (var i = 0; i < files.length; i++) {
-                                    html += '<option value= "images/flags/' + files[i] + '">' + files[i] + '</option>';
-                                }
-                                $('#flagImage').html(html);
-                                res.send($.html());
+                                $("#sectionGenderDropdown").html(flagToSelect(flags));
+                                other_terms.find({}, {sort: 'identification'}, function (err, flags) {
+                                    if (err)
+                                        throw err;
+                                    $("#sectionOtherDropdown").html(flagToSelect(flags));
+                                    fs.readdir(__dirname + '/html/images/flags/', function (err, files) {
+                                        var html = '<option selected="selected" value="">None</option>';
+                                        if (err)
+                                            throw err;
+                                        for (var i = 0; i < files.length; i++) {
+                                            html += '<option value= "images/flags/' + files[i] + '">' + files[i] + '</option>';
+                                        }
+                                        $('#flagImage').html(html);
+                                        res.send($.html());
+                                    });
+                                });
                             });
                         });
                     });
+                } else {
+                    res.writeHead(302, {
+                        'Location': 'login'
+                    });
+                    res.end();
+                }
+            } else {
+                res.writeHead(302, {
+                    'Location': 'login'
                 });
-            });
+                res.end();
+            }
         });
     };
 
@@ -349,7 +390,9 @@
             }
             if (loginFound) {
                 //console.log("Login Found");
-                res.cookie("hoochgsa", {adminLogin: true}, {maxAge: 10000}); //7200000
+                var d = new Date();
+                d.setTime(d.getTime() + 1 * 60 * 1000); // in milliseconds
+                res.cookie("hoochgsa", {adminLogin: true}, {expires: d}); //7200000
                 res.send(true);
             } else {
                 console.log("Login Failed");
