@@ -127,7 +127,7 @@
         fs.readFile(url, function (err, file) {
             if (err)
                 throw err;
-            console.log(req.cookies);
+            //console.log(req.cookies);
             var $ = cheerio.load(file);
             $('#navBar').html(navBar);
             $('#navButton').html(navButton);
