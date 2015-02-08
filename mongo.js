@@ -457,8 +457,8 @@
                 '<img class="flagImg" src = "' + array[i].image_link + '">' +
                 '</div>';
             }
-            html += '<div class="ui attached segment">' +
-            '<p class="flagDesc">' + array[i].description + '</p>' +
+            html += '<div id="flagDesc" class="ui attached segment">' +
+            array[i].description +
             '</div>';
             if (array[i].warning) {
                 html += '<div class="ui bottom attached warning message">' +
