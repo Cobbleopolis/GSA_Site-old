@@ -44,7 +44,7 @@ function submitEdit() {
                         } else {
                             $("#previewImg").show();
                         }
-                        $("#previewImg").attr("src", data.image_link);
+                        $("#previewImg").attr("src", "../" + data.image_link);
                         $("#warning").val(data.warning);
                     } else if (page === "home") {
                         $(".pageToggle").hide();
@@ -192,7 +192,6 @@ function handlePageDropdownChange(sel) {
         $("#sectionOtherDropdown").hide();
     } else if (val === "flags") {
         section = $("#sectionFlagsDropdown").val();
-        //hideShowFlagGroup(val);
         $("#sectionHomeDropdown").hide();
         $("#sectionFlagsDropdown").show();
         if (section === "sexualities") {
@@ -258,5 +257,5 @@ function updateFlagImg(sel) {
     } else {
         $("#previewImg").show();
     }
-    $("#previewImg").attr("src", sel.value);
+    $("#previewImg").attr("src", "../" + sel.value);
 }
