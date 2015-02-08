@@ -148,7 +148,7 @@ function formatFlagPreview() {
     '</div>';
     if ($("#flagImage").val()) {
         html += '<div class="ui attached segment">' +
-        '<img class="flagImg" src = "' + $("#flagImage").val() + '">' +
+        '<img class="flagImg" src = "../' + $("#flagImage").val() + '">' +
         '</div>';
     }
     html += '<div class="ui attached segment">' +
