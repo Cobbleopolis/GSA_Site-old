@@ -29,7 +29,7 @@ app.get('/fishbowl', function(req, res){
 });
 
 app.get('/admin/login', function(req, res){
-    mongo.adminLoginHandle(__dirname + "/html/admin/adminLogin.html", res);
+    mongo.adminLoginHandle(__dirname + "/html/admin/adminLogin.html", req, res);
 });
 
 app.get('/admin/login/fail', function(req, res){

@@ -394,14 +394,25 @@
         //console.log("Cookies: ", req.cookies);
     };
 
-    module.exports.adminLoginHandle = function (url, res) {
+    module.exports.adminLoginHandle = function (url, req, res) {
         fs.readFile(url, function (err, file) {
             if (err)
                 throw err;
             var $ = cheerio.load(file);
             $('#navBar').html(navBar);
             $('#navButton').html(navButton);
-            res.send($.html());
+            if (req.cookies.hoochgsa) {
+                if (req.cookies.hoochgsa.adminLogin) {
+                    res.writeHead(302, {
+                        'Location': 'dash'
+                    });
+                    res.end();
+                } else {
+                    res.send($.html());
+                }
+            } else {
+                res.send($.html());
+            }
         });
     };
 
