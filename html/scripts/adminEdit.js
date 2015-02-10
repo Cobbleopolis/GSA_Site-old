@@ -109,7 +109,7 @@ function submitChange() {
         entryName: $("#entryName").val(),
         flagImage: $("#flagImage").val(),
         editor: $('#content').val(),
-        warning: $("warning").val()
+        warning: $("#warning").val()
     })
         .done(function (data) {
             if (group === "ADD_ENTRY") {
