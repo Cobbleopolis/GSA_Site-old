@@ -121,6 +121,7 @@ function submitChange() {
             $("#result").removeClass("red").addClass("green");
             $("#result").html("Changes Saved.");
             $("#result").show();
+            $("#content").val("");
             $(".pageToggle").hide();
             $("#preview").hide();
             $("#editSection").parent().addClass("disabled");
