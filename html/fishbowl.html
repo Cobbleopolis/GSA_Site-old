@@ -6,13 +6,15 @@
 
     <link rel="stylesheet" type="text/css" href="css/semantic/semantic.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="css/chat.css"/>
+    <link rel="stylesheet" type="text/css" href="css/fishbowl.css"/>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="css/semantic/semantic.min.js"></script>
     <script type="text/javascript" src="scripts/nav.js"></script>
-    <script type="text/javascript" src="scripts/chat.js"></script>
+    <script type="text/javascript" src="scripts/fishbowl.js"></script>
 
+    <script src="../ckeditor/ckeditor.js"></script>
+    <script src="../ckeditor/adapters/jquery.js"></script>
 
     <!-- Enabling HTML5 support for Internet Explorer -->
     <!--[if lt IE 9]>
@@ -21,13 +23,25 @@
 
 </head>
 
-<body class="pushable">
+<body class="pushable" onload="loadFishbowlPage()">
 <div id="navBar" class="ui left demo vertical inverted labeled icon sidebar menu"></div>
 <div id="navButton" class="ui black big launch right attached fixed button" onclick="showNav()"></div>
 
 <div class="pusher">
     <article>
-        Nothing here yet.
+        <p align="center" class="title">Submit A Fishbowl</p>
+        <div class="ui segment">
+            <form>
+                <p class="label">Name</p>
+                <input id="name" type="text">
+
+                <p class="label">Fishbowl</p>
+                <textarea cols="80" id="content" rows="10" style="visibility: hidden; display: none;"></textarea>
+
+                <p class="label">Triggers</p>
+                <input id="triggers" type="text">
+            </form>
+        </div>
     </article>
 </div>
 </body>
