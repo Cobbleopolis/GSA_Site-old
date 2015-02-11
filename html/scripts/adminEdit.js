@@ -44,7 +44,7 @@ function submitEdit() {
                         } else {
                             $("#previewImg").show();
                         }
-                        $("#previewImg").attr("src", data.image_link);
+                        $("#previewImg").attr("src", "../" + data.image_link);
                         $("#warning").val(data.warning);
                     } else if (page === "home") {
                         $(".pageToggle").hide();
@@ -109,7 +109,7 @@ function submitChange() {
         entryName: $("#entryName").val(),
         flagImage: $("#flagImage").val(),
         editor: $('#content').val(),
-        warning: $("warning").val()
+        warning: $("#warning").val()
     })
         .done(function (data) {
             if (group === "ADD_ENTRY") {
@@ -121,6 +121,7 @@ function submitChange() {
             $("#result").removeClass("red").addClass("green");
             $("#result").html("Changes Saved.");
             $("#result").show();
+            $("#content").val("");
             $(".pageToggle").hide();
             $("#preview").hide();
             $("#editSection").parent().addClass("disabled");
@@ -148,7 +149,7 @@ function formatFlagPreview() {
     '</div>';
     if ($("#flagImage").val()) {
         html += '<div class="ui attached segment">' +
-        '<img class="flagImg" src = "' + $("#flagImage").val() + '">' +
+        '<img class="flagImg" src = "../' + $("#flagImage").val() + '">' +
         '</div>';
     }
     html += '<div class="ui attached segment">' +
@@ -192,7 +193,6 @@ function handlePageDropdownChange(sel) {
         $("#sectionOtherDropdown").hide();
     } else if (val === "flags") {
         section = $("#sectionFlagsDropdown").val();
-        //hideShowFlagGroup(val);
         $("#sectionHomeDropdown").hide();
         $("#sectionFlagsDropdown").show();
         if (section === "sexualities") {
@@ -258,5 +258,5 @@ function updateFlagImg(sel) {
     } else {
         $("#previewImg").show();
     }
-    $("#previewImg").attr("src", sel.value);
+    $("#previewImg").attr("src", "../" + sel.value);
 }

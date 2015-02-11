@@ -29,7 +29,7 @@ app.get('/fishbowl', function(req, res){
 });
 
 app.get('/admin/login', function(req, res){
-    mongo.adminLoginHandle(__dirname + "/html/admin/adminLogin.html", res);
+    mongo.adminLoginHandle(__dirname + "/html/admin/adminLogin.html", req, res);
 });
 
 app.get('/admin/login/fail', function(req, res){
@@ -38,6 +38,10 @@ app.get('/admin/login/fail', function(req, res){
 
 app.get('/admin/dash', function(req, res){
     mongo.adminDashHandle(__dirname + "/html/admin/adminDash.html", req, res);
+});
+
+app.get('/admin/fishbowl', function(req, res){
+    mongo.adminFishbowlHandle(__dirname + "/html/admin/adminFishbowl.html", req, res);
 });
 
 app.get('/admin/edit', function(req, res){
@@ -59,6 +63,10 @@ app.post('/admin/edit/edit/',function(req,res){
 app.post('/admin/edit/remove',function(req,res){
     mongo.adminRemoveSubmit(req, res);
 });
+
+//app.post('/admin/fishbowl',function(req,res){
+//    mongo.adminFishbowlSubmit(req, res);
+//});
 
 app.post('/admin/login',function(req,res){
     mongo.adminLoginSubmit(req, res);
