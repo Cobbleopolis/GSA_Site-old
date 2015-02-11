@@ -123,6 +123,15 @@
         });
     };
 
+    module.exports.fishbowlSubmit = function (req, res) {
+        var data = req.body;
+        var fishbowl = db.collection('fishbowl');
+        fishbowl.save({name: data.name, content: data.content, triggers: data.triggers}, function(err, result){
+            res.send(true);
+        })
+    };
+
+
     module.exports.adminDashHandle = function (url, req, res) {
         fs.readFile(url, function (err, file) {
             if (err)

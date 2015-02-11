@@ -1,3 +1,7 @@
+article {
+    margin-right: 2%;
+}
+
 input[type=text] {
     background-color: #FFFFFF;
     border: 1px solid #A9A9A9;
@@ -14,7 +18,14 @@ textarea {
 .label {
     margin: 15px 0;
     font-weight: bold;
-    font-size: 25px;
     text-indent: 0;
     font-size: 20px;
+}
+
+#submitButton {
+    float: right;
+}
+
+#result {
+
 }
