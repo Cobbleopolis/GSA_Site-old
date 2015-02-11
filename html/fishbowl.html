@@ -31,16 +31,17 @@
 <div class="pusher">
     <article>
         <p align="center" class="title">Submit A Fishbowl</p>
-        <p class="ui segment" id="result"></p>
+        <p class="ui inverted segment" id="result"></p>
         <div class="ui segment">
             <form>
                 <p class="label">Name</p>
                 <input id="name" type="text">
+                <p class="subLabel">(Leave blank for anonymous)</p>
 
                 <p class="label">Fishbowl</p>
                 <textarea cols="80" id="content" rows="10" style="visibility: hidden; display: none;"></textarea>
 
-                <p class="label">Triggers</p>
+                <p class="label">Trigger Warnings</p>
                 <input id="triggers" type="text">
                 <div class="ui green submit button" onclick="submitFishbowl()" id="submitButton">Submit</div>
             </form>

@@ -7,20 +7,25 @@ function submitFishbowl() {
     var name = $("#name").val();
     var content = $("#content").val();
     var triggers = $("#triggers").val();
-    //if(name && content && triggers){
-        if(content !== ""){
-            $.post("/fishbowl/submit", {name: name, content: content, triggers: triggers})
-                .done(function (data) {
-                    if(data){
-                        $("#result").removeClass("red").addClass("green");
-                        $("#result").html("Fishbowl Submitted.");
-                        $("#result").show();
-                    }
-                });
-        } else {
-            $("#result").removeClass("green").addClass("red");
-            $("#result").html("Please fill out at least the Fishbowl field.");
-            $("#result").show();
-        }
+    if (name === "") {
+        name = "Anonymous";
+    }
+    if (content !== "") {
+        $.post("/fishbowl/submit", {name: name, content: content, triggers: triggers})
+            .done(function (data) {
+                if (data) {
+                    $("#result").removeClass("red").addClass("green");
+                    $("#result").html("Fishbowl Submitted.");
+                    $("#result").show();
+                    $("#name").val("");
+                    $("#content").val("");
+                    $("#triggers").val("");
+                }
+            });
+    } else {
+        $("#result").removeClass("green").addClass("red");
+        $("#result").html("Please fill out at least the Fishbowl field.");
+        $("#result").show();
+    }
     //}
 }
