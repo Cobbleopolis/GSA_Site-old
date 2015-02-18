@@ -1,7 +1,7 @@
 (function () {
     var fs = require('fs');
     var cheerio = require('cheerio');
-    var databaseUrl = 'gsa-site:gayisok1@99.62.101.62:25566/gsa-site'; // 'username:password@example.com/mydb'
+    var databaseUrl = 'gsa-site:gayisok1@99.62.103.32:25566/gsa-site'; // 'username:password@example.com/mydb'
     var collections = ['homePage', 'sexualities', 'romantic', 'genders', 'other_terms', 'adminUser'];
     var db = require('mongojs').connect(databaseUrl, collections);
 
@@ -126,11 +126,10 @@
     module.exports.fishbowlSubmit = function (req, res) {
         var data = req.body;
         var fishbowl = db.collection('fishbowl');
-        fishbowl.save({name: data.name, content: data.content, triggers: data.triggers}, function(err, result){
+        fishbowl.save({name: data.name, content: data.content, triggers: data.triggers, date: new Date()}, function(err, result){
             res.send(true);
         })
     };
-
 
     module.exports.adminDashHandle = function (url, req, res) {
         fs.readFile(url, function (err, file) {
@@ -161,34 +160,6 @@
     module.exports.adminDashSubmit = function (req, res) {
         var data = req.body;
         //console.log("Cookies: ", req.cookies);
-    };
-
-    module.exports.adminFishbowlHandle = function (url, req, res) {
-        fs.readFile(url, function (err, file) {
-            if (err)
-                throw err;
-            console.log(req.cookies);
-            var $ = cheerio.load(file);
-            $('#navBar').html(navBar);
-            $('#navButton').html(navButton);
-            if (req.cookies.hoochgsa) {
-                if (req.cookies.hoochgsa.adminLogin) {
-                    res.send($.html());
-                } else {
-                    res.writeHead(302, {
-                        'Location': 'login/fail'
-                        //add other headers here...
-                    });
-                    res.end();
-                }
-            } else {
-                res.writeHead(302, {
-                    'Location': 'login/fail'
-                    //add other headers here...
-                });
-                res.end();
-            }
-        });
     };
 
     module.exports.adminEditHandle = function (url, req, res) {
@@ -376,13 +347,24 @@
         fs.readFile(url, function (err, file) {
             if (err)
                 throw err;
-            //console.log(req.cookies);
+            var fishbowl = db.collection('fishbowl');
             var $ = cheerio.load(file);
             $('#navBar').html(navBar);
             $('#navButton').html(navButton);
             if (req.cookies.hoochgsa) {
                 if (req.cookies.hoochgsa.adminLogin) {
-                    res.send($.html());
+                    fishbowl.find({}, function(err, entries){
+                        var html = "";
+                        for(var i = 0; i < entries.length; i++){
+                            html += '<ul class="fishbowlEntry">';
+                            html += '<li>' + entries[i].date + '</li>';
+                            html += '<li>' + entries[i]._id + '</li>';
+                            html += '</ul>';
+                            html += '<br>';
+                        }
+                        $("#fishbowlList").html(html);
+                        res.send($.html());
+                    });
                 } else {
                     res.writeHead(302, {
                         'Location': 'login'
