@@ -7,11 +7,12 @@ function submitFishbowl() {
     var name = $("#name").val();
     var content = $("#content").val();
     var triggers = $("#triggers").val();
+    var urgency = $("#urgency").val();
     if (name === "") {
         name = "Anonymous";
     }
     if (content !== "") {
-        $.post("/fishbowl/submit", {name: name, content: content, triggers: triggers})
+        $.post("/fishbowl/submit", {name: name, content: content, triggers: triggers,  urgency: urgency})
             .done(function (data) {
                 if (data) {
                     $("#result").removeClass("red").addClass("green");
