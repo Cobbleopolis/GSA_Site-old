@@ -7,16 +7,26 @@
 
     <link rel="stylesheet" type="text/css" href="../css/semantic/semantic.min.css"/>
     <link rel="stylesheet" type="text/css" href="../css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/adminDash.css"/>
-
-    <script type="text/javascript" src="../scripts/adminDash.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/adminFishbowl.css"/>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../scripts/adminFishbowl.js"></script>
+    <script type="text/javascript" src="../scripts/tablesort.min.js"></script>
     <script type="text/javascript" src="../css/semantic/semantic.min.js"></script>
 </head>
-<body>
-    <p align="center" class="title">Submit A Fishbowl</p>
-    <a href="dash">Back to Dash</a>
-    <div id="fishbowlList" class="ui segment"></div>
+<body onload="makeAdminFishbowl()">
+<p align="center" class="title">View A Fishbowl</p>
+<a href="dash">Back to Dash</a>
+<div id="randFishbowl" class="ui primary button">Get a Random Fishbowl</div>
+<table id="fishbowlList" class="ui three column sortable celled table">
+    <thead>
+        <tr>
+            <th>Urgency</th>
+            <th>Date</th>
+            <th>Triggers</th>
+            <th>View</th>
+        </tr>
+    </thead>
+</table>
 </body>
 </html>

@@ -63,22 +63,22 @@
             var romantic = db.collection('romantic');
             var genders = db.collection('gender');
             var other_terms = db.collection('other_terms');
-            sexualities.find({}, {sort: 'identification'}, function (err, flags) {
+            sexualities.find().sort({identification: 1}, function (err, flags) {
                 if (err)
                     throw err;
                 $("#sexualitiesSection").html(flagToHTML(flags));
 
-                romantic.find({}, {sort: 'identification'}, function (err, flags) {
+                romantic.find().sort({identification: 1}, function (err, flags) {
                     if (err)
                         throw err;
                     $("#romanticSection").html(flagToHTML(flags));
 
-                    genders.find({}, {sort: 'identification'}, function (err, flags) {
+                    genders.find().sort({identification: 1}, function (err, flags) {
                         if (err)
                             throw err;
                         $("#gendersSection").html(flagToHTML(flags));
 
-                        other_terms.find({}, {sort: 'identification'}, function (err, flags) {
+                        other_terms.find().sort({identification: 1}, function (err, flags) {
                             if (err)
                                 throw err;
                             $("#otherTermsSection").html(flagToHTML(flags));
@@ -126,7 +126,7 @@
     module.exports.fishbowlSubmit = function (req, res) {
         var data = req.body;
         var fishbowl = db.collection('fishbowl');
-        fishbowl.save({name: data.name, content: data.content, triggers: data.triggers, date: new Date()}, function(err, result){
+        fishbowl.save({name: data.name, content: data.content, triggers: data.triggers, urgency: data.urgency, date: new Date()}, function(err, result){
             res.send(true);
         })
     };
@@ -177,19 +177,19 @@
                     var romantic = db.collection('romantic');
                     var genders = db.collection('gender');
                     var other_terms = db.collection('other_terms');
-                    sexualities.find({}, {sort: 'identification'}, function (err, flags) {
+                    sexualities.find().sort({identification: 1}, function (err, flags) {
                         if (err)
                             throw err;
                         $("#sectionSexualityDropdown").html(flagToSelect(flags));
-                        romantic.find({}, {sort: 'identification'}, function (err, flags) {
+                        romantic.find().sort({identification: 1}, function (err, flags) {
                             if (err)
                                 throw err;
                             $("#sectionRomanticDropdown").html(flagToSelect(flags));
-                            genders.find({}, {sort: 'identification'}, function (err, flags) {
+                            genders.find().sort({identification: 1}, function (err, flags) {
                                 if (err)
                                     throw err;
                                 $("#sectionGenderDropdown").html(flagToSelect(flags));
-                                other_terms.find({}, {sort: 'identification'}, function (err, flags) {
+                                other_terms.find().sort({identification: 1}, function (err, flags) {
                                     if (err)
                                         throw err;
                                     $("#sectionOtherDropdown").html(flagToSelect(flags));
@@ -247,19 +247,19 @@
                         database.remove({identification: data.group}, function (err, result) {
                             if (err)
                                 throw err;
-                            sexualities.find({}, {sort: 'identification'}, function (err, flags) {
+                            sexualities.find().sort({identification: 1}, function (err, flags) {
                                 if (err)
                                     throw err;
                                 html[0] += flagToSelect(flags);
-                                romantic.find({}, {sort: 'identification'}, function (err, flags) {
+                                romantic.find().sort({identification: 1}, function (err, flags) {
                                     if (err)
                                         throw err;
                                     html[1] += flagToSelect(flags);
-                                    genders.find({}, {sort: 'identification'}, function (err, flags) {
+                                    genders.find().sort({identification: 1}, function (err, flags) {
                                         if (err)
                                             throw err;
                                         html[2] += flagToSelect(flags);
-                                        other_terms.find({}, {sort: 'identification'}, function (err, flags) {
+                                        other_terms.find().sort({identification: 1}, function (err, flags) {
                                             if (err)
                                                 throw err;
                                             html[3] += flagToSelect(flags);
@@ -302,19 +302,19 @@
             database.remove({identification: data.group}, function (err, result) {
                 if (err)
                     throw err;
-                sexualities.find({}, {sort: 'identification'}, function (err, flags) {
+                sexualities.find().sort({identification: 1}, function (err, flags) {
                     if (err)
                         throw err;
                     html[0] += flagToSelect(flags);
-                    romantic.find({}, {sort: 'identification'}, function (err, flags) {
+                    romantic.find().sort({identification: 1}, function (err, flags) {
                         if (err)
                             throw err;
                         html[1] += flagToSelect(flags);
-                        genders.find({}, {sort: 'identification'}, function (err, flags) {
+                        genders.find().sort({identification: 1}, function (err, flags) {
                             if (err)
                                 throw err;
                             html[2] += flagToSelect(flags);
-                            other_terms.find({}, {sort: 'identification'}, function (err, flags) {
+                            other_terms.find().sort({identification: 1}, function (err, flags) {
                                 if (err)
                                     throw err;
                                 html[3] += flagToSelect(flags);
@@ -353,16 +353,33 @@
             $('#navButton').html(navButton);
             if (req.cookies.hoochgsa) {
                 if (req.cookies.hoochgsa.adminLogin) {
-                    fishbowl.find({}, function(err, entries){
-                        var html = "";
+                    fishbowl.find().sort({urgency: -1} , function(err, entries){
+                        var html = '<tbody>';
                         for(var i = 0; i < entries.length; i++){
-                            html += '<ul class="fishbowlEntry">';
-                            html += '<li>' + entries[i].date + '</li>';
-                            html += '<li>' + entries[i]._id + '</li>';
-                            html += '</ul>';
-                            html += '<br>';
+
+                            if(entries[i].urgency === "Slightly Urgent"){
+                                html += '<tr class="warning">';
+                            } else if(entries[i].urgency === "Very Urgent"){
+                                html += '<tr class="error">';
+                            } else {
+                                html += '<tr>';
+                            }
+
+
+                            html += '<td>' + entries[i].urgency + '</td>';
+                            html += '<td>' + entries[i].date + '</td>';
+                            html += '<td>' + entries[i].triggers + '</td>';
+                            html += '<td><div class="ui primary button">View</div></td>';
+                            html += '</tr>';
+                            //html += '<ul class="fishbowlEntry">';
+                            //html += '<li>' + entries[i].date + '</li>';
+                            //html += '<li>' + entries[i].urgency + '0</li>';
+                            //html += '<li>' + entries[i].triggers + '</li>';
+                            //html += '</ul>';
+                            //html += '<br>';
                         }
-                        $("#fishbowlList").html(html);
+                        html += '</tbody>';
+                        $("#fishbowlList").append(html);
                         res.send($.html());
                     });
                 } else {

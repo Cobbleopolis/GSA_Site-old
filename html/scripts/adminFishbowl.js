@@ -1,0 +1,3 @@
+function makeAdminFishbowl() {
+    $("#fishbowlList").tablesort();
+}
