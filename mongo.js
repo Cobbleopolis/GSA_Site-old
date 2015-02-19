@@ -353,7 +353,7 @@
             $('#navButton').html(navButton);
             if (req.cookies.hoochgsa) {
                 if (req.cookies.hoochgsa.adminLogin) {
-                    fishbowl.find().sort({urgency: -1} , function(err, entries){
+                    fishbowl.find(function(err, entries){
                         var html = '<tbody>';
                         for(var i = 0; i < entries.length; i++){
 
@@ -365,18 +365,11 @@
                                 html += '<tr>';
                             }
 
-
                             html += '<td>' + entries[i].urgency + '</td>';
                             html += '<td>' + entries[i].date + '</td>';
                             html += '<td>' + entries[i].triggers + '</td>';
-                            html += '<td><div class="ui primary button">View</div></td>';
+                            html += '<td><div class="ui primary button" onclick="showFishbowl(' + i + ')">View</div></td>';
                             html += '</tr>';
-                            //html += '<ul class="fishbowlEntry">';
-                            //html += '<li>' + entries[i].date + '</li>';
-                            //html += '<li>' + entries[i].urgency + '0</li>';
-                            //html += '<li>' + entries[i].triggers + '</li>';
-                            //html += '</ul>';
-                            //html += '<br>';
                         }
                         html += '</tbody>';
                         $("#fishbowlList").append(html);
