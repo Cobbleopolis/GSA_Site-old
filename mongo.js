@@ -353,7 +353,7 @@
             $('#navButton').html(navButton);
             if (req.cookies.hoochgsa) {
                 if (req.cookies.hoochgsa.adminLogin) {
-                    fishbowl.find(function(err, entries){
+                    fishbowl.find().sort({urgency: 1}, function(err, entries){
                         var html = '<tbody>';
                         for(var i = 0; i < entries.length; i++){
 
@@ -368,7 +368,7 @@
                             html += '<td>' + entries[i].urgency + '</td>';
                             html += '<td>' + entries[i].date + '</td>';
                             html += '<td>' + entries[i].triggers + '</td>';
-                            html += '<td><div class="ui primary button" onclick="showFishbowl(' + i + ')">View</div></td>';
+                            html += '<td><div class="ui primary button showFishbowl" onclick="showFishbowl(\'' + entries[i]._id + '\')">View</div></td>';
                             html += '</tr>';
                         }
                         html += '</tbody>';
@@ -392,7 +392,13 @@
 
     module.exports.adminFishbowlSubmit = function (req, res) {
         var data = req.body;
-        //console.log("Cookies: ", req.cookies);
+        var fishbowl = db.collection('fishbowl');
+        fishbowl.findOne({_id: data.id}, function(err, entry){
+            if(err)
+                throw err;
+            res.send({name: entry.name, content: entry.content, triggers: entry.triggers, urgency: entry.urgency, date: entry.date});
+            //res.end();
+        });
     };
 
     module.exports.adminLoginHandle = function (url, req, res) {

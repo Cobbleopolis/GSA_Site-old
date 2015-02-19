@@ -2,3 +2,7 @@
     float: right;
     margin: 1%;
 }
+
+.ui-dialog-titlebar {
+    display:none
+}

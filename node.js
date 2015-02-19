@@ -68,9 +68,9 @@ app.post('/admin/edit/remove',function(req,res){
     mongo.adminRemoveSubmit(req, res);
 });
 
-//app.post('/admin/fishbowl',function(req,res){
-//    mongo.adminFishbowlSubmit(req, res);
-//});
+app.post('/admin/fishbowl',function(req,res){
+    mongo.adminFishbowlSubmit(req, res);
+});
 
 app.post('/admin/login',function(req,res){
     mongo.adminLoginSubmit(req, res);

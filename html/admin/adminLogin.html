@@ -18,13 +18,15 @@
 </head>
 <body onload="loadAdminPage()">
 
-<div id="dialog-form" title="Login">
+<div id="dialog-form">
+    <p class="label">Login</p>
     <form>
         <label>Username</label>
         <input type="text" name="name" id="username" class="text ui-widget-content ui-corner-all"/>
         <label>Password</label>
         <input type="password" name="name" id="password" class="text ui-widget-content ui-corner-all"/>
     </form>
+    <div id="login" class="ui primary button" onclick="submitLogin()">Login</div>
 </div>
 
 </body>
