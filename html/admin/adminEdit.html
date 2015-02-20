@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="../css/flag.css"/>
     <link rel="stylesheet" type="text/css" href="../css/index.css"/>
 
-    <script type="text/javascript" src="../scripts/nav.js"></script>
     <script type="text/javascript" src="../scripts/adminEdit.js"></script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -26,12 +25,14 @@
     <![endif]-->
 
 </head>
-
-<body class="pushable" onload="loadAdminPage()">
-<div id="navBar" class="ui left demo vertical inverted labeled icon sidebar menu"></div>
-<div id="navButton" class="ui black big launch right attached fixed button" onclick="showNav()"></div>
-
-<div class="pusher">
+<body onload="loadAdminPage()">
+<a href="/admin/dash">
+    <div id="adminNavButton" class="ui black big launch right attached fixed button">
+        <i class="terminal icon"></i>
+        <span class="text">Back to Dash</span>
+    </div>
+</a>
+<div>
     <article>
         <p align="center" class="title">Edit Site Content</p>
         <div id="result" class="ui inverted segment"></div>

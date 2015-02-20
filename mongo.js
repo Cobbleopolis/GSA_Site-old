@@ -2,7 +2,7 @@
     var fs = require('fs');
     var cheerio = require('cheerio');
     var mongo = require('mongojs');
-    var databaseUrl = 'gsa-site:gayisok1@99.62.103.32:25566/gsa-site'; // 'username:password@example.com/mydb'
+    var databaseUrl = 'gsa-site:gayisok1@45.16.76.67:25566/gsa-site'; // 'username:password@example.com/mydb'
     var collections = ['homePage', 'sexualities', 'romantic', 'genders', 'other_terms', 'adminUser'];
     var db = mongo.connect(databaseUrl, collections);
 
@@ -350,8 +350,6 @@
                 throw err;
             var fishbowl = db.collection('fishbowl');
             var $ = cheerio.load(file);
-            $('#navBar').html(navBar);
-            $('#navButton').html(navButton);
             if (req.cookies.hoochgsa) {
                 if (req.cookies.hoochgsa.adminLogin) {
                     fishbowl.find().sort({urgency: -1}, function(err, entries){
