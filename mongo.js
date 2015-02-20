@@ -1,9 +1,10 @@
 (function () {
     var fs = require('fs');
     var cheerio = require('cheerio');
+    var mongo = require('mongojs');
     var databaseUrl = 'gsa-site:gayisok1@99.62.103.32:25566/gsa-site'; // 'username:password@example.com/mydb'
     var collections = ['homePage', 'sexualities', 'romantic', 'genders', 'other_terms', 'adminUser'];
-    var db = require('mongojs').connect(databaseUrl, collections);
+    var db = mongo.connect(databaseUrl, collections);
 
     var navBar = fs.readFileSync(__dirname + '/html/resorcePages/navBar.html');
     var navButton = fs.readFileSync(__dirname + '/html/resorcePages/navButton.html');
@@ -126,7 +127,7 @@
     module.exports.fishbowlSubmit = function (req, res) {
         var data = req.body;
         var fishbowl = db.collection('fishbowl');
-        fishbowl.save({name: data.name, content: data.content, triggers: data.triggers, urgency: data.urgency, date: new Date()}, function(err, result){
+        fishbowl.save({name: data.name, content: data.content, triggers: data.triggers, urgency: data.urgency, date: new Date(), isAnswered: false}, function(err, result){
             res.send(true);
         })
     };
@@ -368,6 +369,11 @@
                             html += '<td>' + entries[i].urgency + '</td>';
                             html += '<td>' + entries[i].date + '</td>';
                             html += '<td>' + entries[i].triggers + '</td>';
+                            if(entries[i].isAnswered){
+                                html += '<td>Yes</td>';
+                            } else {
+                                html += '<td>No</td>';
+                            }
                             html += '<td><div class="ui primary button showFishbowl" onclick="showFishbowl(\'' + entries[i]._id + '\')">View</div></td>';
                             html += '</tr>';
                         }
@@ -393,11 +399,22 @@
     module.exports.adminFishbowlSubmit = function (req, res) {
         var data = req.body;
         var fishbowl = db.collection('fishbowl');
-        fishbowl.findOne({_id: data.id}, function(err, entry){
+        fishbowl.findOne({_id: mongo.ObjectId(data.id)}, function(err, entry){
             if(err)
                 throw err;
             res.send({name: entry.name, content: entry.content, triggers: entry.triggers, urgency: entry.urgency, date: entry.date});
-            //res.end();
+        });
+    };
+
+    module.exports.adminFishbowlGetIds = function (req, res) {
+        var fishbowl = db.collection('fishbowl');
+        fishbowl.find(function(err, entries){
+            if(err)
+                throw err;
+            var ids = [];
+            for(var i = 0; i < entries.length; i++)
+                ids.push(entries[i]._id);
+            res.send(ids);
         });
     };
 

@@ -3,6 +3,14 @@
     margin: 1%;
 }
 
-.ui-dialog-titlebar {
-    display:none
+#fishbowlDisplay {
+     padding: 0;
+}
+
+#fishbowlDisplay i.close.icon{
+    display: none;
+}
+
+.fullWidth {
+    width: 99% !important;
 }

@@ -72,6 +72,10 @@ app.post('/admin/fishbowl',function(req,res){
     mongo.adminFishbowlSubmit(req, res);
 });
 
+app.post('/admin/fishbowl/getIds',function(req,res){
+    mongo.adminFishbowlGetIds(req, res);
+});
+
 app.post('/admin/login',function(req,res){
     mongo.adminLoginSubmit(req, res);
 });

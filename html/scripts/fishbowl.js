@@ -4,12 +4,15 @@ function loadFishbowlPage() {
 }
 
 function submitFishbowl() {
-    var name = $("#name").val();
-    var content = $("#content").val();
-    var triggers = $("#triggers").val();
-    var urgency = $("#urgency").val();
+    var name = $("#name").val().replace(/&nbsp;/g,' ');
+    var content = $("#content").val().replace(/&nbsp;/g,' ');
+    var triggers = $("#triggers").val().replace(/&nbsp;/g,' ');
+    var urgency = $("#urgency").val().replace(/&nbsp;/g,' ');
     if (name === "") {
         name = "Anonymous";
+    }
+    if (triggers === "") {
+        triggers = "None";
     }
     if (content !== "") {
         $.post("/fishbowl/submit", {name: name, content: content, triggers: triggers,  urgency: urgency})

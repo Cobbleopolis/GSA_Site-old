@@ -19,19 +19,33 @@
 <body onload="makeAdminFishbowl()">
 <p align="center" class="title">View A Fishbowl</p>
 <a href="dash">Back to Dash</a>
-<div id="randFishbowl" class="ui primary button">Get a Random Fishbowl</div>
-<table id="fishbowlList" class="ui three column sortable celled table">
+<div id="randFishbowl" class="ui primary button" onclick="showRandFishbowl()">Get a Random Fishbowl</div>
+<table id="fishbowlList" class="ui four column sortable celled table">
     <thead>
         <tr>
             <th id="tableSort">Urgency</th>
             <th>Date</th>
             <th>Triggers</th>
+            <th>Answered</th>
             <th>View</th>
         </tr>
     </thead>
 </table>
-<div id="fishbowlDisplay">
 
+
+<div id="fishbowlDisplay" class="ui modal">
+    <i class="close icon"></i>
+    <div id="fishbowlDisplayHeader" class="header">
+        Fishbowl
+    </div>
+    <div id="fishbowlDisplayContent" class="content">
+        <div id="fishbowlDisplayContentLeft"></div>
+        <div id="fishbowlDisplayContentRight" class="description"></div>
+    </div>
+    <div class="actions">
+        <div class="ui cancel button">Close</div>
+        <div class="ui positive right labeled icon button">Mark as answered<i class="checkmark icon"></i></div>
+    </div>
 </div>
 </body>
 </html>
