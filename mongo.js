@@ -354,7 +354,7 @@
             $('#navButton').html(navButton);
             if (req.cookies.hoochgsa) {
                 if (req.cookies.hoochgsa.adminLogin) {
-                    fishbowl.find().sort({urgency: 1}, function(err, entries){
+                    fishbowl.find().sort({urgency: -1}, function(err, entries){
                         var html = '<tbody>';
                         for(var i = 0; i < entries.length; i++){
 
