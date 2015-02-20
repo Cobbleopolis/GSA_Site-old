@@ -4,6 +4,7 @@ function loadFishbowlPage() {
 }
 
 function submitFishbowl() {
+    $("#result").hide();
     var name = $("#name").val().replace(/&nbsp;/g,' ');
     var content = $("#content").val().replace(/&nbsp;/g,' ');
     var triggers = $("#triggers").val().replace(/&nbsp;/g,' ');
@@ -18,9 +19,11 @@ function submitFishbowl() {
         $.post("/fishbowl/submit", {name: name, content: content, triggers: triggers,  urgency: urgency})
             .done(function (data) {
                 if (data) {
-                    $("#result").removeClass("red").addClass("green");
-                    $("#result").html("Fishbowl Submitted.");
-                    $("#result").show();
+                    setTimeout(function () {
+                        $("#result").removeClass("red").addClass("green");
+                        $("#result").html("Fishbowl Submitted.");
+                        $("#result").show();
+                    }, 250);
                     $("#name").val("");
                     $("#content").val("");
                     $("#triggers").val("");

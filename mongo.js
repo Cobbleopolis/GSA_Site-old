@@ -367,7 +367,7 @@
                             }
 
                             html += '<td>' + entries[i].urgency + '</td>';
-                            html += '<td>' + entries[i].date + '</td>';
+                            html += '<td>' + entries[i].date.toLocaleTimeString() + ' ' + entries[i].date.toLocaleDateString() + '</td>';
                             html += '<td>' + entries[i].triggers + '</td>';
                             if(entries[i].isAnswered){
                                 html += '<td>Yes</td>';
@@ -402,7 +402,7 @@
         fishbowl.findOne({_id: mongo.ObjectId(data.id)}, function(err, entry){
             if(err)
                 throw err;
-            res.send({name: entry.name, content: entry.content, triggers: entry.triggers, urgency: entry.urgency, date: entry.date});
+            res.send({name: entry.name, content: entry.content, triggers: entry.triggers, urgency: entry.urgency, date: entry.date.toLocaleTimeString() + ' ' + entry.date.toLocaleDateString()});
         });
     };
 

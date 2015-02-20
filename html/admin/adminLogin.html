@@ -12,21 +12,25 @@
     <script type="text/javascript" src="../scripts/adminLogin.js"></script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script type="text/javascript" src="../css/semantic/semantic.min.js"></script>
 </head>
 <body onload="loadAdminPage()">
 
-<div id="dialog-form">
-    <p class="label">Login</p>
+<div class="ui modal" id="dialog-form">
+    <div id="fishbowlDisplayHeader" class="header">
+        Login
+    </div>
+    <div class="content">
     <form>
         <label>Username</label>
         <input type="text" name="name" id="username" class="text ui-widget-content ui-corner-all"/>
         <label>Password</label>
         <input type="password" name="name" id="password" class="text ui-widget-content ui-corner-all"/>
     </form>
-    <div id="login" class="ui primary button" onclick="submitLogin()">Login</div>
+    </div>
+    <div class="actions">
+        <div id="login" class="ui positive button">Login</div>
+    </div>
 </div>
 
 </body>

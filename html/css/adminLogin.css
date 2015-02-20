@@ -19,6 +19,6 @@ input[type=text], input[type=password] {
 }
 
 #login {
-    float: right;
-    margin-top: 10%;
+    /*float: right;*/
+    /*margin-top: 10%;*/
 }

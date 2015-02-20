@@ -1,18 +1,18 @@
 function loadAdminPage() {
-    $(function () {
-        $("#dialog-form").dialog({
-            dialogClass: "ui raised segment",
-            autoOpen: true,
-            modal: true
-            //buttons: {
-            //    "Login": function () {
-            //
-            //        //Do your code here
-            //    }
-            //}
-        });
+    //$(function () {
+    //    $("#dialog-form").dialog({
+    //        dialogClass: "ui raised segment",
+    //        autoOpen: true,
+    //        modal: true
+    //    });
+    //
+    //});
 
-    });
+    $("#dialog-form").modal({
+        onApprove : function() {
+            submitLogin();
+        }
+    }).modal('show');
 }
 
 function submitLogin(){
