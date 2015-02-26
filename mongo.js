@@ -5,6 +5,7 @@
     var databaseUrl = 'gsa-site:gayisok1@45.16.76.67:25566/gsa-site'; // 'username:password@example.com/mydb'
     var collections = ['homePage', 'sexualities', 'romantic', 'genders', 'other_terms', 'adminUser'];
     var db = mongo.connect(databaseUrl, collections);
+    var os = require("os");
 
     var navBar = fs.readFileSync(__dirname + '/html/resorcePages/navBar.html');
     var navButton = fs.readFileSync(__dirname + '/html/resorcePages/navButton.html');
@@ -136,10 +137,18 @@
         fs.readFile(url, function (err, file) {
             if (err)
                 throw err;
-            //console.log(req.cookies);
+            var html = '';
             var $ = cheerio.load(file);
             $('#navBar').html(navBar);
             $('#navButton').html(navButton);
+            html += '<div class="ui segment">';
+            html += '<div id="sysList" class="ui divided list">';
+
+            //TODO add the stuff for sysInfo
+
+            html += '</div>';
+            html += '</div>';
+            $('#sysInfo').html(html);
             if (req.cookies.hoochgsa) {
                 if (req.cookies.hoochgsa.adminLogin) {
                     res.send($.html());

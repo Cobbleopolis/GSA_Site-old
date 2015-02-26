@@ -15,9 +15,28 @@
     <script type="text/javascript" src="../css/semantic/semantic.min.js"></script>
 </head>
 <body onload="loadAdminPage()">
-    <p align="center" class="title">Admin Dashboard</p>
-    <a href="edit">Edit Site Content</a>
-    <br>
-    <a href="fishbowl">View Fishbowls</a>
+<p align="center" class="title">Admin Dashboard</p>
+
+<div class="ui two column grid">
+    <div class="column">
+        <div class="ui horizontal segment" id="sysInfo"></div>
+    </div>
+    <div class="column">
+        <div class="ui horizontal segment">
+            <a href="edit">Edit Site Content</a>
+            <br>
+            <a href="fishbowl">View Fishbowls</a>
+        </div>
+    </div>
+</div>
+<!--<div class="ui two column grid">-->
+<!--<div class="column" id="sysInfo"></div>-->
+<!--<div class="column">-->
+<!--<a href="edit">Edit Site Content</a>-->
+<!--<br>-->
+<!--<a href="fishbowl">View Fishbowls</a>-->
+<!--</div>-->
+<!--</div>-->
+
 </body>
 </html>
