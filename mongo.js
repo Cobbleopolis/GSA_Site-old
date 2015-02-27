@@ -142,11 +142,32 @@
             $('#navBar').html(navBar);
             $('#navButton').html(navButton);
             html += '<div class="ui segment">';
-            html += '<div id="sysList" class="ui divided list">';
+
+            html += '<p class="infoTitle">Operating System</p>';
+            html += '<ul class="info">';
+            html += '<li><b>Operating System Type:</b>&nbsp;&nbsp;' + os.type() + '</li>';
+            html += '<li><b>Operating System Platform:</b>&nbsp;&nbsp;' + os.platform() + '</li>';
+            html += '<li><b>Operating System Architecture:</b>&nbsp;&nbsp;' + os.release() + '</li>';
+            html += '<li><b>Operating System Hostname:</b>&nbsp;&nbsp;' + os.hostname() + '</li>';
+            html += '<li><b>Operating System Architecture:</b>&nbsp;&nbsp;' + os.arch() + '</li>';
+            html += '</ul>';
+
+            html += '<div class="ui devider"></div>';
+
+            html += '<p class="infoTitle">System Info</p>';
+            html += '<ul class="info">';
+            html += '<li><b>Memory/RAM:</b>&nbsp;&nbsp;' + os.totalmem() + ' bytes</li>';
+            html += '<li><b>Used Memory/RAM:</b>&nbsp;&nbsp;' + (os.totalmem() - os.freemem()) + ' bytes</li>';
+            html += '<li><b>Free Memory/RAM:</b>&nbsp;&nbsp;' + os.freemem() + ' bytes</li>';
+            html += '<li><b>Uptime:</b>&nbsp;&nbsp;' + os.uptime() + ' seconds</li>';
+            html += '<li><b>1 Minute Load Average :</b>&nbsp;&nbsp;' + os.loadavg()[0] + '</li>';
+            html += '<li><b>5 Minute Load Average :</b>&nbsp;&nbsp;' + os.loadavg()[1] + '</li>';
+            html += '<li><b>15 Minute Load Average :</b>&nbsp;&nbsp;' + os.loadavg()[2] + '</li>';
+
+            html += '</ul>';
 
             //TODO add the stuff for sysInfo
 
-            html += '</div>';
             html += '</div>';
             $('#sysInfo').html(html);
             if (req.cookies.hoochgsa) {

@@ -6,3 +6,28 @@
 .description{
     display: inline;
 }
+
+.infoTitle{
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 20px !important;
+}
+
+.info{
+    margin: 0;
+}
+
+.info li {
+    list-style-type: none;
+    padding: 0 20px;
+    font-size: 18px;
+}
+
+#adminTasks, #adminTasksChild {
+    padding-left: 0;
+}
+
+.task {
+    font-size: 18px !important;
+    padding-left: 20px !important;
+}

@@ -15,28 +15,32 @@
     <script type="text/javascript" src="../css/semantic/semantic.min.js"></script>
 </head>
 <body onload="loadAdminPage()">
+<div>
 <p align="center" class="title">Admin Dashboard</p>
 
 <div class="ui two column grid">
     <div class="column">
         <div class="ui horizontal segment" id="sysInfo"></div>
     </div>
-    <div class="column">
-        <div class="ui horizontal segment">
-            <a href="edit">Edit Site Content</a>
-            <br>
-            <a href="fishbowl">View Fishbowls</a>
+    <div id="adminTasks" class="column">
+        <!--<div class="ui horizontal segment">-->
+        <!--<a href="edit">Edit Site Content</a>-->
+        <!--<br>-->
+        <!--<a href="fishbowl">View Fishbowls</a>-->
+        <!--</div>-->
+        <div id="adminTasksChild" class="ui horizontal segment">
+            <div class="ui segment">
+                <div class="ui link list">
+                    <div class="active item infoTitle">Admin Tasks:</div>
+                    <a href="edit" class="item task">Edit Site Content</a>
+                    <a href="fishbowl" class="item task">View Fishbowls</a>
+                    <a href="accounts" class="item task">Manage Admin Accounts</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<!--<div class="ui two column grid">-->
-<!--<div class="column" id="sysInfo"></div>-->
-<!--<div class="column">-->
-<!--<a href="edit">Edit Site Content</a>-->
-<!--<br>-->
-<!--<a href="fishbowl">View Fishbowls</a>-->
-<!--</div>-->
-<!--</div>-->
 
+</div>
 </body>
 </html>

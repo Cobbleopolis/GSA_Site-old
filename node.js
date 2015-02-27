@@ -48,6 +48,10 @@ app.get('/admin/edit', function(req, res){
     mongo.adminEditHandle(__dirname + "/html/admin/adminEdit.html", req, res);
 });
 
+app.get('/admin/accounts', function(req, res){
+    mongo.adminEditHandle(__dirname + "/html/admin/adminAccounts.html", req, res);
+});
+
 app.post('/fishbowl/submit',function(req, res){
     mongo.fishbowlSubmit(req, res);
 });
