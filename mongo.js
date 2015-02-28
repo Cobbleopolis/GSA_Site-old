@@ -135,7 +135,7 @@
             isAnswered: false
         }, function (err, result) {
             res.send(true);
-        })
+        });
     };
 
     module.exports.adminDashHandle = function (url, req, res) {
@@ -391,7 +391,7 @@
             if (req.cookies.hoochgsa) {
                 if (req.cookies.hoochgsa.adminLogin) {
                     fishbowl.find().sort({urgency: -1}, function (err, entries) {
-                        var html = '<tbody>';
+                        var html = '<tbody id="fishbowls">';
                         for (var i = 0; i < entries.length; i++) {
 
                             if (entries[i].urgency === "Urgent") {
@@ -443,7 +443,8 @@
                 content: entry.content,
                 triggers: entry.triggers,
                 urgency: entry.urgency,
-                date: entry.date.toLocaleTimeString() + ' ' + entry.date.toLocaleDateString()
+                date: entry.date.toLocaleTimeString() + ' ' + entry.date.toLocaleDateString(),
+                isAnswered: entry.isAnswered
             });
         });
     };
@@ -463,6 +464,42 @@
             }
             res.send(ids);
         });
+    };
+
+    module.exports.adminFishbowlMark = function (req, res) {
+        var data = req.body;
+        var fishbowl = db.collection('fishbowl');
+        fishbowl.update({_id: mongo.ObjectId(data.id)}, {$set: {isAnswered: true}}, function (err, result) {
+            if(err)
+                throw err;
+            fishbowl.find().sort({urgency: -1}, function (err, entries) {
+                if(err)
+                    throw err;
+                var html = '';
+                for (var i = 0; i < entries.length; i++) {
+
+                    if (entries[i].urgency === "Urgent") {
+                        html += '<tr class="warning">';
+                    } else if (entries[i].urgency === "Very Urgent") {
+                        html += '<tr class="error">';
+                    } else {
+                        html += '<tr>';
+                    }
+
+                    html += '<td>' + entries[i].urgency + '</td>';
+                    html += '<td>' + entries[i].date.toLocaleTimeString() + ' ' + entries[i].date.toLocaleDateString() + '</td>';
+                    html += '<td>' + entries[i].triggers + '</td>';
+                    if (entries[i].isAnswered) {
+                        html += '<td>Yes</td>';
+                    } else {
+                        html += '<td>No</td>';
+                    }
+                    html += '<td><div class="ui primary button showFishbowl" onclick="showFishbowl(\'' + entries[i]._id + '\')">View</div></td>';
+                    html += '</tr>';
+                }
+                res.send(html);
+            });
+        })
     };
 
     module.exports.adminLoginHandle = function (url, req, res) {

@@ -1,5 +1,7 @@
 var ids;
 
+var currId;
+
 function makeAdminFishbowl() {
     $.post("/admin/fishbowl/getIds")
         .done(function (data) {
@@ -9,7 +11,9 @@ function makeAdminFishbowl() {
 
     $("#fishbowlDisplay").modal({
         onApprove : function() {
-
+            $.post("/admin/fishbowl/mark", {id: currId}).done(function(data){
+                $("#fishbowls").html(data);
+            });
         }
     });
 
@@ -26,10 +30,19 @@ function showFishbowl(entryId) {
             htmlLeft += '<p><b>Submitted on:</b>&nbsp;&nbsp;' + data.date + '</p>';
             htmlLeft += '<p><b>Urgency:</b>&nbsp;&nbsp;' + data.urgency + '</p>';
             htmlLeft += '<p><b>Triggers:</b>&nbsp;&nbsp;' + data.triggers + '</p>';
+            htmlLeft += '<p><b>Answered:</b>&nbsp;&nbsp;';
+
+            if(data.isAnswered)
+                htmlLeft += "Yes";
+            else
+                htmlLeft += "No";
+
+            htmlLeft += '</p>';
             $("#fishbowlDisplayContentLeft").html(htmlLeft);
 
             htmlRight += '<div class="ui header">Fishbowl Question (Ask Heath what should go here)</div>';
             htmlRight += data.content;
+            currId = entryId;
             $("#fishbowlDisplayContentRight").html(htmlRight);
             $("#fishbowlDisplay").modal("show");
         });

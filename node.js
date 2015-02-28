@@ -80,6 +80,10 @@ app.post('/admin/fishbowl/getIds',function(req,res){
     mongo.adminFishbowlGetIds(req, res);
 });
 
+app.post('/admin/fishbowl/mark',function(req,res){
+    mongo.adminFishbowlMark(req, res);
+});
+
 app.post('/admin/login',function(req,res){
     mongo.adminLoginSubmit(req, res);
 });
