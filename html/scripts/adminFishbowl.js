@@ -40,7 +40,7 @@ function showFishbowl(entryId) {
             htmlLeft += '</p>';
             $("#fishbowlDisplayContentLeft").html(htmlLeft);
 
-            htmlRight += '<div class="ui header">Fishbowl Question (Ask Heath what should go here)</div>';
+            htmlRight += '<div class="ui header">Fishbowl Question:</div>';
             htmlRight += data.content;
             currId = entryId;
             $("#fishbowlDisplayContentRight").html(htmlRight);
