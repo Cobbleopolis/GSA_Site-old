@@ -16,30 +16,52 @@
 </head>
 <body onload="loadAdminPage()">
 <div>
-<p align="center" class="title">Admin Dashboard</p>
+    <a onclick="adminLogOut();">
+        <div id="adminNavButton" class="ui black big launch right attached fixed button">
+            <i class="sign out icon"></i>
+            <span class="text">Logout</span>
+        </div>
+    </a>
 
-<div class="ui two column grid">
-    <div class="column">
-        <div class="ui horizontal segment" id="sysInfo"></div>
-    </div>
-    <div id="adminTasks" class="column">
-        <!--<div class="ui horizontal segment">-->
-        <!--<a href="edit">Edit Site Content</a>-->
-        <!--<br>-->
-        <!--<a href="fishbowl">View Fishbowls</a>-->
-        <!--</div>-->
-        <div id="adminTasksChild" class="ui horizontal segment">
-            <div class="ui segment">
-                <div class="ui link list">
-                    <div class="active item infoTitle">Admin Tasks:</div>
-                    <a href="edit" class="item task">Edit Site Content</a>
-                    <a href="fishbowl" class="item task">View Fishbowls</a>
-                    <a href="accounts" class="item task">Manage Admin Accounts</a>
+    <p align="center" class="title">Admin Dashboard</p>
+
+    <div class="ui two column grid">
+        <div class="column">
+            <div class="ui horizontal segment" id="sysInfo"></div>
+        </div>
+        <div id="adminTasks" class="column">
+            <div id="adminTasksChild" class="ui horizontal segment">
+                <div class="ui red segment">
+                    <!--<div class="ui link list">-->
+                        <!--<div class="active item infoTitle">Admin Tasks:</div>-->
+                        <!--<a href="edit" class="item task">Edit Site Content</a>-->
+                        <!--<a href="fishbowl" class="item task">View Fishbowls</a>-->
+                        <!--<a href="accounts" class="item task">Manage Admin Accounts</a>-->
+                    <!--</div>-->
+                    <div class="ui huge  divided list">
+                        <div class="item">
+                            <div onclick="window.location.href = 'edit';" class="right large right floated compact ui button">Edit</div>
+                            <div class="content">
+                                <div class="header">Edit Site Content</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div onclick="window.location.href = 'fishbowl';" class="right large right floated compact ui button">View</div>
+                            <div class="content">
+                                <div class="header">View Fishbowls</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div onclick="window.location.href = 'accounts';" class="right large right floated compact ui button">Manage Accounts</div>
+                            <div class="content">
+                                <div class="header">Manage Admin Accounts</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 </div>
 </body>

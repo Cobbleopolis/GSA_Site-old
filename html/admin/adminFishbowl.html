@@ -15,40 +15,45 @@
     <script type="text/javascript" src="../css/semantic/semantic.min.js"></script>
 </head>
 <body onload="makeAdminFishbowl()">
-<a href="/admin/dash">
-<div id="adminNavButton" class="ui black big launch right attached fixed button">
-    <i class="terminal icon"></i>
-    <span class="text">Back to Dash</span>
-</div>
-</a>
-<p align="center" class="title">View A Fishbowl</p>
+<div>
+    <article>
+        <a href="/admin/dash">
+            <div id="adminNavButton" class="ui black big launch right attached fixed button">
+                <i class="terminal icon"></i>
+                <span class="text">Back to Dash</span>
+            </div>
+        </a>
 
-<div id="randFishbowl" class="ui primary button" onclick="showRandFishbowl()">Get a Random Fishbowl</div>
-<table id="fishbowlList" class="ui four column sortable celled table">
-    <thead>
-    <tr>
-        <th id="tableSort">Urgency</th>
-        <th>Date</th>
-        <th>Triggers</th>
-        <th>Answered</th>
-        <th>View</th>
-    </tr>
-    </thead>
-</table>
+        <p align="center" class="title">View A Fishbowl</p>
+
+        <div id="randFishbowl" class="ui primary button" onclick="showRandFishbowl()">Get a Random Fishbowl</div>
+        <table id="fishbowlList" class="ui four column sortable celled table">
+            <thead>
+            <tr>
+                <th id="tableSort">Urgency</th>
+                <th>Date</th>
+                <th>Triggers</th>
+                <th>Answered</th>
+                <th>View</th>
+            </tr>
+            </thead>
+        </table>
 
 
-<div id="fishbowlDisplay" class="ui modal">
-    <div id="fishbowlDisplayHeader" class="header">
-        Fishbowl
-    </div>
-    <div id="fishbowlDisplayContent" class="content">
-        <div id="fishbowlDisplayContentLeft"></div>
-        <div id="fishbowlDisplayContentRight" class="description"></div>
-    </div>
-    <div class="actions">
-        <div class="ui cancel button">Close</div>
-        <div class="ui positive right labeled icon button">Mark as answered<i class="checkmark icon"></i></div>
-    </div>
+        <div id="fishbowlDisplay" class="ui modal">
+            <div id="fishbowlDisplayHeader" class="header">
+                Fishbowl
+            </div>
+            <div id="fishbowlDisplayContent" class="content">
+                <div id="fishbowlDisplayContentLeft"></div>
+                <div id="fishbowlDisplayContentRight" class="description"></div>
+            </div>
+            <div class="actions">
+                <div class="ui cancel button">Close</div>
+                <div class="ui positive right labeled icon button">Mark as answered<i class="checkmark icon"></i></div>
+            </div>
+        </div>
+    </article>
 </div>
 </body>
 </html>

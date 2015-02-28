@@ -1,3 +1,30 @@
 article {
     padding-right: 7.8125%;
 }
+
+input[type=text] {
+    background-color: #FFFFFF;
+    border: 1px solid #A9A9A9;
+    border-radius: 2px;
+    margin: 0 0 0 15px;
+}
+
+.label {
+    margin-top: 15px;
+    margin-bottom: 0;
+    font-weight: bold;
+    text-indent: 0;
+    font-size: 20px;
+}
+
+.subLabel {
+    margin: 0 15px;
+    font-weight: 100;
+    text-indent: 0;
+    font-size: 18px;
+}
+
+.deleteAccount {
+    float: left;
+}
+

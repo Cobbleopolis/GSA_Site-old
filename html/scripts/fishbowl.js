@@ -35,5 +35,4 @@ function submitFishbowl() {
         $("#result").html("Please fill out at least the Fishbowl field.");
         $("#result").show();
     }
-    //}
 }

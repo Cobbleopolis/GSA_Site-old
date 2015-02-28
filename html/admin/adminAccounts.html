@@ -9,67 +9,81 @@
     <link rel="stylesheet" type="text/css" href="../css/main.css"/>
     <link rel="stylesheet" type="text/css" href="../css/adminAccounts.css"/>
 
-    <script type="text/javascript" src="../scripts/adminAccounts.js"></script>
-
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../scripts/tablesort.min.js"></script>
     <script type="text/javascript" src="../css/semantic/semantic.min.js"></script>
+    <script type="text/javascript" src="../scripts/adminAccounts.js"></script>
 </head>
-<body>
+<body onload="makeAdminAccounts()">
 <a href="/admin/dash">
     <div id="adminNavButton" class="ui black big launch right attached fixed button">
         <i class="terminal icon"></i>
         <span class="text">Back to Dash</span>
     </div>
 </a>
+<p align="center" class="title">Edit Admin Accounts</p>
 
 <div>
     <article>
-        <table class="ui compact celled table">
+        <div id="accountErr" class="ui inverted red segment"></div>
+        <table id="accounts" class="ui three column sortable celled table">
             <thead>
             <tr>
                 <th>Username</th>
                 <th>Password</th>
-                <th>Contact Info</th>
-                <th>Date account was added</th>
+                <th>Account ID</th>
+                <th></th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td>John Lilki</td>
-                <td>September 14, 2013</td>
-                <td>jhlilk22@yahoo.com</td>
-                <td>No</td>
-            </tr>
-            <tr>
-                <td>Jamie Harington</td>
-                <td>January 11, 2014</td>
-                <td>jamieharingonton@yahoo.com</td>
-                <td>Yes</td>
-            </tr>
-            <tr>
-                <td>Jill Lewis</td>
-                <td>May 11, 2014</td>
-                <td>jilsewris22@yahoo.com</td>
-                <td>Yes</td>
-            </tr>
-            </tbody>
             <tfoot class="full-width">
             <tr>
                 <th></th>
                 <th colspan="4">
-                    <div class="ui right floated small primary labeled icon button">
+                    <div onclick="$('#addUserDisplay').modal('show');" class="ui right floated small primary labeled icon button">
                         <i class="user icon"></i> Add User
-                    </div>
-                    <div class="ui small button">
-                        Approve
-                    </div>
-                    <div class="ui small  disabled button">
-                        Approve All
                     </div>
                 </th>
             </tr>
             </tfoot>
         </table>
+
+
+        <div id="userDisplay" class="ui modal">
+            <div id="userDisplayHeader" class="header">
+                User Information
+            </div>
+            <div id="userContent" class="content">
+                <p class="label">Username:</p>
+                <p id="userContentUsername" class="subLabel"></p>
+                <p class="label">Password:</p>
+                <input id="userContentPassword" type="text">
+                <p class="label">Date account was created:</p>
+                <p id="userContentDate" class="subLabel"></p>
+                <p class="label">User ID:</p>
+                <p id="userContentID" class="subLabel"></p>
+            </div>
+            <div class="actions">
+                <div onclick="deleteUser()" class="ui negative button deleteAccount">Delete Account</div>
+                <div class="ui cancel button">Cancel</div>
+                <div class="ui positive right labeled icon button">Save<i class="checkmark icon"></i></div>
+            </div>
+        </div>
+
+        <div id="addUserDisplay" class="ui modal">
+            <div id="addUserDisplayHeader" class="header">
+                User Information
+            </div>
+            <div id="addUserContent" class="content">
+                <p class="label">Username:</p>
+                <input id="addUserContentUsername" type="text"></p>
+                <p class="label">Password:</p>
+                <input id="addUserContentPassword" type="text">
+            </div>
+            <div class="actions">
+                <div class="ui cancel button">Cancel</div>
+                <div class="ui positive right labeled icon button" onclick="addUser()">Create Account<i class="checkmark icon"></i></div>
+            </div>
+        </div>
     </article>
 </div>
 </body>

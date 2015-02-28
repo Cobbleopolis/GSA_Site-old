@@ -49,7 +49,7 @@ app.get('/admin/edit', function(req, res){
 });
 
 app.get('/admin/accounts', function(req, res){
-    mongo.adminEditHandle(__dirname + "/html/admin/adminAccounts.html", req, res);
+    mongo.adminAccountsHandle(__dirname + "/html/admin/adminAccounts.html", req, res);
 });
 
 app.post('/fishbowl/submit',function(req, res){
@@ -82,6 +82,22 @@ app.post('/admin/fishbowl/getIds',function(req,res){
 
 app.post('/admin/login',function(req,res){
     mongo.adminLoginSubmit(req, res);
+});
+
+app.post('/admin/accounts', function(req, res){
+    mongo.adminAccountsSubmit(req, res);
+});
+
+app.post('/admin/accounts/save', function(req, res){
+    mongo.adminAccountsSave(req, res);
+});
+
+app.post('/admin/accounts/delete', function(req, res){
+    mongo.adminAccountsDelete(req, res);
+});
+
+app.post('/admin/logout', function(req, res){
+    mongo.adminLogout(req, res);
 });
 
 app.use(express.static(__dirname + '/html'));

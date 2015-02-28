@@ -1,13 +1,5 @@
 function loadAdminPage() {
-    //$(function () {
-    //    $("#dialog-form").dialog({
-    //        dialogClass: "ui raised segment",
-    //        autoOpen: true,
-    //        modal: true
-    //    });
-    //
-    //});
-
+    $("#loginErr").hide();
     $("#dialog-form").modal({
         onApprove : function() {
             submitLogin();
@@ -16,9 +8,15 @@ function loadAdminPage() {
 }
 
 function submitLogin(){
+    $("#loginErr").hide();
     $.post("/admin/login", {user: $("#username").val(), pass: $("#password").val()})
         .done(function(data){
-            window.location.replace("/admin/dash");
+            if(data !== false)
+                window.location.replace("/admin/dash");
+            else {
+                $("#loginErr").html("Incorrect Login.");
+                $("#loginErr").show();
+            }
         });
     $(this).dialog("close");
 }

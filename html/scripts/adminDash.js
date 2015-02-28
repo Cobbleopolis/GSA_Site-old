@@ -4,3 +4,8 @@ function loadAdminPage() {
 
         });
 }
+
+function adminLogOut(){
+    $.post("/admin/logout");
+    window.location.href = "/";
+}

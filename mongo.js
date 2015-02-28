@@ -9,8 +9,6 @@
 
     var navBar = fs.readFileSync(__dirname + '/html/resorcePages/navBar.html');
     var navButton = fs.readFileSync(__dirname + '/html/resorcePages/navButton.html');
-    //var adminLoginFail = fs.readFileSync(__dirname + '/html/admin/adminLoginFail.html');
-
 
     module.exports.indexHandle = function (url, res) {
         fs.readFile(url, function (err, file) {
@@ -128,7 +126,14 @@
     module.exports.fishbowlSubmit = function (req, res) {
         var data = req.body;
         var fishbowl = db.collection('fishbowl');
-        fishbowl.save({name: data.name, content: data.content, triggers: data.triggers, urgency: data.urgency, date: new Date(), isAnswered: false}, function(err, result){
+        fishbowl.save({
+            name: data.name,
+            content: data.content,
+            triggers: data.triggers,
+            urgency: data.urgency,
+            date: new Date(),
+            isAnswered: false
+        }, function (err, result) {
             res.send(true);
         })
     };
@@ -141,9 +146,9 @@
             var $ = cheerio.load(file);
             $('#navBar').html(navBar);
             $('#navButton').html(navButton);
-            html += '<div class="ui segment">';
+            html += '<div class="ui blue segment">';
 
-            html += '<p class="infoTitle">Operating System</p>';
+            html += '<p class="infoTitle">Operating System:</p>';
             html += '<ul class="info">';
             html += '<li><b>Operating System Type:</b>&nbsp;&nbsp;' + os.type() + '</li>';
             html += '<li><b>Operating System Platform:</b>&nbsp;&nbsp;' + os.platform() + '</li>';
@@ -154,7 +159,7 @@
 
             html += '<div class="ui devider"></div>';
 
-            html += '<p class="infoTitle">System Info</p>';
+            html += '<p class="infoTitle">System Info:</p>';
             html += '<ul class="info">';
             html += '<li><b>Memory/RAM:</b>&nbsp;&nbsp;' + os.totalmem() + ' bytes</li>';
             html += '<li><b>Used Memory/RAM:</b>&nbsp;&nbsp;' + (os.totalmem() - os.freemem()) + ' bytes</li>';
@@ -165,8 +170,6 @@
             html += '<li><b>15 Minute Load Average :</b>&nbsp;&nbsp;' + os.loadavg()[2] + '</li>';
 
             html += '</ul>';
-
-            //TODO add the stuff for sysInfo
 
             html += '</div>';
             $('#sysInfo').html(html);
@@ -365,10 +368,15 @@
 
         if (data.page === "flags") {
             database.findOne({identification: data.group}, function (err, document) {
+                if (err)
+                    throw err;
                 res.send(document);
             });
         } else if (data.page === "home") {
+
             database.findOne({section: data.section}, function (err, document) {
+                if (err)
+                    throw err;
                 res.send(document);
             });
         }
@@ -382,13 +390,13 @@
             var $ = cheerio.load(file);
             if (req.cookies.hoochgsa) {
                 if (req.cookies.hoochgsa.adminLogin) {
-                    fishbowl.find().sort({urgency: -1}, function(err, entries){
+                    fishbowl.find().sort({urgency: -1}, function (err, entries) {
                         var html = '<tbody>';
-                        for(var i = 0; i < entries.length; i++){
+                        for (var i = 0; i < entries.length; i++) {
 
-                            if(entries[i].urgency === "Slightly Urgent"){
+                            if (entries[i].urgency === "Slightly Urgent") {
                                 html += '<tr class="warning">';
-                            } else if(entries[i].urgency === "Very Urgent"){
+                            } else if (entries[i].urgency === "Very Urgent") {
                                 html += '<tr class="error">';
                             } else {
                                 html += '<tr>';
@@ -397,7 +405,7 @@
                             html += '<td>' + entries[i].urgency + '</td>';
                             html += '<td>' + entries[i].date.toLocaleTimeString() + ' ' + entries[i].date.toLocaleDateString() + '</td>';
                             html += '<td>' + entries[i].triggers + '</td>';
-                            if(entries[i].isAnswered){
+                            if (entries[i].isAnswered) {
                                 html += '<td>Yes</td>';
                             } else {
                                 html += '<td>No</td>';
@@ -427,20 +435,26 @@
     module.exports.adminFishbowlSubmit = function (req, res) {
         var data = req.body;
         var fishbowl = db.collection('fishbowl');
-        fishbowl.findOne({_id: mongo.ObjectId(data.id)}, function(err, entry){
-            if(err)
+        fishbowl.findOne({_id: mongo.ObjectId(data.id)}, function (err, entry) {
+            if (err)
                 throw err;
-            res.send({name: entry.name, content: entry.content, triggers: entry.triggers, urgency: entry.urgency, date: entry.date.toLocaleTimeString() + ' ' + entry.date.toLocaleDateString()});
+            res.send({
+                name: entry.name,
+                content: entry.content,
+                triggers: entry.triggers,
+                urgency: entry.urgency,
+                date: entry.date.toLocaleTimeString() + ' ' + entry.date.toLocaleDateString()
+            });
         });
     };
 
     module.exports.adminFishbowlGetIds = function (req, res) {
         var fishbowl = db.collection('fishbowl');
-        fishbowl.find(function(err, entries){
-            if(err)
+        fishbowl.find(function (err, entries) {
+            if (err)
                 throw err;
             var ids = [];
-            for(var i = 0; i < entries.length; i++)
+            for (var i = 0; i < entries.length; i++)
                 ids.push(entries[i]._id);
             res.send(ids);
         });
@@ -489,7 +503,6 @@
                 res.cookie("hoochgsa", {adminLogin: true}, {expires: d}); //7200000
                 res.send(true);
             } else {
-                console.log("Login Failed");
                 //console.log("User: " + data.user);
                 //console.log("Pass: " + data.pass);
                 res.send(false);
@@ -506,6 +519,142 @@
             $('#navButton').html(navButton);
             res.send($.html());
         });
+    };
+
+    module.exports.adminAccountsHandle = function (url, req, res) {
+        fs.readFile(url, function (err, file) {
+            if (err)
+                throw err;
+            var adminUser = db.collection('adminUser');
+            var $ = cheerio.load(file);
+            if (req.cookies.hoochgsa) {
+                if (req.cookies.hoochgsa.adminLogin) {
+                    adminUser.find(function (err, users) {
+                        if (err)
+                            throw err;
+                        var html = '<tbody id="userBody">';
+                        for (var i = 0; i < users.length; i++) {
+                            if (users[i].user !== "root") {
+                                html += '<tr>';
+                                html += '<td>' + users[i].user + '</td>';
+                                html += '<td>' + users[i].pass.replace(/./g, "•") + '</td>';
+                                html += '<td>' + users[i]._id + '</td>';
+
+                                html += '<td><div class="ui primary button" onclick="editUser(\'' + users[i]._id + '\')">Edit</div></td>';
+                                html += '</tr>';
+                            }
+                        }
+                        html += '</tbody>';
+                        $("#accounts").append(html);
+                        res.send($.html());
+                    });
+                } else {
+                    res.writeHead(302, {
+                        'Location': 'login'
+                    });
+                    res.end();
+                }
+            } else {
+                res.writeHead(302, {
+                    'Location': 'login'
+                });
+                res.end();
+            }
+        });
+    };
+
+    module.exports.adminAccountsSubmit = function (req, res) {
+        var data = req.body;
+
+        var database = db.collection("adminUser");
+
+        database.findOne({_id: mongo.ObjectId(data.id)}, function (err, user) {
+                if (err)
+                    throw err;
+                res.send({user: user.user, pass: user.pass, id: user._id});
+            }
+        );
+    };
+
+    module.exports.adminAccountsSave = function (req, res) {
+        var data = req.body;
+
+        var database = db.collection("adminUser");
+
+        database.find(function (err, users) {
+            if (err)
+                throw err;
+            var noDupeUsers = true;
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].user === data.user)
+                    noDupeUsers = false;
+            }
+            if (noDupeUsers)
+                database.save({_id: mongo.ObjectId(data.id), user: data.user, pass: data.pass}, function (err, result) {
+                    if (err)
+                        throw err;
+                    database.find(function (err, users) {
+                        if (err)
+                            throw err;
+                        var html = '';
+                        for (var i = 0; i < users.length; i++) {
+                            if (users[i].user !== "root") {
+                                html += '<tr>';
+                                html += '<td>' + users[i].user + '</td>';
+                                html += '<td>' + users[i].pass.replace(/./g, "•") + '</td>';
+                                html += '<td>' + users[i]._id + '</td>';
+
+                                html += '<td><div class="ui primary button" onclick="editUser(\'' + users[i]._id + '\')">Edit</div></td>';
+                                html += '</tr>';
+                            }
+                        }
+                        res.send(html);
+                    });
+                });
+            else
+                res.send(false);
+        });
+    };
+
+    module.exports.adminAccountsDelete = function (req, res) {
+        var data = req.body;
+
+        var database = db.collection("adminUser");
+        database.find(function (err, users) {
+            if (users.length > 2)
+                database.remove({
+                    _id: mongo.ObjectId(data.id),
+                    user: data.user,
+                    pass: data.pass
+                }, function (err, result) {
+                    if (err)
+                        throw err;
+                    database.find(function (err, users) {
+                        if (err)
+                            throw err;
+                        var html = '';
+                        for (var i = 0; i < users.length; i++) {
+                            if (users[i].user !== "root") {
+                                html += '<tr>';
+                                html += '<td>' + users[i].user + '</td>';
+                                html += '<td>' + users[i].pass.replace(/./g, "•") + '</td>';
+                                html += '<td>' + users[i]._id + '</td>';
+
+                                html += '<td><div class="ui primary button" onclick="editUser(\'' + users[i]._id + '\')">Edit</div></td>';
+                                html += '</tr>';
+                            }
+                        }
+                        res.send(html);
+                    });
+                });
+            else
+                res.send(false);
+        });
+    };
+
+    module.exports.adminLogout = function (req, res) {
+        res.clearCookie('hoochgsa');
+        res.end();
     };
 
     function flagToHTML(array) {
