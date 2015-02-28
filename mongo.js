@@ -394,7 +394,7 @@
                         var html = '<tbody>';
                         for (var i = 0; i < entries.length; i++) {
 
-                            if (entries[i].urgency === "Slightly Urgent") {
+                            if (entries[i].urgency === "Urgent") {
                                 html += '<tr class="warning">';
                             } else if (entries[i].urgency === "Very Urgent") {
                                 html += '<tr class="error">';
@@ -454,8 +454,13 @@
             if (err)
                 throw err;
             var ids = [];
-            for (var i = 0; i < entries.length; i++)
+            for (var i = 0; i < entries.length; i++){
+                if(entries[i].urgency === "Urgent" || entries[i].urgency === "Very Urgent")
+                    ids.push(entries[i]._id);
+                if(entries[i].urgency === "Very Urgent")
+                    ids.push(entries[i]._id);
                 ids.push(entries[i]._id);
+            }
             res.send(ids);
         });
     };

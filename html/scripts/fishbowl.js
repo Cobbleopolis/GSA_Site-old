@@ -27,7 +27,7 @@ function submitFishbowl() {
                     $("#name").val("");
                     $("#content").val("");
                     $("#triggers").val("");
-                    $("#urgency").val("Not Very Urgent");
+                    $("#urgency").val("Not Urgent");
                 }
             });
     } else {
