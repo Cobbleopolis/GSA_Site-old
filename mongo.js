@@ -2,8 +2,8 @@
     var fs = require('fs');
     var cheerio = require('cheerio');
     var mongo = require('mongojs');
-    var databaseUrl = 'gsa-site:gayisok1@45.16.76.67:25566/gsa-site'; // 'username:password@example.com/mydb'
-    var collections = ['homePage', 'sexualities', 'romantic', 'genders', 'other_terms', 'adminUser'];
+    var databaseUrl = 'gsa-site:gayisok1@45.16.76.67:25566/gsa-site'; //DO NOT CHANGE THIS UNLESS YOU KNOW WHAT YOU'RE DOING // 'username:password@example.com/mydb'
+    var collections = ['homePage', 'sexualities', 'romantic', 'genders', 'other_terms', 'adminUser', 'mesc'];
     var db = mongo.connect(databaseUrl, collections);
     var os = require("os");
 
@@ -126,6 +126,7 @@
     module.exports.fishbowlSubmit = function (req, res) {
         var data = req.body;
         var fishbowl = db.collection('fishbowl');
+        var mesc = db.collection('mesc');
         fishbowl.save({
             name: data.name,
             content: data.content,
@@ -134,7 +135,17 @@
             date: new Date(),
             isAnswered: false
         }, function (err, result) {
-            res.send(true);
+            if(err){
+                throw err;
+                res.send([false]);
+            }
+            mesc.findOne({ field: "nextWipeDate"}, function(err, result){
+                if(err){
+                    throw err;
+                    res.send([false]);
+                }
+                res.send([true, result.entry.toLocaleDateString()]);
+            });
         });
     };
 
@@ -438,14 +449,17 @@
         fishbowl.findOne({_id: mongo.ObjectId(data.id)}, function (err, entry) {
             if (err)
                 throw err;
-            res.send({
-                name: entry.name,
-                content: entry.content,
-                triggers: entry.triggers,
-                urgency: entry.urgency,
-                date: entry.date.toLocaleTimeString() + ' ' + entry.date.toLocaleDateString(),
-                isAnswered: entry.isAnswered
-            });
+            if(entry)
+                res.send({
+                    name: entry.name,
+                    content: entry.content,
+                    triggers: entry.triggers,
+                    urgency: entry.urgency,
+                    date: entry.date.toLocaleTimeString() + ' ' + entry.date.toLocaleDateString(),
+                    isAnswered: entry.isAnswered
+                });
+            else
+                res.send(false);
         });
     };
 
