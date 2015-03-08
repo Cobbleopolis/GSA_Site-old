@@ -1,4 +1,4 @@
-//run with mongo --port 25566 clearFishbowls.js
+//run with mongo --port 25566 /path/to/file/clearFishbowls.js
 var db = connect("localhost:25566/gsa-site");
 
 db.fishbowl.drop();
