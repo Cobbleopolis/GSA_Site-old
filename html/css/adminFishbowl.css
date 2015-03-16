@@ -7,10 +7,6 @@ article {
     margin: 1%;
 }
 
-#fishbowlDisplay {
-     padding: 0;
-}
-
 #fishbowlDisplayContentLeft > * {
     text-indent: 0 !important;
 

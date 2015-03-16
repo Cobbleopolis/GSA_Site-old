@@ -14,6 +14,9 @@
     <script type="text/javascript" src="../scripts/tablesort.min.js"></script>
     <script type="text/javascript" src="../css/semantic/semantic.min.js"></script>
 
+    <script src="../ckeditor/ckeditor.js"></script>
+    <script src="../ckeditor/adapters/jquery.js"></script>
+
     <!-- Enabling HTML5 support for Internet Explorer -->
     <!--[if lte IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -48,7 +51,7 @@
         </table>
 
 
-        <div id="fishbowlDisplay" class="ui modal">
+        <div id="fishbowlDisplay" class="ui large modal">
             <div id="fishbowlDisplayHeader" class="header">
                 Fishbowl
             </div>
@@ -58,7 +61,11 @@
                         <div class="ui horizontal segment" id="fishbowlDisplayContentLeft"></div>
                     </div>
                     <div class="column">
-                        <div class="ui horizontal segment" id="fishbowlDisplayContentRight" class="description"></div>
+                        <div class="ui horizontal segment" id="fishbowlDisplayContentRight" class="description">
+                            <div id="fishbowlDisplayContentRightQuestion"></div>
+                            <div class="ui header">Answer:</div>
+                            <textarea cols="80" id="answer" rows="10" style="visibility: hidden; display: none;"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>

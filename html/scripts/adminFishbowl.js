@@ -3,17 +3,19 @@ var ids;
 var currId;
 
 function makeAdminFishbowl() {
+    $("#answer").ckeditor();
     $.post("/admin/fishbowl/getIds")
         .done(function (data) {
             ids = data;
         });
-    $("#fishbowlList").tablesort();
 
+    $("#fishbowlList").tablesort();
     $("#fishbowlDisplay").modal({
         onApprove : function() {
             $.post("/admin/fishbowl/mark", {id: currId}).done(function(data){
                 $("#fishbowls").html(data);
             });
+            //$("#fishbowlDisplayContentRight").html('<textarea cols="80" id="answer" rows="10" style="visibility: hidden; display: none;"></textarea>');
         }
     });
 
@@ -39,10 +41,12 @@ function showFishbowl(entryId) {
                 htmlLeft += '</p>';
                 $("#fishbowlDisplayContentLeft").html(htmlLeft);
 
-                htmlRight += '<div class="ui header">Fishbowl Question:</div>';
+                //htmlRight += '<div class="ui top attached segment header">Fishbowl Question:</div><div class="ui bottom attached segment">';
+                htmlRight += '<div class="ui top attached segment"><b>Fishbowl Question:</b></div><div class="ui bottom attached segment">';
                 htmlRight += data.content;
+                htmlRight += '</div>';
                 currId = entryId;
-                $("#fishbowlDisplayContentRight").html(htmlRight);
+                $("#fishbowlDisplayContentRightQuestion").html(htmlRight);
                 $("#fishbowlDisplay").modal("show");
             } else {
                 alert("There was a problem loading the fishbowl.");
