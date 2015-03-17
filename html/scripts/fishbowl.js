@@ -5,11 +5,11 @@ function loadFishbowlPage() {
 
 function submitFishbowl() {
     $("#result").hide();
-    var name = $("#name").val().replace(/&nbsp;/g,' ');
-    var content = $("#content").val().replace(/&nbsp;/g,' ');
-    var triggers = $("#triggers").val().replace(/&nbsp;/g,' ');
-    var urgency = $("#urgency").val().replace(/&nbsp;/g,' ');
-    var email = $("#email").val().replace(/&nbsp;/g,' ');
+    var name = $("#name").val().replace(/&nbsp;/g, ' ');
+    var content = $("#content").val().replace(/&nbsp;/g, ' ');
+    var triggers = $("#triggers").val().replace(/&nbsp;/g, ' ');
+    var urgency = $("#urgency").val().replace(/&nbsp;/g, ' ');
+    var email = $("#email").val().replace(/&nbsp;/g, ' ');
     var emailCheckbox = $("#emailCheckbox").prop('checked');
     console.log(emailCheckbox);
     if (name === "")
@@ -18,14 +18,25 @@ function submitFishbowl() {
     if (triggers === "")
         triggers = "None";
 
-    if (emailCheckbox === false)
+    if (!emailCheckbox)
         email = "None";
 
-    if (email === "")
-        emailCheckbox = false;
+    if (email === "" && emailCheckbox) {
+        $("#result").removeClass("green").addClass("red");
+        $("#result").html("<p>Please fill out the email field or deselect the checkbox saying you would like to receive an email when your fishbowl is answered.</p>");
+        $("#result").show();
+        return;
+    }
 
     if (content !== "") {
-        $.post("/fishbowl/submit", {name: name, content: content, triggers: triggers, urgency: urgency, returnEmail: emailCheckbox, email: email})
+        $.post("/fishbowl/submit", {
+            name: name,
+            content: content,
+            triggers: triggers,
+            urgency: urgency,
+            returnEmail: emailCheckbox,
+            email: email
+        })
             .done(function (data) {
                 if (data[0]) {
                     setTimeout(function () {

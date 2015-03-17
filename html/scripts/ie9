@@ -1,2 +1,0 @@
-
-alert("This site does not support your browser. The list of supported browsers can be found below<br><ul><li>Last 2 Versions FF, Chrome, IE 10+</li><li>Safari 6</li><li>Android 4</li><li>Blackberry 10</li></ul>");
