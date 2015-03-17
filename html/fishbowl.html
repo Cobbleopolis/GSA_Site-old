@@ -54,6 +54,11 @@
                     <option value="Very Urgent">Very Urgent</option>
                 </select>
 
+                <p class="label">Email</p>
+                <input id="emailCheckbox" onchange="$('#email').attr('disabled', !this.checked)" type="checkbox" checked="checked">I'd like to receive an email when my fishbowl is answered.<br>
+                <input id="email" type="email" name="email">
+                <p class="subLabel">(An email will be sent to this address with the answer to your fishbowl)</p>
+
                 <div class="ui green submit button" onclick="submitFishbowl()" id="submitButton">Submit</div>
             </form>
         </div>

@@ -9,14 +9,23 @@ function submitFishbowl() {
     var content = $("#content").val().replace(/&nbsp;/g,' ');
     var triggers = $("#triggers").val().replace(/&nbsp;/g,' ');
     var urgency = $("#urgency").val().replace(/&nbsp;/g,' ');
-    if (name === "") {
+    var email = $("#email").val().replace(/&nbsp;/g,' ');
+    var emailCheckbox = $("#emailCheckbox").prop('checked');
+    console.log(emailCheckbox);
+    if (name === "")
         name = "Anonymous";
-    }
-    if (triggers === "") {
+
+    if (triggers === "")
         triggers = "None";
-    }
+
+    if (emailCheckbox === false)
+        email = "None";
+
+    if (email === "")
+        emailCheckbox = false;
+
     if (content !== "") {
-        $.post("/fishbowl/submit", {name: name, content: content, triggers: triggers,  urgency: urgency})
+        $.post("/fishbowl/submit", {name: name, content: content, triggers: triggers, urgency: urgency, returnEmail: emailCheckbox, email: email})
             .done(function (data) {
                 if (data[0]) {
                     setTimeout(function () {
@@ -27,6 +36,7 @@ function submitFishbowl() {
                     $("#name").val("");
                     $("#content").val("");
                     $("#triggers").val("");
+                    $("#email").val("");
                     $("#urgency").val("Not Urgent");
                 } else {
                     setTimeout(function () {

@@ -5,10 +5,19 @@
     var databaseUrl = 'gsa-site:gayisok1@45.16.76.67:25566/gsa-site'; //DO NOT CHANGE THIS UNLESS YOU KNOW WHAT YOU'RE DOING // 'username:password@example.com/mydb'
     var collections = ['homePage', 'sexualities', 'romantic', 'genders', 'other_terms', 'adminUser', 'mesc'];
     var db = mongo.connect(databaseUrl, collections);
+    var nodemailer = require('nodemailer');
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'hooch.gsa.do.not.reply@gmail.com',
+            pass: 'gayisok1'
+        }
+    });
     var os = require("os");
 
     var navBar = fs.readFileSync(__dirname + '/html/resorcePages/navBar.html');
     var navButton = fs.readFileSync(__dirname + '/html/resorcePages/navButton.html');
+    var emailHTML = fs.readFileSync(__dirname + '/html/resorcePages/email.html').toString();
 
     module.exports.indexHandle = function (url, res) {
         fs.readFile(url, function (err, file) {
@@ -127,20 +136,23 @@
         var data = req.body;
         var fishbowl = db.collection('fishbowl');
         var mesc = db.collection('mesc');
+        data.returnEmail = (data.returnEmail === 'true');
         fishbowl.save({
             name: data.name,
             content: data.content,
             triggers: data.triggers,
             urgency: data.urgency,
+            returnEmail: data.returnEmail,
+            email: data.email,
             date: new Date(),
             isAnswered: false
         }, function (err, result) {
-            if(err){
+            if (err) {
                 throw err;
                 res.send([false]);
             }
-            mesc.findOne({ field: "nextWipeDate"}, function(err, result){
-                if(err){
+            mesc.findOne({field: "nextWipeDate"}, function (err, result) {
+                if (err) {
                     throw err;
                     res.send([false]);
                 }
@@ -449,13 +461,14 @@
         fishbowl.findOne({_id: mongo.ObjectId(data.id)}, function (err, entry) {
             if (err)
                 throw err;
-            if(entry)
+            if (entry)
                 res.send({
                     name: entry.name,
                     content: entry.content,
                     triggers: entry.triggers,
                     urgency: entry.urgency,
                     date: entry.date.toLocaleTimeString() + ' ' + entry.date.toLocaleDateString(),
+                    returnEmail: entry.returnEmail,
                     isAnswered: entry.isAnswered
                 });
             else
@@ -469,10 +482,10 @@
             if (err)
                 throw err;
             var ids = [];
-            for (var i = 0; i < entries.length; i++){
-                if(entries[i].urgency === "Urgent" || entries[i].urgency === "Very Urgent")
+            for (var i = 0; i < entries.length; i++) {
+                if (entries[i].urgency === "Urgent" || entries[i].urgency === "Very Urgent")
                     ids.push(entries[i]._id);
-                if(entries[i].urgency === "Very Urgent")
+                if (entries[i].urgency === "Very Urgent")
                     ids.push(entries[i]._id);
                 ids.push(entries[i]._id);
             }
@@ -484,34 +497,62 @@
         var data = req.body;
         var fishbowl = db.collection('fishbowl');
         fishbowl.update({_id: mongo.ObjectId(data.id)}, {$set: {isAnswered: true}}, function (err, result) {
-            if(err)
+            if (err)
                 throw err;
-            fishbowl.find().sort({urgency: -1}, function (err, entries) {
-                if(err)
+            fishbowl.findOne({_id: mongo.ObjectId(data.id)}, function (err, entry) {
+                if (err)
                     throw err;
-                var html = '';
-                for (var i = 0; i < entries.length; i++) {
-
-                    if (entries[i].urgency === "Urgent") {
-                        html += '<tr class="warning">';
-                    } else if (entries[i].urgency === "Very Urgent") {
-                        html += '<tr class="error">';
-                    } else {
-                        html += '<tr>';
+                if (entry.returnEmail) {
+                    if(req.ans === "")
+                        res.send(false);
+                    var replaceArray = ['Time', 'Date', 'NewTime', 'NewDate', 'Content', 'Ans'];
+                    var replaceWith = [entry.date.toLocaleTimeString(), entry.date.toLocaleDateString(), new Date().toLocaleTimeString(), new Date().toLocaleDateString(), entry.content, data.ans];
+                    var sendHTML = emailHTML;
+                    for (var i = 0; i < replaceArray.length; i++) {
+                        sendHTML = sendHTML.replace(new RegExp('{' + replaceArray[i] + '}', 'gi'), replaceWith[i]);
                     }
+                    var mailOptions = {
+                        from: 'Hooch GSA <hooch.gsa.do.not.reply>', // sender address
+                        to: entry.email, // list of receivers
+                        subject: 'Your fishbowl has been answered', // Subject line
+                        html: sendHTML
+                    };
+                    transporter.sendMail(mailOptions, function (error, info) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            //console.log('Message sent: ' + info.response);
+                        }
+                    });
 
-                    html += '<td>' + entries[i].urgency + '</td>';
-                    html += '<td>' + entries[i].date.toLocaleTimeString() + ' ' + entries[i].date.toLocaleDateString() + '</td>';
-                    html += '<td>' + entries[i].triggers + '</td>';
-                    if (entries[i].isAnswered) {
-                        html += '<td>Yes</td>';
-                    } else {
-                        html += '<td>No</td>';
-                    }
-                    html += '<td><div class="ui primary button showFishbowl" onclick="showFishbowl(\'' + entries[i]._id + '\')">View</div></td>';
-                    html += '</tr>';
                 }
-                res.send(html);
+                fishbowl.find().sort({urgency: -1}, function (err, entries) {
+                    if (err)
+                        throw err;
+                    var html = '';
+                    for (var i = 0; i < entries.length; i++) {
+
+                        if (entries[i].urgency === "Urgent") {
+                            html += '<tr class="warning">';
+                        } else if (entries[i].urgency === "Very Urgent") {
+                            html += '<tr class="error">';
+                        } else {
+                            html += '<tr>';
+                        }
+
+                        html += '<td>' + entries[i].urgency + '</td>';
+                        html += '<td>' + entries[i].date.toLocaleTimeString() + ' ' + entries[i].date.toLocaleDateString() + '</td>';
+                        html += '<td>' + entries[i].triggers + '</td>';
+                        if (entries[i].isAnswered) {
+                            html += '<td>Yes</td>';
+                        } else {
+                            html += '<td>No</td>';
+                        }
+                        html += '<td><div class="ui primary button showFishbowl" onclick="showFishbowl(\'' + entries[i]._id + '\')">View</div></td>';
+                        html += '</tr>';
+                    }
+                    res.send(html);
+                });
             });
         })
     };

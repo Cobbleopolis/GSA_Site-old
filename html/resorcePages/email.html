@@ -1,0 +1,82 @@
+<head>
+    <meta charset="utf-8"/>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu&subset=latin,cyrillic,latin-ext,greek-ext,cyrillic-ext'
+          rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        * {
+            font-family: 'Ubuntu', sans-serif;
+            color: #000000;
+        }
+
+        body {
+            background-color: #e7e7e7;
+        }
+
+        .content {
+            background-color: #ffffff;
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            margin: auto;
+            width: fit-content;
+            padding: 2%
+        }
+
+        h1 {
+            border-bottom: 2px;
+        }
+
+        table {
+            border-spacing: 30px;
+            border-collapse: separate;
+        }
+
+        td {
+            padding: 15px;
+            border: 1px solid black;
+            border-radius: 2px;
+        }
+
+        p {
+            font-size: 22px;
+        }
+
+        #footer {
+            margin-top: 20px;
+        }
+
+        a {
+            color: #7b7b7b;
+        }
+    </style>
+</head>
+<body>
+<div align="center" class="content">
+    <h1 align="center">Chattahoochee Gay-Straight Alliance Club</h1>
+
+    <p align="center">The fishbowl you submitted at {Time} on {Date} has been answered. This fishbowl was answered at
+        {NewTime} on {NewDate}.</p>
+
+    <table align="center">
+        <tbody>
+        <tr>
+            <td>
+                <p align="center">Submitted Fishbowl:</p>
+
+                <div align="center">{Content}</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p align="center">Answer:</p>
+
+                <div align="center">{Ans}</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</body>
+<div id="footer" align="center">
+    <a href="http://www.hoochgsa.com">Visit the Chattahoochee Gay-Straight Alliance Website</a>
+</div>
