@@ -15,3 +15,7 @@ article {
 .fullWidth {
     width: 99% !important;
 }
+
+.fr-btn-hover-menu {
+    display: none !important;
+}
